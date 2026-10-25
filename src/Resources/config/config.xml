@@ -79,10 +79,33 @@
 
         <input-field type="textarea">
             <name>shipping</name>
-            <label>[[Versandkosten]] (HTML allowed)</label>
-            <label lang="de-DE">[[Versandkosten]] (HTML erlaubt)</label>
-            <helpText lang="de-DE">Versandkosten-Abschnitt dieses Shops für „Zahlung und Versand“ – auch mehrzeilig mit &lt;br&gt; und &lt;strong&gt;. Wird unverändert eingesetzt.</helpText>
-            <helpText>Shipping cost section of this shop, HTML allowed, inserted as is.</helpText>
+            <label>[[Versandkosten]] by hand (HTML allowed)</label>
+            <label lang="de-DE">[[Versandkosten]] von Hand (HTML erlaubt)</label>
+            <helpText lang="de-DE">LEER LASSEN = Versandkosten werden automatisch aus den Versandarten des Verkaufskanals erzeugt (Preise, Gewichtsstufen, Regeln, Lieferzeit) – so stimmen Text und Checkout immer überein. Nur ausfüllen, wenn ein eigener Text gewünscht ist. Die automatische Tabelle gibt es zusätzlich immer als [[Versandkosten automatisch]].</helpText>
+            <helpText>Leave EMPTY = generated automatically from the sales channel's shipping methods. Also always available as [[Versandkosten automatisch]].</helpText>
+        </input-field>
+
+        <component name="sw-entity-multi-id-select">
+            <name>shippingHidden</name>
+            <entity>shipping_method</entity>
+            <label>Automatic shipping table: hide these shipping methods</label>
+            <label lang="de-DE">Automatische Versandkosten: diese Versandarten nicht aufführen</label>
+        </component>
+
+        <input-field type="bool">
+            <name>shippingShowRules</name>
+            <label>Automatic shipping table: show rule names (e.g. "Germany")</label>
+            <label lang="de-DE">Automatische Versandkosten: Regelnamen zeigen (z. B. „Deutschland“)</label>
+            <helpText lang="de-DE">Die Namen der Regeln aus dem Rule Builder erscheinen als „Gilt für“. Dafür die Regeln kundenverständlich benennen.</helpText>
+            <helpText>Rule names appear as "applies to" – name them in customer-friendly terms.</helpText>
+            <defaultValue>true</defaultValue>
+        </input-field>
+
+        <input-field type="bool">
+            <name>shippingShowDeliveryTime</name>
+            <label>Automatic shipping table: show delivery time</label>
+            <label lang="de-DE">Automatische Versandkosten: Lieferzeit zeigen</label>
+            <defaultValue>true</defaultValue>
         </input-field>
 
         <input-field type="textarea">

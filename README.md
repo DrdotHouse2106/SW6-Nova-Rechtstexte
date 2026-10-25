@@ -27,13 +27,21 @@ Mit Nova Rechtstexte gibt es **ein Layout je Rechtstext**, das allen Shops zugew
 | `[[Inhaber]]` | Inhaber bzw. Verantwortlicher | Plugin-Konfiguration |
 | `[[USt-IdNr]]` | Umsatzsteuer-ID | Plugin-Konfiguration |
 | `[[Lieferzeit]]` | z. B. „3 - 5 Tagen“ | Plugin-Konfiguration |
-| `[[Versandkosten]]` | Versandkosten-Abschnitt, mehrzeilig, HTML erlaubt | Plugin-Konfiguration |
+| `[[Versandkosten]]` | Versandkosten-Übersicht: **automatisch aus den Versandarten** des Verkaufskanals, oder eigener Text (HTML) | Versandarten bzw. Plugin-Konfiguration |
+| `[[Versandkosten automatisch]]` | immer die automatische Übersicht | Versandarten |
 | `[[Domain]]` | z. B. mein-shop.de | aufgerufene Domain (ohne www) |
 | `[[Shop-URL]]` | z. B. https://mein-shop.de | Domain des Verkaufskanals |
 | `[[Jahr]]` | aktuelles Jahr | – |
 | `[[Zusatz1]]`–`[[Zusatz3]]` | freier Text je Shop, HTML erlaubt (leer = verschwindet) | Plugin-Konfiguration |
 
 Einfache Werte werden HTML-sicher eingesetzt. `[[Versandkosten]]` und `[[Zusatz…]]` werden unverändert eingesetzt (nur von Admins pflegbar).
+
+## Versandkosten automatisch
+
+Ist das Feld „[[Versandkosten]] von Hand“ leer, erzeugt das Plugin die Versandkosten aus den **Versandarten des Verkaufskanals** (*Einstellungen → Versand*): je aktive, zugewiesene Versandart Name, Lieferzeit, Verfügbarkeitsregel und die Preis-Matrix (Gewicht, Warenwert, Anzahl oder Volumen; Bruttopreise in der Währung des Shops, 0 € = versandkostenfrei). So stimmen Rechtstext und Checkout immer überein – ändert sich ein Preis, ändert sich der Text.
+
+- Regelnamen erscheinen als „Gilt für“ – im Rule Builder kundenverständlich benennen (z. B. „Deutschland“, „EU Zone 1“, „Warenkorb enthält Sperrgut“) oder in der Konfiguration ausblenden.
+- Versandarten, die nicht im Text stehen sollen (z. B. interne), unter „diese Versandarten nicht aufführen“ wählen.
 
 ## Bausteine: Abschnitte je Shop ein- und ausblenden
 
@@ -126,6 +134,12 @@ bin/console cache:clear
 **Ursache:** Eine Bedingung ist nicht geschlossen (fehlendes `[[ende]]`) oder die Markierung ist durch Formatierung zerteilt
 
 **Lösung:** In der Quellcode-Ansicht prüfen, dass jedes `[[wenn …]]` ein `[[ende]]` hat und kein HTML zwischen den Klammern steht
+
+### Versandkosten-Tabelle zeigt interne Regelnamen
+
+**Ursache:** Die Spalte „Gilt für“ zeigt die Namen aus dem Rule Builder
+
+**Lösung:** Regeln kundenverständlich umbenennen oder „Regelnamen zeigen“ ausschalten
 
 ## Lizenz
 

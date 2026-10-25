@@ -8,9 +8,15 @@
             <argument type="service" id="payment_method.repository"/>
         </service>
 
+        <service id="Nova\Rechtstexte\Service\ShippingTableRenderer">
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
+            <argument type="service" id="shipping_method.repository"/>
+        </service>
+
         <service id="Nova\Rechtstexte\Subscriber\LegalPlaceholderSubscriber">
             <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
             <argument type="service" id="Nova\Rechtstexte\Service\BlockResolver"/>
+            <argument type="service" id="Nova\Rechtstexte\Service\ShippingTableRenderer"/>
             <tag name="kernel.event_subscriber"/>
         </service>
     </services>

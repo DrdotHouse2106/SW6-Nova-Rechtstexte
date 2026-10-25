@@ -6,6 +6,7 @@ use Shopware\Core\Content\Cms\CmsPageEntity;
 use Shopware\Core\Content\Cms\Events\CmsPageLoadedEvent;
 use Shopware\Core\Content\Cms\SalesChannel\Struct\TextStruct;
 use Nova\Rechtstexte\Service\BlockResolver;
+use Nova\Rechtstexte\Service\ShippingTableRenderer;
 use Shopware\Core\System\SystemConfig\SystemConfigService;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
@@ -23,6 +24,7 @@ class LegalPlaceholderSubscriber implements EventSubscriberInterface
     public function __construct(
         private readonly SystemConfigService $config,
         private readonly BlockResolver $blocks,
+        private readonly ShippingTableRenderer $shipping,
     ) {
     }
 
@@ -165,8 +167,12 @@ class LegalPlaceholderSubscriber implements EventSubscriberInterface
             'lieferzeit' => $cfg('deliveryTime'),
         ];
         // Mehrzeilige Felder dürfen HTML enthalten (nur von Admins pflegbar) und werden nicht maskiert
+        // Versandkosten: eigener Text, sonst automatisch aus den Versandarten des Verkaufskanals
+        $auto = fn (): string => $this->shipping->render($event->getSalesChannelContext());
+        $manual = $cfg('shipping');
         $html = [
-            'versandkosten' => $cfg('shipping'),
+            'versandkosten' => $manual !== '' ? $manual : $auto(),
+            'versandkostenautomatisch' => $auto(),
             'zusatz1' => $cfg('extra1'),
             'zusatz2' => $cfg('extra2'),
             'zusatz3' => $cfg('extra3'),

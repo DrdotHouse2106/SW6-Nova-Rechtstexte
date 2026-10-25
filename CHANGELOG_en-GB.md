@@ -1,3 +1,6 @@
+# 1.5.0
+- New templates: battery notes (EU Battery Regulation/BattDG), packaging notes (VerpackG)
+
 # 1.4.1
 - Imprint template: shop line shows the domain only
 

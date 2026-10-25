@@ -325,6 +325,10 @@ Deutschland</placeholder>
                     <name>Batterien (BattG)</name>
                 </option>
                 <option>
+                    <id>starterbatterien</id>
+                    <name>Starterbatterien (Pfand)</name>
+                </option>
+                <option>
                     <id>buchpreisbindung</id>
                     <name>Preisgebundene Bücher</name>
                 </option>
@@ -498,6 +502,10 @@ Deutschland</placeholder>
                 <option>
                     <id>batterien</id>
                     <name>Batterien (BattG)</name>
+                </option>
+                <option>
+                    <id>starterbatterien</id>
+                    <name>Starterbatterien (Pfand)</name>
                 </option>
                 <option>
                     <id>buchpreisbindung</id>

@@ -1,3 +1,6 @@
+# 1.5.1
+- Building block aliases for starter batteries
+
 # 1.5.0
 - New templates: battery notes (EU Battery Regulation/BattDG), packaging notes (VerpackG)
 

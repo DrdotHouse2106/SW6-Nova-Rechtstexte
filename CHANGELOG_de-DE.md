@@ -1,3 +1,6 @@
+# 1.5.1
+- Baustein „Starterbatterien (Pfand)“ wird auch unter seinem Anzeigenamen erkannt
+
 # 1.5.0
 - Neue Vorlagen: **Batteriehinweise** (nach EU-Batterieverordnung und BattDG, das BattG gilt seit 18.08.2025 nicht mehr; Baustein „Starterbatterien (Pfand)“) und **Verpackungshinweise** (VerpackG)
 

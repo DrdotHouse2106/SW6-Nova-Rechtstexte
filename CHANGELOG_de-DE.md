@@ -1,3 +1,7 @@
+# 1.6.1
+- Vorlagen Rücksendung und Altteilbestimmungen allgemein gehalten: Fristen (`[[Altteil-Frist]]`, `[[Altteil-Erstattungsfrist]]`), Annahmebedingungen (`[[Altteil-Anforderungen]]`), Beträge und Etiketten kommen aus der Konfiguration; Abschnitte entfallen, wenn nichts eingetragen ist
+- AGB-Abschnitt Altteilpfand nutzt dieselben Fristen
+
 # 1.6.0
 - Neue Vorlagen **Rücksendung** und **Altteilbestimmungen** (passend zum AGB-Abschnitt Altteilpfand)
 - Neue Platzhalter `[[Rücksendekosten]]` und `[[Altteil-Details]]` (HTML, je Verkaufskanal)

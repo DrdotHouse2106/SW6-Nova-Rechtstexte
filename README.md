@@ -35,6 +35,9 @@ Mit Nova Rechtstexte gibt es **ein Layout je Rechtstext**, das allen Shops zugew
 | `[[Anschrift]]` | Anschrift, mehrzeilig | Plugin-Konfiguration |
 | `[[Aufsichtsbehörde]]` | zuständige Datenschutz-Aufsichtsbehörde | Plugin-Konfiguration |
 | `[[Warenwirtschaft]]` | Anbieter des ERP/Warenwirtschaftssystems | Plugin-Konfiguration |
+| `[[Rücksendekosten]]` | Etikett-Links, Preise je Land, Zuschläge (HTML) | Plugin-Konfiguration |
+| `[[Altteil-Frist]]`, `[[Altteil-Erstattungsfrist]]` | Tage (Standard 14 bzw. 30) | Plugin-Konfiguration |
+| `[[Altteil-Anforderungen]]`, `[[Altteil-Details]]` | eigene Annahmebedingungen, Beträge je Bauteil (HTML) | Plugin-Konfiguration |
 | `[[Lieferzeit]]` | z. B. „3 - 5 Tagen“ | Plugin-Konfiguration |
 | `[[Versandkosten]]` | Versandkosten-Übersicht: **automatisch aus den Versandarten** des Verkaufskanals, oder eigener Text (HTML) | Versandarten bzw. Plugin-Konfiguration |
 | `[[Versandkosten automatisch]]` | immer die automatische Übersicht | Versandarten |
@@ -60,7 +63,7 @@ Das Plugin bringt eigene, frei nutzbare Vorlagen mit (Ordner `src/Resources/lega
 | Batteriehinweise (EU-Batterieverordnung/BattDG) | `[[Vorlage Batteriehinweise]]` |
 | Verpackungshinweise (VerpackG) | `[[Vorlage Verpackungshinweise]]` |
 | Rücksendung (mit eigenen Etikettpreisen `[[Rücksendekosten]]`) | `[[Vorlage Rücksendung]]` |
-| Altteilbestimmungen (zum AGB-Baustein Altteilpfand, eigene Beträge `[[Altteil-Details]]`) | `[[Vorlage Altteilbestimmungen]]` |
+| Altteilbestimmungen (zum AGB-Baustein Altteilpfand; Fristen, Annahmebedingungen und Beträge in der Konfiguration) | `[[Vorlage Altteilbestimmungen]]` |
 
 - Die Vorlagen nutzen Platzhalter und Bausteine – passend zu Ihren Einstellungen erscheinen nur die Abschnitte, die für den jeweiligen Shop gelten.
 - **Automatische Nummerierung:** `[[§]]` (Paragraphen) und `[[Nr]]` (Abschnitte) werden fortlaufend gezählt. Fällt ein Abschnitt weg, entsteht keine Lücke.

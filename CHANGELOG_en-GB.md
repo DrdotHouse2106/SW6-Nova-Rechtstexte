@@ -1,3 +1,6 @@
+# 1.6.1
+- Returns and core part templates made generic; shop-specific values in configuration
+
 # 1.6.0
 - New templates: returns and core part returns; new placeholders
 

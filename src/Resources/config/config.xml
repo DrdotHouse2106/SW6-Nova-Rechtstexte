@@ -144,6 +144,32 @@ Deutschland</placeholder>
             <helpText>For the returns template: label prices per country and links.</helpText>
         </input-field>
 
+        <input-field type="text">
+            <name>oldPartsDays</name>
+            <label>[[Altteil-Frist]] (days)</label>
+            <label lang="de-DE">[[Altteil-Frist]] (Tage)</label>
+            <placeholder>14</placeholder>
+            <helpText lang="de-DE">Frist für die Rückgabe des Altteils nach Erhalt der Ware (AGB und Altteilbestimmungen). Leer = 14.</helpText>
+            <helpText>Days to return the core part. Empty = 14.</helpText>
+        </input-field>
+
+        <input-field type="text">
+            <name>oldPartsRefundDays</name>
+            <label>[[Altteil-Erstattungsfrist]] (days)</label>
+            <label lang="de-DE">[[Altteil-Erstattungsfrist]] (Tage)</label>
+            <placeholder>30</placeholder>
+            <helpText lang="de-DE">Erstattung des Pfands nach Eingang des Altteils. Leer = 30.</helpText>
+            <helpText>Days to refund the deposit. Empty = 30.</helpText>
+        </input-field>
+
+        <input-field type="textarea">
+            <name>oldPartsRequirements</name>
+            <label>[[Altteil-Anforderungen]] (HTML allowed)</label>
+            <label lang="de-DE">[[Altteil-Anforderungen]] (HTML erlaubt)</label>
+            <helpText lang="de-DE">Ihre eigenen Annahmebedingungen für Altteile (z. B. Liste der Ablehnungsgründe, Originalkarton). Leer = allgemeine Standardliste der Vorlage.</helpText>
+            <helpText>Your own acceptance conditions for core parts. Empty = generic default list.</helpText>
+        </input-field>
+
         <input-field type="textarea">
             <name>oldPartsDetails</name>
             <label>[[Altteil-Details]] (HTML allowed)</label>

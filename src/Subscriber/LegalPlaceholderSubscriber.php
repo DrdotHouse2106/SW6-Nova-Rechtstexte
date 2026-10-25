@@ -215,6 +215,8 @@ class LegalPlaceholderSubscriber implements EventSubscriberInterface
             'ust-idnr' => $cfg('vatId'),
             'lieferzeit' => $cfg('deliveryTime'),
             'warenwirtschaft' => $cfg('erpProvider'),
+            'altteil-frist' => $cfg('oldPartsDays') ?: '14',
+            'altteil-erstattungsfrist' => $cfg('oldPartsRefundDays') ?: '30',
         ];
         // Mehrzeilige Felder dürfen HTML enthalten (nur von Admins pflegbar) und werden nicht maskiert
         // Versandkosten: eigener Text, sonst automatisch aus den Versandarten des Verkaufskanals
@@ -226,6 +228,7 @@ class LegalPlaceholderSubscriber implements EventSubscriberInterface
             'anschrift' => nl2br(htmlspecialchars($cfg('address'), \ENT_QUOTES | \ENT_HTML5, 'UTF-8'), false),
             'aufsichtsbehoerde' => nl2br($cfg('supervisoryAuthority'), false),
             'altteil-details' => $cfg('oldPartsDetails'),
+            'altteil-anforderungen' => $cfg('oldPartsRequirements'),
             'ruecksendekosten' => $cfg('returnCosts'),
             'zusatz1' => $cfg('extra1'),
             'zusatz2' => $cfg('extra2'),
@@ -243,6 +246,9 @@ class LegalPlaceholderSubscriber implements EventSubscriberInterface
         $map['aufsichtsbehörde'] = $map['aufsichtsbehoerde'];
         $map['rücksendekosten'] = $map['ruecksendekosten'];
         $map['altteildetails'] = $map['altteil-details'];
+        $map['altteilanforderungen'] = $map['altteil-anforderungen'];
+        $map['altteilfrist'] = $map['altteil-frist'];
+        $map['altteilerstattungsfrist'] = $map['altteil-erstattungsfrist'];
         // Englische/alternative Schreibweisen
         $map['email'] = $map['mail'] = $map['e-mail'];
         $map['phone'] = $map['tel'] = $map['telefon'];

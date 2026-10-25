@@ -99,7 +99,10 @@ Wie bei den Rechtstext-Generatoren der Händlerverbände: Ein Text enthält **al
 | `[[wenn PayPal oder Klarna]] … [[ende]]` | wenn mindestens einer aktiv ist |
 | `[[wenn Klarna]] … [[sonst]] … [[ende]]` | entweder – oder |
 | `[[wenn Telefax]] … [[ende]]` | Platzhalter als Bedingung: nur wenn der Wert gefüllt ist |
+| `[[bis 02.05.2026]] … [[ende]]` | nur bis einschließlich dieses Tages – danach verschwindet der Inhalt von selbst (z. B. Termine) |
+| `[[ab 01.03.2027]] … [[ende]]` | erst ab diesem Tag sichtbar (auch mit `[[sonst]]`) |
 
+- **Zeitgesteuerte Abschnitte** (ab 1.7.0) funktionieren in jedem Erlebniswelt-Text, nicht nur in Rechtstexten – etwa für eine Seite „Treffen & Messen“: jeden Termin in `[[bis <letzter Tag>]] … [[ende]]` einpacken, dann muss niemand vergangene Termine von Hand entfernen. Datum als `TT.MM.JJJJ` oder `JJJJ-MM-TT`, maßgeblich ist deutsche Zeit. Weil Shopware Seiten zwischenspeichert, kann ein abgelaufener Termin noch einige Stunden sichtbar bleiben (sofort weg nach „Caches leeren“).
 - Verschachteln ist erlaubt. Groß-/Kleinschreibung, Leerzeichen und Umlaute sind egal („Amazon Pay“ = „amazonpay“).
 - Steht eine Markierung **allein in einem Absatz**, verschwindet der leere Absatz mit – im Texteditor die Markierungen am besten in eine eigene Zeile schreiben.
 

@@ -118,28 +118,35 @@ class LegalPlaceholderSubscriber implements EventSubscriberInterface
     /**
      * Bedingte Abschnitte: [[wenn Klarna]] … [[sonst]] … [[ende]], auch [[wenn nicht Klarna]] und
      * mehrere Bausteine mit „oder“: [[wenn PayPal oder Klarna]]. Verschachtelung ist erlaubt.
+     * Zeitgesteuert: [[bis 02.05.2026]] … [[ende]] (bis einschließlich dieses Tages) und [[ab 01.03.2027]] … [[ende]],
+     * jeweils auch mit [[sonst]] – z. B. für Termine, die nach dem Datum von selbst verschwinden.
      * Steht eine Markierung allein in einem Absatz, verschwindet der ganze Absatz mit.
      *
      * @param array<string, true> $tags aktive Bausteine (normierte Namen)
      */
-    public static function applyConditions(string $content, array $tags): string
+    public static function applyConditions(string $content, array $tags, ?\DateTimeInterface $today = null): string
     {
-        if (!preg_match('/\[\[\s*wenn\b/iu', $content)) {
+        if (!preg_match('/\[\[\s*(?:wenn|bis|ab)\b/iu', $content)) {
             return $content;
         }
 
+        $today = ($today ?? new \DateTimeImmutable('now', new \DateTimeZone('Europe/Berlin')))->format('Y-m-d');
+
         // Markierungen, die allein in einem Absatz stehen, aus dem Absatz lösen
-        $marker = '\[\[\s*(?:wenn\b[^\[\]]*|sonst|ende)\s*\]\]';
+        $marker = '\[\[\s*(?:wenn\b[^\[\]]*|(?:bis|ab)\s+[0-9.\-]+|sonst|ende)\s*\]\]';
         $content = (string) preg_replace(
-            '#<(p|div|h[1-6])\b[^>]*>(?:\s|&nbsp;|<br\s*/?>|</?(?:span|strong|b|em|i)\b[^>]*>)*(' . $marker . ')(?:\s|&nbsp;|<br\s*/?>|</?(?:span|strong|b|em|i)\b[^>]*>)*</\1>#iu',
+            '#<(p|div|h[1-6]|li)\b[^>]*>(?:\s|&nbsp;|<br\s*/?>|</?(?:span|strong|b|em|i)\b[^>]*>)*(' . $marker . ')(?:\s|&nbsp;|<br\s*/?>|</?(?:span|strong|b|em|i)\b[^>]*>)*</\1>#iu',
             '$2',
             $content
         );
 
-        // Innerste Bedingung zuerst auflösen, bis keine mehr übrig ist
-        $pattern = '/\[\[\s*wenn\s+(nicht\s+)?([^\[\]]+?)\s*\]\]((?:(?!\[\[\s*wenn\b).)*?)\[\[\s*ende\s*\]\]/isu';
-        for ($i = 0; $i < 50 && preg_match($pattern, $content); ++$i) {
-            $content = (string) preg_replace_callback($pattern, static function (array $m) use ($tags): string {
+        // Innerste Bedingung zuerst auflösen (wenn / bis / ab), bis keine mehr übrig ist
+        $inner = '((?:(?!\[\[\s*(?:wenn|bis|ab)\b).)*?)\[\[\s*ende\s*\]\]';
+        $ifPattern = '/\[\[\s*wenn\s+(nicht\s+)?([^\[\]]+?)\s*\]\]' . $inner . '/isu';
+        $datePattern = '/\[\[\s*(bis|ab)\s+(\d{1,2}\.\d{1,2}\.\d{4}|\d{4}-\d{2}-\d{2})\s*\]\]' . $inner . '/isu';
+
+        for ($i = 0; $i < 100 && (preg_match($ifPattern, $content) || preg_match($datePattern, $content)); ++$i) {
+            $content = (string) preg_replace_callback($ifPattern, static function (array $m) use ($tags): string {
                 $match = false;
                 foreach (preg_split('/\s+oder\s+/iu', $m[2]) ?: [] as $name) {
                     if (isset($tags[BlockResolver::key($name)])) {
@@ -154,9 +161,36 @@ class LegalPlaceholderSubscriber implements EventSubscriberInterface
 
                 return $match ? $parts[0] : ($parts[1] ?? '');
             }, $content);
+
+            // [[bis 02.05.2026]] … [[ende]]: bis einschließlich dieses Tages sichtbar; [[ab …]]: ab diesem Tag
+            $content = (string) preg_replace_callback($datePattern, static function (array $m) use ($today): string {
+                $date = self::isoDate($m[2]);
+                $parts = preg_split('/\[\[\s*sonst\s*\]\]/iu', $m[3], 2) ?: [$m[3]];
+                if ($date === null) {
+                    // Ungültiges Datum: Inhalt zeigen, damit nichts unbemerkt verschwindet
+                    return $parts[0];
+                }
+                $match = strtolower($m[1]) === 'bis' ? $today <= $date : $today >= $date;
+
+                return $match ? $parts[0] : ($parts[1] ?? '');
+            }, $content);
         }
 
         return $content;
+    }
+
+    /** „2.5.2026“ oder „2026-05-02“ → „2026-05-02“, ungültig → null */
+    private static function isoDate(string $value): ?string
+    {
+        if (preg_match('/^(\d{1,2})\.(\d{1,2})\.(\d{4})$/', $value, $m)) {
+            [$day, $month, $year] = [(int) $m[1], (int) $m[2], (int) $m[3]];
+        } elseif (preg_match('/^(\d{4})-(\d{2})-(\d{2})$/', $value, $m)) {
+            [$year, $month, $day] = [(int) $m[1], (int) $m[2], (int) $m[3]];
+        } else {
+            return null;
+        }
+
+        return checkdate($month, $day, $year) ? \sprintf('%04d-%02d-%02d', $year, $month, $day) : null;
     }
 
     /**

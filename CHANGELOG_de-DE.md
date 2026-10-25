@@ -1,3 +1,6 @@
+# 1.7.0
+- Neu: **zeitgesteuerte Abschnitte** `[[bis 02.05.2026]] … [[ende]]` und `[[ab 01.03.2027]] … [[ende]]` (auch mit `[[sonst]]`) – in jedem Erlebniswelt-Text, z. B. für Termine auf einer Seite „Treffen & Messen“, die nach dem Datum von selbst verschwinden
+
 # 1.6.2
 - „-“ in einem Feld = in diesem Verkaufskanal leer (statt den gemeinsamen Wert zu erben), z. B. für Shops ohne USt-IdNr. oder WhatsApp
 - Vorlage Impressum: USt-IdNr.-Zeile entfällt, wenn keine eingetragen ist

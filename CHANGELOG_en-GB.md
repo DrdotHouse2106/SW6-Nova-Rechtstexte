@@ -1,3 +1,6 @@
+# 1.7.0
+- New: time-based sections `[[bis DATE]] … [[ende]]` and `[[ab DATE]] … [[ende]]` for any Shopping Experience text
+
 # 1.6.2
 - "-" means empty for this sales channel; imprint VAT line optional
 

@@ -1,3 +1,6 @@
+# 1.4.1
+- Vorlage Impressum: Onlineshop-Zeile nur noch mit Domain (vorher doppelt, wenn Shopname und Domain gleich sind)
+
 # 1.4.0
 - Neu: **Textvorlagen** für Impressum, AGB, Widerrufsbelehrung (Waren/Dienstleistungen), Zahlung und Versand und Datenschutzerklärung – eigene Formulierungen mit Bausteinen, einzusetzen mit `[[Vorlage …]]`
 - Neu: automatische Nummerierung `[[§]]` und `[[Nr]]` ohne Lücken bei ausgeblendeten Abschnitten

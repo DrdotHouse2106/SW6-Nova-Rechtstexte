@@ -1,3 +1,6 @@
+# 1.4.1
+- Imprint template: shop line shows the domain only
+
 # 1.4.0
 - New: German legal text templates with building blocks, automatic numbering, more placeholders
 

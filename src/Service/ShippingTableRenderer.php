@@ -152,7 +152,8 @@ class ShippingTableRenderer
             return 'ab ' . $fmt($start);
         }
 
-        return $fmt($start) . ' bis ' . $fmt($end);
+        // „10 bis 20 kg“ statt „10 kg bis 20 kg“ (bei Beträgen beide mit €)
+        return ($unit === '€' ? $fmt($start) : self::num($start)) . ' bis ' . $fmt($end);
     }
 
     private function money(float $value): string

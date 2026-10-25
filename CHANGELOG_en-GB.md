@@ -1,3 +1,6 @@
+# 1.3.1
+- Shipping table: shorter ranges
+
 # 1.3.0
 - Automatic shipping table: customer label from rule description, "-" hides a rule; grouped by rule
 

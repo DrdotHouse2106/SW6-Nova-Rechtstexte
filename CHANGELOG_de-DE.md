@@ -1,3 +1,6 @@
+# 1.3.1
+- Versandkosten: Bereiche kürzer („10 bis 20 kg“)
+
 # 1.3.0
 - Versandkosten automatisch: „Gilt für“ aus der **Regel-Beschreibung** (erste Zeile), Beschreibung „-“ blendet Preise einer Regel aus – interne Regelnamen bleiben unverändert
 - Preise je Regel gruppiert (Zwischenüberschrift statt wiederholter Spalte), Spaltenkopf passend zur Berechnung (Gewicht, Anzahl …)

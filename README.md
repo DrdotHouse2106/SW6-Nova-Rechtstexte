@@ -79,6 +79,8 @@ Ist das Feld „[[Versandkosten]] von Hand“ leer, erzeugt das Plugin die Versa
 - **Beschreibung „-“** (nur ein Bindestrich) = Preise dieser Regel nicht aufführen, z. B. Sonderregeln für einzelne Artikel. Bei einer Verfügbarkeitsregel blendet „-“ nur die Zeile „Gilt für“ aus.
 - Versandarten, die nicht im Text stehen sollen (z. B. interne), unter „diese Versandarten nicht aufführen“ wählen.
 
+**Leere Werte je Shop:** Soll ein Platzhalter in einem Shop leer sein (z. B. keine USt-IdNr.), dort nur „-“ eintragen – ein leeres Feld erbt den Wert von „Alle Verkaufskanäle“.
+
 ## Bausteine: Abschnitte je Shop ein- und ausblenden
 
 Wie bei den Rechtstext-Generatoren der Händlerverbände: Ein Text enthält **alle** möglichen Abschnitte, und je Shop wird angeklickt, welche gelten. Abschnitte werden im Text markiert:

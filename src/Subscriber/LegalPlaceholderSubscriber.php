@@ -192,7 +192,12 @@ class LegalPlaceholderSubscriber implements EventSubscriberInterface
         $request = $event->getRequest();
 
         $get = fn (string $key): string => trim((string) $this->config->get($key, $scId));
-        $cfg = fn (string $field): string => $get(self::CONFIG . $field);
+        // „-“ = in diesem Verkaufskanal bewusst leer (ein leeres Feld würde den Wert von „Alle Verkaufskanäle“ erben)
+        $cfg = static function (string $field) use ($get): string {
+            $value = $get(self::CONFIG . $field);
+
+            return $value === '-' ? '' : $value;
+        };
 
         $baseUrl = (string) $request->attributes->get('sw-sales-channel-absolute-base-url', '');
         if ($baseUrl === '') {

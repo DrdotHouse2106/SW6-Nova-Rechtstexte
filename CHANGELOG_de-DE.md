@@ -1,3 +1,7 @@
+# 1.6.2
+- „-“ in einem Feld = in diesem Verkaufskanal leer (statt den gemeinsamen Wert zu erben), z. B. für Shops ohne USt-IdNr. oder WhatsApp
+- Vorlage Impressum: USt-IdNr.-Zeile entfällt, wenn keine eingetragen ist
+
 # 1.6.1
 - Vorlagen Rücksendung und Altteilbestimmungen allgemein gehalten: Fristen (`[[Altteil-Frist]]`, `[[Altteil-Erstattungsfrist]]`), Annahmebedingungen (`[[Altteil-Anforderungen]]`), Beträge und Etiketten kommen aus der Konfiguration; Abschnitte entfallen, wenn nichts eingetragen ist
 - AGB-Abschnitt Altteilpfand nutzt dieselben Fristen

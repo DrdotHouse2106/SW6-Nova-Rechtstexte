@@ -1,3 +1,6 @@
+# 1.6.2
+- "-" means empty for this sales channel; imprint VAT line optional
+
 # 1.6.1
 - Returns and core part templates made generic; shop-specific values in configuration
 

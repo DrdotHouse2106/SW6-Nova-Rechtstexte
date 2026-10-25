@@ -77,6 +77,7 @@ class BlockResolver
         'dienstleistungen' => ['Dienstleistungen'],
         'altteilpfand' => ['Altteilpfand'],
         'batterien' => ['Batterien (BattG)', 'battg'],
+        'starterbatterien' => ['Starterbatterien (Pfand)', 'starterbatterie', 'fahrzeugbatterien'],
         'buchpreisbindung' => ['Preisgebundene Bücher'],
         'individualanfertigung' => ['Individuelle Anfertigungen (z. B. 3D-Druck)', '3ddruck', 'individuellgestaltetewaren'],
     ];

@@ -4,6 +4,10 @@
 
 Maintain imprint, privacy policy, terms and shipping information **once** for all sales channels. Use placeholders such as `[[Shopname]]`, `[[E-Mail]]`, `[[Telefon]]`, `[[Telefax]]`, `[[WhatsApp]]`, `[[Firma]]`, `[[Inhaber]]`, `[[USt-IdNr]]`, `[[Lieferzeit]]`, `[[Versandkosten]]`, `[[Domain]]`, `[[Shop-URL]]`, `[[Jahr]]`, `[[Zusatz1]]`–`[[Zusatz3]]` in shopping experience text elements; they are replaced per sales channel on the server – independent of the theme and also in modals (terms in checkout).
 
+## Building blocks
+
+Mark optional sections with `[[wenn Klarna]] … [[sonst]] … [[ende]]` (also `[[wenn nicht …]]`, `[[wenn A oder B]]`). Active blocks per sales channel: auto-detected (assigned payment methods, reCAPTCHA, Nova Tag Manager), selected from a list, own names, or forced off.
+
 ## Installation
 
 ```bash

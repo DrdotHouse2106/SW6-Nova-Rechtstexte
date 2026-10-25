@@ -5,6 +5,7 @@ namespace Nova\Rechtstexte\Subscriber;
 use Shopware\Core\Content\Cms\CmsPageEntity;
 use Shopware\Core\Content\Cms\Events\CmsPageLoadedEvent;
 use Shopware\Core\Content\Cms\SalesChannel\Struct\TextStruct;
+use Nova\Rechtstexte\Service\BlockResolver;
 use Shopware\Core\System\SystemConfig\SystemConfigService;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
@@ -19,8 +20,10 @@ class LegalPlaceholderSubscriber implements EventSubscriberInterface
 {
     private const CONFIG = 'NovaRechtstexte.config.';
 
-    public function __construct(private readonly SystemConfigService $config)
-    {
+    public function __construct(
+        private readonly SystemConfigService $config,
+        private readonly BlockResolver $blocks,
+    ) {
     }
 
     public static function getSubscribedEvents(): array
@@ -35,6 +38,7 @@ class LegalPlaceholderSubscriber implements EventSubscriberInterface
         }
 
         $map = null;
+        $tags = null;
 
         foreach ($event->getResult() as $page) {
             if (!$page instanceof CmsPageEntity || $page->getSections() === null) {
@@ -52,11 +56,56 @@ class LegalPlaceholderSubscriber implements EventSubscriberInterface
                             continue;
                         }
                         $map ??= $this->buildMap($event);
-                        $data->setContent(self::replace($content, $map));
+                        $tags ??= $this->blocks->resolve($event->getSalesChannelContext());
+                        $data->setContent(self::replace(self::applyConditions($content, $tags), $map));
                     }
                 }
             }
         }
+    }
+
+    /**
+     * Bedingte Abschnitte: [[wenn Klarna]] … [[sonst]] … [[ende]], auch [[wenn nicht Klarna]] und
+     * mehrere Bausteine mit „oder“: [[wenn PayPal oder Klarna]]. Verschachtelung ist erlaubt.
+     * Steht eine Markierung allein in einem Absatz, verschwindet der ganze Absatz mit.
+     *
+     * @param array<string, true> $tags aktive Bausteine (normierte Namen)
+     */
+    public static function applyConditions(string $content, array $tags): string
+    {
+        if (!preg_match('/\[\[\s*wenn\b/iu', $content)) {
+            return $content;
+        }
+
+        // Markierungen, die allein in einem Absatz stehen, aus dem Absatz lösen
+        $marker = '\[\[\s*(?:wenn\b[^\[\]]*|sonst|ende)\s*\]\]';
+        $content = (string) preg_replace(
+            '#<(p|div|h[1-6])\b[^>]*>(?:\s|&nbsp;|<br\s*/?>|</?(?:span|strong|b|em|i)\b[^>]*>)*(' . $marker . ')(?:\s|&nbsp;|<br\s*/?>|</?(?:span|strong|b|em|i)\b[^>]*>)*</\1>#iu',
+            '$2',
+            $content
+        );
+
+        // Innerste Bedingung zuerst auflösen, bis keine mehr übrig ist
+        $pattern = '/\[\[\s*wenn\s+(nicht\s+)?([^\[\]]+?)\s*\]\]((?:(?!\[\[\s*wenn\b).)*?)\[\[\s*ende\s*\]\]/isu';
+        for ($i = 0; $i < 50 && preg_match($pattern, $content); ++$i) {
+            $content = (string) preg_replace_callback($pattern, static function (array $m) use ($tags): string {
+                $match = false;
+                foreach (preg_split('/\s+oder\s+/iu', $m[2]) ?: [] as $name) {
+                    if (isset($tags[BlockResolver::key($name)])) {
+                        $match = true;
+                        break;
+                    }
+                }
+                if ($m[1] !== '') {
+                    $match = !$match;
+                }
+                $parts = preg_split('/\[\[\s*sonst\s*\]\]/iu', $m[3], 2) ?: [$m[3]];
+
+                return $match ? $parts[0] : ($parts[1] ?? '');
+            }, $content);
+        }
+
+        return $content;
     }
 
     /**

@@ -35,6 +35,35 @@ Mit Nova Rechtstexte gibt es **ein Layout je Rechtstext**, das allen Shops zugew
 
 Einfache Werte werden HTML-sicher eingesetzt. `[[Versandkosten]]` und `[[Zusatz…]]` werden unverändert eingesetzt (nur von Admins pflegbar).
 
+## Bausteine: Abschnitte je Shop ein- und ausblenden
+
+Wie bei den Rechtstext-Generatoren der Händlerverbände: Ein Text enthält **alle** möglichen Abschnitte, und je Shop wird angeklickt, welche gelten. Abschnitte werden im Text markiert:
+
+```html
+<p>[[wenn Klarna]]</p>
+<h3>Zahlung über Klarna</h3>
+<p>In Zusammenarbeit mit Klarna bieten wir …</p>
+<p>[[ende]]</p>
+```
+
+| Schreibweise | Bedeutung |
+|---|---|
+| `[[wenn Klarna]] … [[ende]]` | nur wenn der Baustein „Klarna“ aktiv ist |
+| `[[wenn nicht Klarna]] … [[ende]]` | nur wenn er NICHT aktiv ist |
+| `[[wenn PayPal oder Klarna]] … [[ende]]` | wenn mindestens einer aktiv ist |
+| `[[wenn Klarna]] … [[sonst]] … [[ende]]` | entweder – oder |
+
+- Verschachteln ist erlaubt. Groß-/Kleinschreibung, Leerzeichen und Umlaute sind egal („Amazon Pay“ = „amazonpay“).
+- Steht eine Markierung **allein in einem Absatz**, verschwindet der leere Absatz mit – im Texteditor die Markierungen am besten in eine eigene Zeile schreiben.
+
+**Welche Bausteine aktiv sind** (Plugin-Konfiguration, je Verkaufskanal):
+- **Automatisch erkennen** (Standard an): zugewiesene Zahlungsarten (PayPal, Klarna, Amazon Pay, Google Pay, Apple Pay, Ratepay, Mollie, Stripe, Vorkasse, Barzahlung, Rechnung, Lastschrift), Google reCAPTCHA (Grundinformationen) und Nova Tag Manager (Container-ID gesetzt)
+- **Genutzte Bausteine:** Liste zum Anklicken, z. B. Newsletter, Kundenkonto, YouTube, Gebrauchte Waren, Reparaturleistungen, Altteilpfand, Batterien, Preisgebundene Bücher …
+- **Eigene Bausteine:** freie Namen, kommagetrennt
+- **Nie verwenden:** übersteuert die automatische Erkennung
+
+Die Inhalte der Abschnitte schreibt das Plugin nicht – es blendet nur ein und aus. Rechtstexte selbst kommen weiterhin von Ihrem Rechtstext-Anbieter oder Anwalt.
+
 ## Installation
 
 **Mit dem GitHub Plugin-Updater:** *Erweiterungen → Meine Erweiterungen → Plugin-Katalog → Nova Rechtstexte → Installieren*.
@@ -85,6 +114,18 @@ bin/console cache:clear
 **Ursache:** Der Wert ist nur unter „Alle Verkaufskanäle“ gesetzt und der Shop erbt ihn
 
 **Lösung:** In der Plugin-Konfiguration den Verkaufskanal wählen und dort einen eigenen Wert eintragen
+
+### Ein Abschnitt erscheint nicht (oder fehlt nicht)
+
+**Ursache:** Baustein nicht aktiv bzw. trotz Erkennung unerwünscht aktiv; oder ein Verkaufskanal hat eine eigene Auswahl bei „Genutzte Bausteine“ und erbt die Liste von „Alle Verkaufskanäle“ deshalb nicht mehr
+
+**Lösung:** In der Plugin-Konfiguration den Verkaufskanal wählen und „Genutzte Bausteine“ bzw. „Nie verwenden“ prüfen; Schreibweise im Text mit dem Bausteinnamen vergleichen
+
+### Im Shop steht `[[ende]]` oder `[[wenn …]]`
+
+**Ursache:** Eine Bedingung ist nicht geschlossen (fehlendes `[[ende]]`) oder die Markierung ist durch Formatierung zerteilt
+
+**Lösung:** In der Quellcode-Ansicht prüfen, dass jedes `[[wenn …]]` ein `[[ende]]` hat und kein HTML zwischen den Klammern steht
 
 ## Lizenz
 

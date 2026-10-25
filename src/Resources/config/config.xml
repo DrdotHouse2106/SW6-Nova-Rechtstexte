@@ -105,4 +105,350 @@
             <label lang="de-DE">[[Zusatz3]] (frei, HTML erlaubt)</label>
         </input-field>
     </card>
+    <card>
+        <title>Building blocks: which sections apply?</title>
+        <title lang="de-DE">Bausteine: welche Abschnitte gelten?</title>
+
+        <input-field type="bool">
+            <name>autoDetect</name>
+            <label>Detect automatically</label>
+            <label lang="de-DE">Automatisch erkennen</label>
+            <helpText>Payment methods assigned to the sales channel (PayPal, Klarna, Amazon Pay …), Google reCAPTCHA and Nova Tag Manager are detected and switched on as building blocks.</helpText>
+            <helpText lang="de-DE">Dem Verkaufskanal zugewiesene Zahlungsarten (PayPal, Klarna, Amazon Pay, Vorkasse …), Google reCAPTCHA und Nova Tag Manager werden erkannt und als Baustein eingeschaltet.</helpText>
+            <defaultValue>true</defaultValue>
+        </input-field>
+
+        <input-field type="multi-select">
+            <name>blocks</name>
+            <label>Building blocks in use</label>
+            <label lang="de-DE">Genutzte Bausteine</label>
+            <helpText>Text between [[wenn Klarna]] and [[ende]] only appears if the block is active. Also: [[wenn nicht …]], [[wenn A oder B]], [[sonst]].</helpText>
+            <helpText lang="de-DE">Text zwischen [[wenn Klarna]] und [[ende]] erscheint nur, wenn der Baustein aktiv ist (angeklickt oder automatisch erkannt). Außerdem: [[wenn nicht …]], [[wenn A oder B]], [[sonst]]. Unter „Alle Verkaufskanäle“ die gemeinsamen wählen; ein Verkaufskanal mit eigener Auswahl ersetzt die Liste komplett.</helpText>
+            <options>
+                <option>
+                    <id>vorkasse</id>
+                    <name>Vorkasse / Überweisung</name>
+                </option>
+                <option>
+                    <id>barzahlung</id>
+                    <name>Barzahlung bei Abholung</name>
+                </option>
+                <option>
+                    <id>rechnung</id>
+                    <name>Rechnung (eigene)</name>
+                </option>
+                <option>
+                    <id>lastschrift</id>
+                    <name>Lastschrift (eigene)</name>
+                </option>
+                <option>
+                    <id>paypal</id>
+                    <name>PayPal</name>
+                </option>
+                <option>
+                    <id>klarna</id>
+                    <name>Klarna</name>
+                </option>
+                <option>
+                    <id>amazonpay</id>
+                    <name>Amazon Pay</name>
+                </option>
+                <option>
+                    <id>googlepay</id>
+                    <name>Google Pay</name>
+                </option>
+                <option>
+                    <id>applepay</id>
+                    <name>Apple Pay</name>
+                </option>
+                <option>
+                    <id>ratepay</id>
+                    <name>Ratepay</name>
+                </option>
+                <option>
+                    <id>mollie</id>
+                    <name>Mollie</name>
+                </option>
+                <option>
+                    <id>stripe</id>
+                    <name>Stripe</name>
+                </option>
+                <option>
+                    <id>versand</id>
+                    <name>Versand</name>
+                </option>
+                <option>
+                    <id>abholung</id>
+                    <name>Selbstabholung</name>
+                </option>
+                <option>
+                    <id>auslandsversand</id>
+                    <name>Versand ins Ausland</name>
+                </option>
+                <option>
+                    <id>spedition</id>
+                    <name>Speditionsversand</name>
+                </option>
+                <option>
+                    <id>kundenkonto</id>
+                    <name>Kundenkonto</name>
+                </option>
+                <option>
+                    <id>newsletter</id>
+                    <name>Newsletter</name>
+                </option>
+                <option>
+                    <id>bewertungen</id>
+                    <name>Produktbewertungen</name>
+                </option>
+                <option>
+                    <id>kontaktformular</id>
+                    <name>Kontaktformular</name>
+                </option>
+                <option>
+                    <id>dateiupload</id>
+                    <name>Datei-Upload (Nova Upload)</name>
+                </option>
+                <option>
+                    <id>tagmanager</id>
+                    <name>Google Tag Manager</name>
+                </option>
+                <option>
+                    <id>analytics</id>
+                    <name>Google Analytics</name>
+                </option>
+                <option>
+                    <id>googleads</id>
+                    <name>Google Ads</name>
+                </option>
+                <option>
+                    <id>adsense</id>
+                    <name>Google AdSense</name>
+                </option>
+                <option>
+                    <id>shopwareanalytics</id>
+                    <name>Shopware Analytics</name>
+                </option>
+                <option>
+                    <id>recaptcha</id>
+                    <name>Google reCAPTCHA</name>
+                </option>
+                <option>
+                    <id>youtube</id>
+                    <name>YouTube</name>
+                </option>
+                <option>
+                    <id>doofinder</id>
+                    <name>Doofinder</name>
+                </option>
+                <option>
+                    <id>whatsapp</id>
+                    <name>WhatsApp</name>
+                </option>
+                <option>
+                    <id>warenwirtschaft</id>
+                    <name>Warenwirtschaft (z. B. weclapp/ERPNext)</name>
+                </option>
+                <option>
+                    <id>gebrauchtware</id>
+                    <name>Gebrauchte Waren</name>
+                </option>
+                <option>
+                    <id>reparaturen</id>
+                    <name>Reparaturleistungen</name>
+                </option>
+                <option>
+                    <id>dienstleistungen</id>
+                    <name>Dienstleistungen</name>
+                </option>
+                <option>
+                    <id>altteilpfand</id>
+                    <name>Altteilpfand</name>
+                </option>
+                <option>
+                    <id>batterien</id>
+                    <name>Batterien (BattG)</name>
+                </option>
+                <option>
+                    <id>buchpreisbindung</id>
+                    <name>Preisgebundene Bücher</name>
+                </option>
+                <option>
+                    <id>individualanfertigung</id>
+                    <name>Individuelle Anfertigungen (z. B. 3D-Druck)</name>
+                </option>
+            </options>
+        </input-field>
+
+        <input-field type="text">
+            <name>customBlocks</name>
+            <label>Own building blocks</label>
+            <label lang="de-DE">Eigene Bausteine</label>
+            <placeholder>z. B. Messen, Vermietung</placeholder>
+            <helpText lang="de-DE">Weitere Namen, kommagetrennt – im Text als [[wenn Messen]] … [[ende]] nutzbar.</helpText>
+            <helpText>Further names, comma separated.</helpText>
+        </input-field>
+
+        <input-field type="multi-select">
+            <name>blocksOff</name>
+            <label>Never use (overrides detection)</label>
+            <label lang="de-DE">Nie verwenden (übersteuert die Erkennung)</label>
+            <helpText lang="de-DE">Bausteine, die in diesem Shop trotz automatischer Erkennung aus bleiben sollen.</helpText>
+            <helpText>Blocks that stay off in this shop despite detection.</helpText>
+            <options>
+                <option>
+                    <id>vorkasse</id>
+                    <name>Vorkasse / Überweisung</name>
+                </option>
+                <option>
+                    <id>barzahlung</id>
+                    <name>Barzahlung bei Abholung</name>
+                </option>
+                <option>
+                    <id>rechnung</id>
+                    <name>Rechnung (eigene)</name>
+                </option>
+                <option>
+                    <id>lastschrift</id>
+                    <name>Lastschrift (eigene)</name>
+                </option>
+                <option>
+                    <id>paypal</id>
+                    <name>PayPal</name>
+                </option>
+                <option>
+                    <id>klarna</id>
+                    <name>Klarna</name>
+                </option>
+                <option>
+                    <id>amazonpay</id>
+                    <name>Amazon Pay</name>
+                </option>
+                <option>
+                    <id>googlepay</id>
+                    <name>Google Pay</name>
+                </option>
+                <option>
+                    <id>applepay</id>
+                    <name>Apple Pay</name>
+                </option>
+                <option>
+                    <id>ratepay</id>
+                    <name>Ratepay</name>
+                </option>
+                <option>
+                    <id>mollie</id>
+                    <name>Mollie</name>
+                </option>
+                <option>
+                    <id>stripe</id>
+                    <name>Stripe</name>
+                </option>
+                <option>
+                    <id>versand</id>
+                    <name>Versand</name>
+                </option>
+                <option>
+                    <id>abholung</id>
+                    <name>Selbstabholung</name>
+                </option>
+                <option>
+                    <id>auslandsversand</id>
+                    <name>Versand ins Ausland</name>
+                </option>
+                <option>
+                    <id>spedition</id>
+                    <name>Speditionsversand</name>
+                </option>
+                <option>
+                    <id>kundenkonto</id>
+                    <name>Kundenkonto</name>
+                </option>
+                <option>
+                    <id>newsletter</id>
+                    <name>Newsletter</name>
+                </option>
+                <option>
+                    <id>bewertungen</id>
+                    <name>Produktbewertungen</name>
+                </option>
+                <option>
+                    <id>kontaktformular</id>
+                    <name>Kontaktformular</name>
+                </option>
+                <option>
+                    <id>dateiupload</id>
+                    <name>Datei-Upload (Nova Upload)</name>
+                </option>
+                <option>
+                    <id>tagmanager</id>
+                    <name>Google Tag Manager</name>
+                </option>
+                <option>
+                    <id>analytics</id>
+                    <name>Google Analytics</name>
+                </option>
+                <option>
+                    <id>googleads</id>
+                    <name>Google Ads</name>
+                </option>
+                <option>
+                    <id>adsense</id>
+                    <name>Google AdSense</name>
+                </option>
+                <option>
+                    <id>shopwareanalytics</id>
+                    <name>Shopware Analytics</name>
+                </option>
+                <option>
+                    <id>recaptcha</id>
+                    <name>Google reCAPTCHA</name>
+                </option>
+                <option>
+                    <id>youtube</id>
+                    <name>YouTube</name>
+                </option>
+                <option>
+                    <id>doofinder</id>
+                    <name>Doofinder</name>
+                </option>
+                <option>
+                    <id>whatsapp</id>
+                    <name>WhatsApp</name>
+                </option>
+                <option>
+                    <id>warenwirtschaft</id>
+                    <name>Warenwirtschaft (z. B. weclapp/ERPNext)</name>
+                </option>
+                <option>
+                    <id>gebrauchtware</id>
+                    <name>Gebrauchte Waren</name>
+                </option>
+                <option>
+                    <id>reparaturen</id>
+                    <name>Reparaturleistungen</name>
+                </option>
+                <option>
+                    <id>dienstleistungen</id>
+                    <name>Dienstleistungen</name>
+                </option>
+                <option>
+                    <id>altteilpfand</id>
+                    <name>Altteilpfand</name>
+                </option>
+                <option>
+                    <id>batterien</id>
+                    <name>Batterien (BattG)</name>
+                </option>
+                <option>
+                    <id>buchpreisbindung</id>
+                    <name>Preisgebundene Bücher</name>
+                </option>
+                <option>
+                    <id>individualanfertigung</id>
+                    <name>Individuelle Anfertigungen (z. B. 3D-Druck)</name>
+                </option>
+            </options>
+        </input-field>
+    </card>
 </config>

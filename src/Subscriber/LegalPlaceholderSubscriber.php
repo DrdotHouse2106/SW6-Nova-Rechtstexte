@@ -58,12 +58,61 @@ class LegalPlaceholderSubscriber implements EventSubscriberInterface
                             continue;
                         }
                         $map ??= $this->buildMap($event);
-                        $tags ??= $this->blocks->resolve($event->getSalesChannelContext());
-                        $data->setContent(self::replace(self::applyConditions($content, $tags), $map));
+                        if ($tags === null) {
+                            // Bausteine plus alle gefüllten Platzhalter: [[wenn Telefax]] … greift, sobald ein Fax eingetragen ist
+                            $tags = $this->blocks->resolve($event->getSalesChannelContext());
+                            foreach ($map as $key => $value) {
+                                if (trim(strip_tags((string) $value)) !== '') {
+                                    $tags[BlockResolver::key($key)] = true;
+                                }
+                            }
+                        }
+                        $content = self::applyConditions(self::expandTemplates($content), $tags);
+                        $data->setContent(self::replace(self::number($content), $map));
                     }
                 }
             }
         }
+    }
+
+    /**
+     * [[Vorlage AGB]], [[Vorlage Datenschutz]] … durch die mitgelieferte Textvorlage ersetzen
+     * (src/Resources/legal/de-DE/<name>.html). Unbekannte Vorlagen bleiben sichtbar stehen.
+     */
+    public static function expandTemplates(string $content): string
+    {
+        return (string) preg_replace_callback('/\[\[\s*vorlage\s+([^\[\]]{1,40}?)\s*\]\]/iu', static function (array $m): string {
+            // Dateiname und Vorlagenname werden normiert verglichen: „Widerruf Waren“ = widerruf-waren.html
+            $file = null;
+            foreach (glob(\dirname(__DIR__) . '/Resources/legal/de-DE/*.html') ?: [] as $candidate) {
+                if (BlockResolver::key(basename($candidate, '.html')) === BlockResolver::key($m[1])) {
+                    $file = $candidate;
+                    break;
+                }
+            }
+            if ($file === null) {
+                return $m[0];
+            }
+
+            // Kopfkommentar (Hinweise für Shopbetreiber) nicht ausliefern
+            return (string) preg_replace('/^\s*<!--.*?-->\s*/s', '', (string) file_get_contents($file), 1);
+        }, $content);
+    }
+
+    /**
+     * Fortlaufende Nummern nach dem Ausblenden von Abschnitten: [[§]] für Paragraphen, [[Nr]] für Abschnitte –
+     * fällt ein Abschnitt weg, entsteht keine Lücke in der Zählung.
+     */
+    public static function number(string $content): string
+    {
+        foreach (['§' => '/\[\[\s*§\s*\]\]/u', 'nr' => '/\[\[\s*nr\.?\s*\]\]/iu'] as $pattern) {
+            $i = 0;
+            $content = (string) preg_replace_callback($pattern, static function () use (&$i): string {
+                return (string) ++$i;
+            }, $content);
+        }
+
+        return $content;
     }
 
     /**
@@ -165,6 +214,7 @@ class LegalPlaceholderSubscriber implements EventSubscriberInterface
             'inhaber' => $cfg('owner'),
             'ust-idnr' => $cfg('vatId'),
             'lieferzeit' => $cfg('deliveryTime'),
+            'warenwirtschaft' => $cfg('erpProvider'),
         ];
         // Mehrzeilige Felder dürfen HTML enthalten (nur von Admins pflegbar) und werden nicht maskiert
         // Versandkosten: eigener Text, sonst automatisch aus den Versandarten des Verkaufskanals
@@ -173,6 +223,8 @@ class LegalPlaceholderSubscriber implements EventSubscriberInterface
         $html = [
             'versandkosten' => $manual !== '' ? $manual : $auto(),
             'versandkostenautomatisch' => $auto(),
+            'anschrift' => nl2br(htmlspecialchars($cfg('address'), \ENT_QUOTES | \ENT_HTML5, 'UTF-8'), false),
+            'aufsichtsbehoerde' => nl2br($cfg('supervisoryAuthority'), false),
             'zusatz1' => $cfg('extra1'),
             'zusatz2' => $cfg('extra2'),
             'zusatz3' => $cfg('extra3'),
@@ -186,6 +238,7 @@ class LegalPlaceholderSubscriber implements EventSubscriberInterface
             $map[$k] = $v;
         }
         $map['ustidnr'] = $map['ust-id'] = $map['ust-idnr'];
+        $map['aufsichtsbehörde'] = $map['aufsichtsbehoerde'];
         // Englische/alternative Schreibweisen
         $map['email'] = $map['mail'] = $map['e-mail'];
         $map['phone'] = $map['tel'] = $map['telefon'];

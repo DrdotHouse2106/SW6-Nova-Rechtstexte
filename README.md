@@ -32,6 +32,9 @@ Mit Nova Rechtstexte gibt es **ein Layout je Rechtstext**, das allen Shops zugew
 | `[[Firma]]` | Firmierung, z. B. „Muster GmbH“ | Plugin-Konfiguration, sonst Shopname |
 | `[[Inhaber]]` | Inhaber bzw. Verantwortlicher | Plugin-Konfiguration |
 | `[[USt-IdNr]]` | Umsatzsteuer-ID | Plugin-Konfiguration |
+| `[[Anschrift]]` | Anschrift, mehrzeilig | Plugin-Konfiguration |
+| `[[Aufsichtsbehörde]]` | zuständige Datenschutz-Aufsichtsbehörde | Plugin-Konfiguration |
+| `[[Warenwirtschaft]]` | Anbieter des ERP/Warenwirtschaftssystems | Plugin-Konfiguration |
 | `[[Lieferzeit]]` | z. B. „3 - 5 Tagen“ | Plugin-Konfiguration |
 | `[[Versandkosten]]` | Versandkosten-Übersicht: **automatisch aus den Versandarten** des Verkaufskanals, oder eigener Text (HTML) | Versandarten bzw. Plugin-Konfiguration |
 | `[[Versandkosten automatisch]]` | immer die automatische Übersicht | Versandarten |
@@ -41,6 +44,25 @@ Mit Nova Rechtstexte gibt es **ein Layout je Rechtstext**, das allen Shops zugew
 | `[[Zusatz1]]`–`[[Zusatz3]]` | freier Text je Shop, HTML erlaubt (leer = verschwindet) | Plugin-Konfiguration |
 
 Einfache Werte werden HTML-sicher eingesetzt. `[[Versandkosten]]` und `[[Zusatz…]]` werden unverändert eingesetzt (nur von Admins pflegbar).
+
+## Mitgelieferte Textvorlagen
+
+Das Plugin bringt eigene, frei nutzbare Vorlagen mit (Ordner `src/Resources/legal/de-DE/`). Ein Text-Element mit nur einer Zeile genügt:
+
+| Vorlage | Einsetzen mit |
+|---|---|
+| Impressum (Einzelunternehmen) | `[[Vorlage Impressum]]` |
+| AGB und Kundeninformationen | `[[Vorlage AGB]]` |
+| Widerrufsbelehrung Waren (gesetzliches Muster) | `[[Vorlage Widerruf Waren]]` |
+| Widerrufsbelehrung Dienstleistungen (gesetzliches Muster) | `[[Vorlage Widerruf Dienstleistungen]]` |
+| Zahlung und Versand (mit automatischen Versandkosten) | `[[Vorlage Zahlung Versand]]` |
+| Datenschutzerklärung (ein Baustein je Dienst) | `[[Vorlage Datenschutz]]` |
+
+- Die Vorlagen nutzen Platzhalter und Bausteine – passend zu Ihren Einstellungen erscheinen nur die Abschnitte, die für den jeweiligen Shop gelten.
+- **Automatische Nummerierung:** `[[§]]` (Paragraphen) und `[[Nr]]` (Abschnitte) werden fortlaufend gezählt. Fällt ein Abschnitt weg, entsteht keine Lücke.
+- Platzhalter dürfen auch als Bedingung dienen: `[[wenn Telefax]]Telefax: [[Telefax]][[ende]]` erscheint nur, wenn ein Fax eingetragen ist.
+- Updates der Vorlagen kommen mit Plugin-Updates. Wer einen Text ändern will, kopiert ihn stattdessen in ein eigenes Text-Element – dann bleibt er bei Updates unverändert.
+- Die Vorlagen sind eigene Formulierungen bzw. bei der Widerrufsbelehrung das gesetzliche Muster. Für sie gilt der Haftungsausschluss oben.
 
 ## Versandkosten automatisch
 
@@ -67,6 +89,7 @@ Wie bei den Rechtstext-Generatoren der Händlerverbände: Ein Text enthält **al
 | `[[wenn nicht Klarna]] … [[ende]]` | nur wenn er NICHT aktiv ist |
 | `[[wenn PayPal oder Klarna]] … [[ende]]` | wenn mindestens einer aktiv ist |
 | `[[wenn Klarna]] … [[sonst]] … [[ende]]` | entweder – oder |
+| `[[wenn Telefax]] … [[ende]]` | Platzhalter als Bedingung: nur wenn der Wert gefüllt ist |
 
 - Verschachteln ist erlaubt. Groß-/Kleinschreibung, Leerzeichen und Umlaute sind egal („Amazon Pay“ = „amazonpay“).
 - Steht eine Markierung **allein in einem Absatz**, verschwindet der leere Absatz mit – im Texteditor die Markierungen am besten in eine eigene Zeile schreiben.

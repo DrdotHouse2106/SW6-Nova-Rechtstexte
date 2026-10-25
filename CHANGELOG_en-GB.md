@@ -1,3 +1,6 @@
+# 1.4.0
+- New: German legal text templates with building blocks, automatic numbering, more placeholders
+
 # 1.3.1
 - Shipping table: shorter ranges
 

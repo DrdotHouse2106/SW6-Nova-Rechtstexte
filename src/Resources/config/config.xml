@@ -62,6 +62,34 @@
             <helpText>Owner / controller. Set once under "All sales channels".</helpText>
         </input-field>
 
+        <input-field type="textarea">
+            <name>address</name>
+            <label>[[Anschrift]]</label>
+            <label lang="de-DE">[[Anschrift]]</label>
+            <placeholder>Musterstraße 1
+12345 Musterstadt
+Deutschland</placeholder>
+            <helpText lang="de-DE">Ladungsfähige Anschrift, eine Angabe pro Zeile. Wird in Impressum, AGB, Widerruf und Datenschutz der Vorlagen verwendet.</helpText>
+            <helpText>Postal address, one item per line.</helpText>
+        </input-field>
+
+        <input-field type="textarea">
+            <name>supervisoryAuthority</name>
+            <label>[[Aufsichtsbehörde]] (HTML allowed)</label>
+            <label lang="de-DE">[[Aufsichtsbehörde]] (HTML erlaubt)</label>
+            <helpText lang="de-DE">Für Sie zuständige Datenschutz-Aufsichtsbehörde (Bundesland Ihres Sitzes) mit Anschrift, eine Angabe pro Zeile – für die Vorlage Datenschutzerklärung.</helpText>
+            <helpText>Data protection supervisory authority responsible for you.</helpText>
+        </input-field>
+
+        <input-field type="text">
+            <name>erpProvider</name>
+            <label>[[Warenwirtschaft]]</label>
+            <label lang="de-DE">[[Warenwirtschaft]]</label>
+            <placeholder>weclapp GmbH, Friedrich-Ebert-Straße 28, 97318 Kitzingen</placeholder>
+            <helpText lang="de-DE">Anbieter Ihres externen Warenwirtschafts-/ERP-Systems mit Anschrift (Baustein „Warenwirtschaft“ in der Datenschutzerklärung).</helpText>
+            <helpText>Provider of your external ERP system with address.</helpText>
+        </input-field>
+
         <input-field type="text">
             <name>vatId</name>
             <label>[[USt-IdNr]]</label>
@@ -273,6 +301,10 @@
                     <name>Warenwirtschaft (z. B. weclapp/ERPNext)</name>
                 </option>
                 <option>
+                    <id>widerrufsformular</id>
+                    <name>Online-Widerrufsformular (Widerrufsbutton)</name>
+                </option>
+                <option>
                     <id>gebrauchtware</id>
                     <name>Gebrauchte Waren</name>
                 </option>
@@ -442,6 +474,10 @@
                 <option>
                     <id>warenwirtschaft</id>
                     <name>Warenwirtschaft (z. B. weclapp/ERPNext)</name>
+                </option>
+                <option>
+                    <id>widerrufsformular</id>
+                    <name>Online-Widerrufsformular (Widerrufsbutton)</name>
                 </option>
                 <option>
                     <id>gebrauchtware</id>

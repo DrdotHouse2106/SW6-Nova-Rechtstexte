@@ -1,3 +1,9 @@
+# 1.4.0
+- Neu: **Textvorlagen** für Impressum, AGB, Widerrufsbelehrung (Waren/Dienstleistungen), Zahlung und Versand und Datenschutzerklärung – eigene Formulierungen mit Bausteinen, einzusetzen mit `[[Vorlage …]]`
+- Neu: automatische Nummerierung `[[§]]` und `[[Nr]]` ohne Lücken bei ausgeblendeten Abschnitten
+- Neu: Platzhalter `[[Anschrift]]`, `[[Aufsichtsbehörde]]`, `[[Warenwirtschaft]]`; gefüllte Platzhalter auch als Bedingung (`[[wenn Telefax]]`)
+- Bausteine: Anzeigenamen und Aliase werden erkannt („Gebrauchte Waren“ = „gebrauchtware“), neuer Baustein „Online-Widerrufsformular“
+
 # 1.3.1
 - Versandkosten: Bereiche kürzer („10 bis 20 kg“)
 

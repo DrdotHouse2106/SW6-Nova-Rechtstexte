@@ -12,6 +12,10 @@ Maintain imprint, privacy policy, terms and shipping information **once** for al
 
 Mark optional sections with `[[wenn Klarna]] … [[sonst]] … [[ende]]` (also `[[wenn nicht …]]`, `[[wenn A oder B]]`). Active blocks per sales channel: auto-detected (assigned payment methods, reCAPTCHA, Nova Tag Manager), selected from a list, own names, or forced off.
 
+## Included templates (German)
+
+`[[Vorlage Impressum]]`, `[[Vorlage AGB]]`, `[[Vorlage Widerruf Waren]]`, `[[Vorlage Widerruf Dienstleistungen]]`, `[[Vorlage Zahlung Versand]]`, `[[Vorlage Datenschutz]]` – own wording (statutory model for the withdrawal notice), with building blocks and automatic numbering (`[[§]]`, `[[Nr]]`). Not legal advice.
+
 ## Installation
 
 ```bash

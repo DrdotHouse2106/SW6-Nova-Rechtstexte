@@ -35,6 +35,52 @@ class BlockResolver
         'debitpayment' => 'lastschrift',
     ];
 
+    /**
+     * Bausteine der Auswahlliste mit Anzeigenamen und Aliasen – im Text darf jede Schreibweise stehen,
+     * z. B. [[wenn Gebrauchte Waren]] oder [[wenn gebrauchtware]].
+     */
+    private const ALIASES = [
+        'vorkasse' => ['Vorkasse / Überweisung', 'ueberweisung'],
+        'barzahlung' => ['Barzahlung bei Abholung'],
+        'rechnung' => ['Rechnung (eigene)'],
+        'lastschrift' => ['Lastschrift (eigene)'],
+        'paypal' => ['PayPal', 'paypalcheckout', 'paypalexpress'],
+        'klarna' => ['Klarna'],
+        'amazonpay' => ['Amazon Pay', 'amazonpayments', 'amazon'],
+        'googlepay' => ['Google Pay'],
+        'applepay' => ['Apple Pay'],
+        'ratepay' => ['Ratepay'],
+        'mollie' => ['Mollie'],
+        'stripe' => ['Stripe'],
+        'versand' => ['Versand'],
+        'abholung' => ['Selbstabholung'],
+        'auslandsversand' => ['Versand ins Ausland'],
+        'spedition' => ['Speditionsversand'],
+        'kundenkonto' => ['Kundenkonto'],
+        'newsletter' => ['Newsletter'],
+        'bewertungen' => ['Produktbewertungen'],
+        'kontaktformular' => ['Kontaktformular'],
+        'dateiupload' => ['Datei-Upload (Nova Upload)', 'upload'],
+        'tagmanager' => ['Google Tag Manager', 'gtm'],
+        'analytics' => ['Google Analytics'],
+        'googleads' => ['Google Ads'],
+        'adsense' => ['Google AdSense'],
+        'shopwareanalytics' => ['Shopware Analytics'],
+        'recaptcha' => ['Google reCAPTCHA'],
+        'youtube' => ['YouTube'],
+        'doofinder' => ['Doofinder'],
+        'whatsapp' => ['WhatsApp'],
+        'warenwirtschaft' => ['Warenwirtschaft (z. B. weclapp/ERPNext)'],
+        'widerrufsformular' => ['Online-Widerrufsformular (Widerrufsbutton)', 'widerrufsbutton'],
+        'gebrauchtware' => ['Gebrauchte Waren', 'gebraucht', 'gebrauchtteile'],
+        'reparaturen' => ['Reparaturleistungen', 'reparatur'],
+        'dienstleistungen' => ['Dienstleistungen'],
+        'altteilpfand' => ['Altteilpfand'],
+        'batterien' => ['Batterien (BattG)', 'battg'],
+        'buchpreisbindung' => ['Preisgebundene Bücher'],
+        'individualanfertigung' => ['Individuelle Anfertigungen (z. B. 3D-Druck)', '3ddruck', 'individuellgestaltetewaren'],
+    ];
+
     /** @var array<string, array<string, true>> */
     private array $cache = [];
 
@@ -68,8 +114,19 @@ class BlockResolver
                 $tags[$tag] = true;
             }
         }
+        $off = [];
         foreach ((array) $this->config->get(self::CONFIG . 'blocksOff', $scId) as $tag) {
-            unset($tags[self::key((string) $tag)]);
+            $off[self::key((string) $tag)] = true;
+        }
+        $tags = array_diff_key($tags, $off);
+
+        // Anzeigenamen und Aliase der aktiven Bausteine ebenfalls als aktiv führen
+        foreach (self::ALIASES as $id => $names) {
+            if (isset($tags[$id])) {
+                foreach ($names as $name) {
+                    $tags[self::key($name)] = true;
+                }
+            }
         }
 
         return $this->cache[$scId] = $tags;

@@ -6,6 +6,12 @@
 
 Mit Nova Rechtstexte gibt es **ein Layout je Rechtstext**, das allen Shops zugewiesen wird. Shop-spezifische Angaben stehen als Platzhalter im Text, z. B. `[[Shopname]]` oder `[[E-Mail]]`, und werden beim Ausliefern je Verkaufskanal ersetzt.
 
+> **⚠️ Haftungsausschluss – bitte lesen**
+>
+> Dieses Plugin und alle mitgelieferten Textvorlagen und Bausteine sind **keine Rechtsberatung**. Sie wurden nach bestem Wissen erstellt, aber **nicht anwaltlich geprüft**. Für Richtigkeit, Vollständigkeit und Aktualität wird **keine Gewähr und keine Haftung** übernommen – insbesondere nicht für Abmahnungen, Bußgelder oder sonstige Schäden aus der Verwendung.
+>
+> Rechtstexte müssen zum eigenen Geschäft passen (Rechtsform, Sortiment, Zahlungs- und Versandarten, eingesetzte Dienste) und bei Gesetzesänderungen angepasst werden. **Die Verantwortung für die im Shop veröffentlichten Texte liegt allein beim Shopbetreiber.** Lassen Sie Ihre Texte vor dem Einsatz von einer Rechtsanwältin oder einem Rechtsanwalt bzw. einem spezialisierten Dienstleister prüfen.
+
 ## Funktionen
 
 - Platzhalter in **allen Text-Elementen** von Erlebniswelten (Kategorieseiten, Shopseiten, Landingpages)

@@ -1,3 +1,6 @@
+# 1.2.1
+- README: Haftungsausschluss – keine Rechtsberatung, keine Gewähr für Textvorlagen, Verantwortung liegt beim Shopbetreiber
+
 # 1.2.0
 - Neu: **Versandkosten automatisch** – `[[Versandkosten]]` erzeugt die Übersicht aus den Versandarten des Verkaufskanals (Preis-Matrix, Regeln, Lieferzeit), solange kein eigener Text eingetragen ist; zusätzlich `[[Versandkosten automatisch]]`. Versandarten ausblendbar, Regelnamen und Lieferzeit abschaltbar
 

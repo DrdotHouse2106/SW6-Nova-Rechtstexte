@@ -1,3 +1,6 @@
+# 1.2.1
+- README: disclaimer – no legal advice, no liability for text templates
+
 # 1.2.0
 - New: automatic shipping cost table from the sales channel's shipping methods
 

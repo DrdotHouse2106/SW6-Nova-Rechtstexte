@@ -1,3 +1,6 @@
+# 1.3.0
+- Automatic shipping table: customer label from rule description, "-" hides a rule; grouped by rule
+
 # 1.2.1
 - README: disclaimer – no legal advice, no liability for text templates
 

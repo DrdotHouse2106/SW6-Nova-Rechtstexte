@@ -96,7 +96,7 @@
             <name>shippingShowRules</name>
             <label>Automatic shipping table: show rule names (e.g. "Germany")</label>
             <label lang="de-DE">Automatische Versandkosten: Regelnamen zeigen (z. B. „Deutschland“)</label>
-            <helpText lang="de-DE">Die Namen der Regeln aus dem Rule Builder erscheinen als „Gilt für“. Dafür die Regeln kundenverständlich benennen.</helpText>
+            <helpText lang="de-DE">Als „Gilt für“ erscheint die erste Zeile der Regel-BESCHREIBUNG aus dem Rule Builder (z. B. „EU-Zone 1: Österreich, Belgien …“), sonst der Regelname. Beschreibung „-“ = Preise dieser Regel nicht aufführen (z. B. Sonderregeln für einzelne Artikel). So bleiben die internen Regelnamen unverändert.</helpText>
             <helpText>Rule names appear as "applies to" – name them in customer-friendly terms.</helpText>
             <defaultValue>true</defaultValue>
         </input-field>

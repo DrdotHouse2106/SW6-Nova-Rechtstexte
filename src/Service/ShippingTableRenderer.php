@@ -76,8 +76,10 @@ class ShippingTableRenderer
         if ($showDeliveryTime && $method->getDeliveryTime() !== null) {
             $meta[] = 'Lieferzeit: ' . self::e($method->getDeliveryTime()->getTranslation('name') ?? $method->getDeliveryTime()->getName() ?? '');
         }
-        if ($showRules && $method->getAvailabilityRule() !== null) {
-            $meta[] = 'Gilt für: ' . self::e($method->getAvailabilityRule()->getName());
+        $availability = $method->getAvailabilityRule();
+        if ($showRules && $availability !== null && trim((string) $availability->getDescription()) !== '-') {
+            $label = trim(strtok((string) $availability->getDescription(), "\n") ?: '');
+            $meta[] = 'Gilt für: ' . self::e($label !== '' ? $label : $availability->getName());
         }
 
         $prices = $method->getPrices()->getElements();
@@ -85,8 +87,11 @@ class ShippingTableRenderer
 
         $rows = [];
         $hasRuleColumn = false;
-        $unitLabel = null;
+        $units = [];
         foreach ($prices as $price) {
+            if (self::isHiddenRule($price)) {
+                continue;
+            }
             $amount = $price->getCurrencyPrice()?->getCurrencyPrice($context->getCurrencyId());
             if ($amount === null) {
                 continue;
@@ -94,8 +99,8 @@ class ShippingTableRenderer
             $rule = $showRules ? self::ruleName($price) : '';
             $hasRuleColumn = $hasRuleColumn || $rule !== '';
             $calc = $price->getCalculation();
-            if ($calc !== null && isset(self::UNITS[$calc])) {
-                $unitLabel ??= self::UNITS[$calc][0];
+            if ($calc !== null && isset(self::UNITS[$calc]) && $this->range($price) !== '') {
+                $units[self::UNITS[$calc][0]] = true;
             }
             $rows[] = [$rule, $this->range($price), $this->money($amount->getGross())];
         }
@@ -105,19 +110,22 @@ class ShippingTableRenderer
             $out .= '<p><small>' . implode(' · ', $meta) . '</small></p>';
         }
         if ($rows === []) {
-            return $out . '<p>Die Kosten werden im Warenkorb angezeigt.</p>';
+            // Alle Preise ausgeblendet oder keine hinterlegt: Versandart nur nennen, wenn sie nicht ganz leer ist
+            return $method->getPrices()->count() > 0 ? '' : $out . '<p>Die Kosten werden im Warenkorb angezeigt.</p>';
         }
         if (\count($rows) === 1 && $rows[0][1] === '' && $rows[0][0] === '') {
             return $out . '<p>' . $rows[0][2] . '</p>';
         }
 
-        $out .= '<table class="table table-sm"><thead><tr>';
-        if ($hasRuleColumn) {
-            $out .= '<th>Gilt für</th>';
-        }
-        $out .= '<th>' . self::e($unitLabel ?? 'Bereich') . '</th><th>Preis</th></tr></thead><tbody>';
+        $unitLabel = \count($units) === 1 ? (string) array_key_first($units) : 'Bereich';
+        $out .= '<table class="table table-sm"><thead><tr><th>' . self::e($unitLabel) . '</th><th>Preis</th></tr></thead><tbody>';
+        $currentRule = null;
         foreach ($rows as [$rule, $range, $money]) {
-            $out .= '<tr>' . ($hasRuleColumn ? '<td>' . self::e($rule) . '</td>' : '') . '<td>' . ($range !== '' ? $range : 'pauschal') . '</td><td>' . $money . '</td></tr>';
+            if ($hasRuleColumn && $rule !== $currentRule) {
+                $currentRule = $rule;
+                $out .= '<tr class="nova-legal-shipping-group"><th colspan="2">' . self::e($rule !== '' ? $rule : 'Alle übrigen') . '</th></tr>';
+            }
+            $out .= '<tr><td>' . ($range !== '' ? $range : 'pauschal') . '</td><td>' . $money . '</td></tr>';
         }
 
         return $out . '</tbody></table>';
@@ -157,9 +165,26 @@ class ShippingTableRenderer
         return rtrim(rtrim(number_format($value, 3, ',', '.'), '0'), ',');
     }
 
+    /**
+     * Kundentext einer Regel: erste Zeile der Regel-Beschreibung (Rule Builder), sonst der Regelname.
+     * Beschreibung „-“ = Preise dieser Regel nicht im Rechtstext aufführen (z. B. Sonderfälle für einzelne Artikel).
+     */
     private static function ruleName(ShippingMethodPriceEntity $price): string
     {
-        return $price->getRule()?->getName() ?? $price->getCalculationRule()?->getName() ?? '';
+        $rule = $price->getRule() ?? $price->getCalculationRule();
+        if ($rule === null) {
+            return '';
+        }
+        $description = trim(strtok((string) $rule->getDescription(), "\n") ?: '');
+
+        return $description !== '' ? $description : $rule->getName();
+    }
+
+    private static function isHiddenRule(ShippingMethodPriceEntity $price): bool
+    {
+        $rule = $price->getRule() ?? $price->getCalculationRule();
+
+        return $rule !== null && trim((string) $rule->getDescription()) === '-';
     }
 
     private static function e(string $value): string

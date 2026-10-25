@@ -46,7 +46,8 @@ Einfache Werte werden HTML-sicher eingesetzt. `[[Versandkosten]]` und `[[Zusatz�
 
 Ist das Feld „[[Versandkosten]] von Hand“ leer, erzeugt das Plugin die Versandkosten aus den **Versandarten des Verkaufskanals** (*Einstellungen → Versand*): je aktive, zugewiesene Versandart Name, Lieferzeit, Verfügbarkeitsregel und die Preis-Matrix (Gewicht, Warenwert, Anzahl oder Volumen; Bruttopreise in der Währung des Shops, 0 € = versandkostenfrei). So stimmen Rechtstext und Checkout immer überein – ändert sich ein Preis, ändert sich der Text.
 
-- Regelnamen erscheinen als „Gilt für“ – im Rule Builder kundenverständlich benennen (z. B. „Deutschland“, „EU Zone 1“, „Warenkorb enthält Sperrgut“) oder in der Konfiguration ausblenden.
+- **„Gilt für“ kommt aus der Regel-Beschreibung** (Rule Builder → Regel → Beschreibung, erste Zeile), z. B. „EU-Zone 1: Österreich, Belgien, Frankreich …“. Ohne Beschreibung erscheint der Regelname. Interne Regelnamen müssen also nicht geändert werden.
+- **Beschreibung „-“** (nur ein Bindestrich) = Preise dieser Regel nicht aufführen, z. B. Sonderregeln für einzelne Artikel. Bei einer Verfügbarkeitsregel blendet „-“ nur die Zeile „Gilt für“ aus.
 - Versandarten, die nicht im Text stehen sollen (z. B. interne), unter „diese Versandarten nicht aufführen“ wählen.
 
 ## Bausteine: Abschnitte je Shop ein- und ausblenden
@@ -145,7 +146,7 @@ bin/console cache:clear
 
 **Ursache:** Die Spalte „Gilt für“ zeigt die Namen aus dem Rule Builder
 
-**Lösung:** Regeln kundenverständlich umbenennen oder „Regelnamen zeigen“ ausschalten
+**Lösung:** Im Rule Builder bei der Regel eine **Beschreibung** eintragen (erste Zeile = Kundentext) bzw. „-“ zum Ausblenden; oder „Regelnamen zeigen“ ausschalten
 
 ## Mitmachen – Juristinnen und Juristen willkommen
 

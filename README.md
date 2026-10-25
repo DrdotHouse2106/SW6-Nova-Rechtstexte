@@ -59,6 +59,8 @@ Das Plugin bringt eigene, frei nutzbare Vorlagen mit (Ordner `src/Resources/lega
 | Datenschutzerklärung (ein Baustein je Dienst) | `[[Vorlage Datenschutz]]` |
 | Batteriehinweise (EU-Batterieverordnung/BattDG) | `[[Vorlage Batteriehinweise]]` |
 | Verpackungshinweise (VerpackG) | `[[Vorlage Verpackungshinweise]]` |
+| Rücksendung (mit eigenen Etikettpreisen `[[Rücksendekosten]]`) | `[[Vorlage Rücksendung]]` |
+| Altteilbestimmungen (zum AGB-Baustein Altteilpfand, eigene Beträge `[[Altteil-Details]]`) | `[[Vorlage Altteilbestimmungen]]` |
 
 - Die Vorlagen nutzen Platzhalter und Bausteine – passend zu Ihren Einstellungen erscheinen nur die Abschnitte, die für den jeweiligen Shop gelten.
 - **Automatische Nummerierung:** `[[§]]` (Paragraphen) und `[[Nr]]` (Abschnitte) werden fortlaufend gezählt. Fällt ein Abschnitt weg, entsteht keine Lücke.

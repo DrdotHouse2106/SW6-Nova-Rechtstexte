@@ -1,3 +1,7 @@
+# 1.6.0
+- Neue Vorlagen **Rücksendung** und **Altteilbestimmungen** (passend zum AGB-Abschnitt Altteilpfand)
+- Neue Platzhalter `[[Rücksendekosten]]` und `[[Altteil-Details]]` (HTML, je Verkaufskanal)
+
 # 1.5.1
 - Baustein „Starterbatterien (Pfand)“ wird auch unter seinem Anzeigenamen erkannt
 

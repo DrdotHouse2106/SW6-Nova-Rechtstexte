@@ -225,6 +225,8 @@ class LegalPlaceholderSubscriber implements EventSubscriberInterface
             'versandkostenautomatisch' => $auto(),
             'anschrift' => nl2br(htmlspecialchars($cfg('address'), \ENT_QUOTES | \ENT_HTML5, 'UTF-8'), false),
             'aufsichtsbehoerde' => nl2br($cfg('supervisoryAuthority'), false),
+            'altteil-details' => $cfg('oldPartsDetails'),
+            'ruecksendekosten' => $cfg('returnCosts'),
             'zusatz1' => $cfg('extra1'),
             'zusatz2' => $cfg('extra2'),
             'zusatz3' => $cfg('extra3'),
@@ -239,6 +241,8 @@ class LegalPlaceholderSubscriber implements EventSubscriberInterface
         }
         $map['ustidnr'] = $map['ust-id'] = $map['ust-idnr'];
         $map['aufsichtsbehörde'] = $map['aufsichtsbehoerde'];
+        $map['rücksendekosten'] = $map['ruecksendekosten'];
+        $map['altteildetails'] = $map['altteil-details'];
         // Englische/alternative Schreibweisen
         $map['email'] = $map['mail'] = $map['e-mail'];
         $map['phone'] = $map['tel'] = $map['telefon'];

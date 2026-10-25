@@ -137,6 +137,22 @@ Deutschland</placeholder>
         </input-field>
 
         <input-field type="textarea">
+            <name>returnCosts</name>
+            <label>[[Rücksendekosten]] (HTML allowed)</label>
+            <label lang="de-DE">[[Rücksendekosten]] (HTML erlaubt)</label>
+            <helpText lang="de-DE">Für die Vorlage „Rücksendung“: Preise der Rücksendeetiketten je Land und ggf. Links zum Etikett, z. B. als Liste. Leer = Abschnitt entfällt.</helpText>
+            <helpText>For the returns template: label prices per country and links.</helpText>
+        </input-field>
+
+        <input-field type="textarea">
+            <name>oldPartsDetails</name>
+            <label>[[Altteil-Details]] (HTML allowed)</label>
+            <label lang="de-DE">[[Altteil-Details]] (HTML erlaubt)</label>
+            <helpText lang="de-DE">Für die Vorlage „Altteilbestimmungen“: Erstattungsbeträge und Abzüge für einzelne Bauteile. Leer = Abschnitt entfällt.</helpText>
+            <helpText>For the core return template: refund amounts and deductions per part.</helpText>
+        </input-field>
+
+        <input-field type="textarea">
             <name>extra1</name>
             <label>[[Zusatz1]] (free, HTML allowed)</label>
             <label lang="de-DE">[[Zusatz1]] (frei, HTML erlaubt)</label>

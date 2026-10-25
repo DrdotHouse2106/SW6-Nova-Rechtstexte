@@ -1,3 +1,6 @@
+# 1.6.0
+- New templates: returns and core part returns; new placeholders
+
 # 1.5.1
 - Building block aliases for starter batteries
 

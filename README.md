@@ -147,6 +147,16 @@ bin/console cache:clear
 
 **Lösung:** Regeln kundenverständlich umbenennen oder „Regelnamen zeigen“ ausschalten
 
+## Mitmachen – Juristinnen und Juristen willkommen
+
+Die Textbausteine sollen mit der Zeit besser werden. **Sind Sie Rechtsanwältin oder Rechtsanwalt** (oder anderweitig fachkundig, z. B. im Datenschutz) und möchten etwas beitragen? Sehr gern:
+
+- Korrekturen, Ergänzungen oder ganze Bausteine (z. B. für weitere Zahlungs- oder Versanddienstleister) als **Pull Request** oder **Issue** einreichen
+- Hinweise auf Gesetzesänderungen oder neue Rechtsprechung, die eine Anpassung nötig machen
+- Eine fachliche Durchsicht bestehender Texte – auf Wunsch wird die Prüfung mit Namen und Datum in der Vorlage vermerkt
+
+Beiträge stehen unter derselben Lizenz wie das Projekt (MIT) und kommen über Plugin-Updates allen Shops zugute. Bitte keine Texte aus kostenpflichtigen Generatoren oder Abo-Diensten einreichen – diese sind urheberrechtlich geschützt.
+
 ## Lizenz
 
 MIT

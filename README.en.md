@@ -32,6 +32,10 @@ Set common values under "All sales channels" in the plugin configuration, then o
 - **`[[...]]` still visible:** typo, or HTML inside the brackets – check the source view of the text editor.
 - **Change not visible:** clear the cache.
 
+## Contributing – lawyers welcome
+
+Are you a lawyer or a data protection expert? Corrections, new building blocks, hints on legal changes or a review of existing texts are very welcome as pull request or issue. Reviews can be credited with name and date in the template. Contributions are MIT licensed; please do not submit texts from paid generators (copyright).
+
 ## License
 
 MIT

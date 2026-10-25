@@ -1,0 +1,31 @@
+{
+    "name": "nova/nova-rechtstexte",
+    "description": "Rechtstexte einmal pflegen, in allen Shops nutzen: Platzhalter wie [[Shopname]] oder [[E-Mail]] in Erlebniswelt-Texten werden je Verkaufskanal ersetzt",
+    "type": "shopware-platform-plugin",
+    "version": "1.0.0",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Nova"
+        }
+    ],
+    "require": {
+        "shopware/core": "~6.6.0 || ~6.7.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Nova\\Rechtstexte\\": "src/"
+        }
+    },
+    "extra": {
+        "shopware-plugin-class": "Nova\\Rechtstexte\\NovaRechtstexte",
+        "label": {
+            "de-DE": "Nova Rechtstexte",
+            "en-GB": "Nova Legal Texts"
+        },
+        "description": {
+            "de-DE": "Impressum, Datenschutz, AGB & Co. einmal pflegen und in allen Shops nutzen: Platzhalter wie [[Shopname]], [[E-Mail]] oder [[Telefon]] werden je Verkaufskanal ersetzt – auch in den AGB im Checkout und unabhängig vom Theme.",
+            "en-GB": "Maintain imprint, privacy policy and terms once for all shops: placeholders such as [[Shopname]] or [[E-Mail]] are replaced per sales channel."
+        }
+    }
+}

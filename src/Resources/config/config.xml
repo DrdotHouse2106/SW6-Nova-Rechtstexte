@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/shopware/trunk/src/Core/System/SystemConfig/Schema/config.xsd">
+
+    <card>
+        <title>Placeholders per sales channel</title>
+        <title lang="de-DE">Platzhalter je Verkaufskanal</title>
+
+        <input-field type="bool">
+            <name>disabled</name>
+            <label>Do not replace placeholders</label>
+            <label lang="de-DE">Platzhalter NICHT ersetzen</label>
+            <helpText>Text elements in shopping experiences may contain placeholders such as [[Shopname]], [[E-Mail]], [[Telefon]], [[Telefax]], [[WhatsApp]], [[Firma]], [[Inhaber]], [[USt-IdNr]], [[Lieferzeit]], [[Versandkosten]], [[Domain]], [[Shop-URL]], [[Jahr]], [[Zusatz1]]–[[Zusatz3]]. They are replaced per sales channel – so one legal text layout can be used in all shops. Shop name and e-mail come from Settings → Basic information.</helpText>
+            <helpText lang="de-DE">Texte in Erlebniswelten dürfen Platzhalter enthalten: [[Shopname]], [[E-Mail]], [[Telefon]], [[Telefax]], [[WhatsApp]], [[Firma]], [[Inhaber]], [[USt-IdNr]], [[Lieferzeit]], [[Versandkosten]], [[Domain]], [[Shop-URL]], [[Jahr]], [[Zusatz1]] bis [[Zusatz3]]. Sie werden je Verkaufskanal ersetzt – so reicht EIN Layout je Rechtstext für alle Shops. Shopname und E-Mail kommen aus Einstellungen → Grundinformationen (E-Mail hier überschreibbar). Werte unter „Alle Verkaufskanäle“ gelten für jeden Shop ohne eigenen Wert. Nach Änderungen den Cache leeren.</helpText>
+            <defaultValue>false</defaultValue>
+        </input-field>
+
+        <input-field type="text">
+            <name>email</name>
+            <label>[[E-Mail]] (optional)</label>
+            <label lang="de-DE">[[E-Mail]] (optional)</label>
+            <helpText>Empty = e-mail from Basic information.</helpText>
+            <helpText lang="de-DE">Leer = E-Mail-Adresse aus den Grundinformationen des Verkaufskanals.</helpText>
+        </input-field>
+
+        <input-field type="text">
+            <name>phone</name>
+            <label>[[Telefon]]</label>
+            <label lang="de-DE">[[Telefon]]</label>
+            <placeholder>+49 6403 72201</placeholder>
+            <helpText>Empty = phone number of the top bar.</helpText>
+            <helpText lang="de-DE">Leer = Telefonnummer aus der Topbar (Nova Theme), falls vorhanden.</helpText>
+        </input-field>
+
+        <input-field type="text">
+            <name>fax</name>
+            <label>[[Telefax]]</label>
+            <label lang="de-DE">[[Telefax]]</label>
+        </input-field>
+
+        <input-field type="text">
+            <name>whatsapp</name>
+            <label>[[WhatsApp]]</label>
+            <label lang="de-DE">[[WhatsApp]]</label>
+        </input-field>
+
+        <input-field type="text">
+            <name>company</name>
+            <label>[[Firma]]</label>
+            <label lang="de-DE">[[Firma]]</label>
+            <placeholder>FranceTec Marcel Ulber</placeholder>
+            <helpText lang="de-DE">Firmierung für Impressum, AGB, Widerruf. Leer = Shopname.</helpText>
+            <helpText>Company name for imprint and terms. Empty = shop name.</helpText>
+        </input-field>
+
+        <input-field type="text">
+            <name>owner</name>
+            <label>[[Inhaber]]</label>
+            <label lang="de-DE">[[Inhaber]]</label>
+            <placeholder>Marcel Ulber</placeholder>
+            <helpText lang="de-DE">Inhaber bzw. Verantwortlicher (Impressum, Datenschutz, Widerruf). Unter „Alle Verkaufskanäle“ einmal setzen.</helpText>
+            <helpText>Owner / controller. Set once under "All sales channels".</helpText>
+        </input-field>
+
+        <input-field type="text">
+            <name>vatId</name>
+            <label>[[USt-IdNr]]</label>
+            <label lang="de-DE">[[USt-IdNr]]</label>
+        </input-field>
+
+        <input-field type="text">
+            <name>deliveryTime</name>
+            <label>[[Lieferzeit]]</label>
+            <label lang="de-DE">[[Lieferzeit]]</label>
+            <placeholder>3 - 5 Tagen</placeholder>
+            <helpText lang="de-DE">Für „Zahlung und Versand“, z. B. „3 - 5 Tagen“ oder „1 - 3 Werktagen“.</helpText>
+            <helpText>E.g. "3 - 5 days".</helpText>
+        </input-field>
+
+        <input-field type="textarea">
+            <name>shipping</name>
+            <label>[[Versandkosten]] (HTML allowed)</label>
+            <label lang="de-DE">[[Versandkosten]] (HTML erlaubt)</label>
+            <helpText lang="de-DE">Versandkosten-Abschnitt dieses Shops für „Zahlung und Versand“ – auch mehrzeilig mit &lt;br&gt; und &lt;strong&gt;. Wird unverändert eingesetzt.</helpText>
+            <helpText>Shipping cost section of this shop, HTML allowed, inserted as is.</helpText>
+        </input-field>
+
+        <input-field type="textarea">
+            <name>extra1</name>
+            <label>[[Zusatz1]] (free, HTML allowed)</label>
+            <label lang="de-DE">[[Zusatz1]] (frei, HTML erlaubt)</label>
+            <helpText lang="de-DE">Freier Text je Shop, z. B. ein Absatz, der nur in einem Shop gilt. Leer = Platzhalter verschwindet.</helpText>
+            <helpText>Free text per shop. Empty = placeholder disappears.</helpText>
+        </input-field>
+
+        <input-field type="textarea">
+            <name>extra2</name>
+            <label>[[Zusatz2]] (free, HTML allowed)</label>
+            <label lang="de-DE">[[Zusatz2]] (frei, HTML erlaubt)</label>
+        </input-field>
+
+        <input-field type="textarea">
+            <name>extra3</name>
+            <label>[[Zusatz3]] (free, HTML allowed)</label>
+            <label lang="de-DE">[[Zusatz3]] (frei, HTML erlaubt)</label>
+        </input-field>
+    </card>
+</config>

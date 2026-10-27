@@ -1,3 +1,6 @@
+# 1.7.1
+- Own plugin icon (previously showed the Nova Upload icon by mistake)
+
 # 1.7.0
 - New: time-based sections `[[bis DATE]] … [[ende]]` and `[[ab DATE]] … [[ende]]` for any Shopping Experience text
 

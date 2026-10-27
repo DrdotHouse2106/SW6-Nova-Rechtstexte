@@ -1,3 +1,6 @@
+# 1.7.1
+- Eigenes Plugin-Icon (bisher versehentlich das Icon von Nova Upload)
+
 # 1.7.0
 - Neu: **zeitgesteuerte Abschnitte** `[[bis 02.05.2026]] … [[ende]]` und `[[ab 01.03.2027]] … [[ende]]` (auch mit `[[sonst]]`) – in jedem Erlebniswelt-Text, z. B. für Termine auf einer Seite „Treffen & Messen“, die nach dem Datum von selbst verschwinden
 

@@ -1,3 +1,6 @@
+# 1.8.1
+- Privacy template, block `suchauswertung` (Nova Search): paragraph on the voluntary **search result feedback** added – rating and short text, stored without IP address or account reference, deleted after 12 months
+
 # 1.8.0
 - Privacy template extended: product uploads (Nova Upload) with retention, enhanced conversions (hashed customer data, block `erweitertekonversionen`), site search analytics (`suchauswertung`) and AI search correction via Anthropic (`kisuche`) – all auto-detected
 

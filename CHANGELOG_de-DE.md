@@ -1,3 +1,6 @@
+# 1.8.1
+- Datenschutz-Vorlage, Baustein `suchauswertung` (Nova Suche): Absatz zur freiwilligen **Rückmeldung zum Suchergebnis** ergänzt – Bewertung und kurzer Text, gespeichert ohne IP-Adresse und Kontobezug, Löschung nach 12 Monaten
+
 # 1.8.0
 - Datenschutz-Vorlage ergänzt:
   - **Dateien zu Artikeln** (Nova Upload): Zweck, Löschung nach 14 Tagen ohne Bestellung bzw. zwei Jahren nach Bestellung, Mitlöschen bei Bestell-/Kontolöschung

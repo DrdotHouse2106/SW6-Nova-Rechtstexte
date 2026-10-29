@@ -7,6 +7,7 @@ use Shopware\Core\Content\Cms\Events\CmsPageLoadedEvent;
 use Shopware\Core\Content\Cms\SalesChannel\Struct\TextStruct;
 use Nova\Rechtstexte\Service\BlockResolver;
 use Nova\Rechtstexte\Service\ShippingTableRenderer;
+use Psr\Log\LoggerInterface;
 use Shopware\Core\System\SystemConfig\SystemConfigService;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
@@ -21,11 +22,21 @@ class LegalPlaceholderSubscriber implements EventSubscriberInterface
 {
     private const CONFIG = 'NovaRechtstexte.config.';
 
+    /** @var list<string> PCRE-Fehler der aktuellen Verarbeitung (Schritt + Meldung) */
+    private static array $regexErrors = [];
+
+    private ?LoggerInterface $logger = null;
+
     public function __construct(
         private readonly SystemConfigService $config,
         private readonly BlockResolver $blocks,
         private readonly ShippingTableRenderer $shipping,
     ) {
+    }
+
+    public function setLogger(LoggerInterface $logger): void
+    {
+        $this->logger = $logger;
     }
 
     public static function getSubscribedEvents(): array
@@ -57,6 +68,7 @@ class LegalPlaceholderSubscriber implements EventSubscriberInterface
                         if ($content === null || !str_contains($content, '[[')) {
                             continue;
                         }
+                        self::takeRegexErrors();
                         $map ??= $this->buildMap($event);
                         if ($tags === null) {
                             // Bausteine plus alle gefüllten Platzhalter: [[wenn Telefax]] … greift, sobald ein Fax eingetragen ist
@@ -69,6 +81,14 @@ class LegalPlaceholderSubscriber implements EventSubscriberInterface
                         }
                         $content = self::applyConditions(self::expandTemplates($content), $tags);
                         $data->setContent(self::replace(self::number($content), $map));
+                        $errors = self::takeRegexErrors();
+                        if ($errors !== []) {
+                            $this->logger?->error('Nova Rechtstexte: Textbaustein nur teilweise verarbeitet (PCRE-Fehler), betroffener Schritt unverändert gelassen', [
+                                'cmsPageId' => $page->getId(),
+                                'slotId' => $slot->getId(),
+                                'errors' => array_values(array_unique($errors)),
+                            ]);
+                        }
                     }
                 }
             }
@@ -81,7 +101,7 @@ class LegalPlaceholderSubscriber implements EventSubscriberInterface
      */
     public static function expandTemplates(string $content): string
     {
-        return (string) preg_replace_callback('/\[\[\s*vorlage\s+([^\[\]]{1,40}?)\s*\]\]/iu', static function (array $m): string {
+        return self::checked(preg_replace_callback('/\[\[\s*vorlage\s+([^\[\]]{1,40}?)\s*\]\]/iu', static function (array $m): string {
             // Dateiname und Vorlagenname werden normiert verglichen: „Widerruf Waren“ = widerruf-waren.html
             $file = null;
             foreach (glob(\dirname(__DIR__) . '/Resources/legal/de-DE/*.html') ?: [] as $candidate) {
@@ -95,8 +115,10 @@ class LegalPlaceholderSubscriber implements EventSubscriberInterface
             }
 
             // Kopfkommentar (Hinweise für Shopbetreiber) nicht ausliefern
-            return (string) preg_replace('/^\s*<!--.*?-->\s*/s', '', (string) file_get_contents($file), 1);
-        }, $content);
+            $template = (string) file_get_contents($file);
+
+            return self::checked(preg_replace('/^\s*<!--.*?-->\s*/s', '', $template, 1), $template, 'Vorlage');
+        }, $content), $content, 'Vorlagen');
     }
 
     /**
@@ -107,9 +129,9 @@ class LegalPlaceholderSubscriber implements EventSubscriberInterface
     {
         foreach (['§' => '/\[\[\s*§\s*\]\]/u', 'nr' => '/\[\[\s*nr\.?\s*\]\]/iu'] as $pattern) {
             $i = 0;
-            $content = (string) preg_replace_callback($pattern, static function () use (&$i): string {
+            $content = self::checked(preg_replace_callback($pattern, static function () use (&$i): string {
                 return (string) ++$i;
-            }, $content);
+            }, $content), $content, 'Nummerierung');
         }
 
         return $content;
@@ -126,7 +148,12 @@ class LegalPlaceholderSubscriber implements EventSubscriberInterface
      */
     public static function applyConditions(string $content, array $tags, ?\DateTimeInterface $today = null): string
     {
-        if (!preg_match('/\[\[\s*(?:wenn|bis|ab)\b/iu', $content)) {
+        $hasConditions = preg_match('/\[\[\s*(?:wenn|bis|ab)\b/iu', $content);
+        if ($hasConditions !== 1) {
+            if ($hasConditions === false) {
+                self::$regexErrors[] = 'Bedingungen: ' . preg_last_error_msg();
+            }
+
             return $content;
         }
 
@@ -134,19 +161,20 @@ class LegalPlaceholderSubscriber implements EventSubscriberInterface
 
         // Markierungen, die allein in einem Absatz stehen, aus dem Absatz lösen
         $marker = '\[\[\s*(?:wenn\b[^\[\]]*|(?:bis|ab)\s+[0-9.\-]+|sonst|ende)\s*\]\]';
-        $content = (string) preg_replace(
+        $content = self::checked(preg_replace(
             '#<(p|div|h[1-6]|li)\b[^>]*>(?:\s|&nbsp;|<br\s*/?>|</?(?:span|strong|b|em|i)\b[^>]*>)*(' . $marker . ')(?:\s|&nbsp;|<br\s*/?>|</?(?:span|strong|b|em|i)\b[^>]*>)*</\1>#iu',
             '$2',
             $content
-        );
+        ), $content, 'Absatzmarkierungen');
 
         // Innerste Bedingung zuerst auflösen (wenn / bis / ab), bis keine mehr übrig ist
         $inner = '((?:(?!\[\[\s*(?:wenn|bis|ab)\b).)*?)\[\[\s*ende\s*\]\]';
         $ifPattern = '/\[\[\s*wenn\s+(nicht\s+)?([^\[\]]+?)\s*\]\]' . $inner . '/isu';
         $datePattern = '/\[\[\s*(bis|ab)\s+(\d{1,2}\.\d{1,2}\.\d{4}|\d{4}-\d{2}-\d{2})\s*\]\]' . $inner . '/isu';
 
-        for ($i = 0; $i < 100 && (preg_match($ifPattern, $content) || preg_match($datePattern, $content)); ++$i) {
-            $content = (string) preg_replace_callback($ifPattern, static function (array $m) use ($tags): string {
+        for ($i = 0; $i < 100 && (preg_match($ifPattern, $content) === 1 || preg_match($datePattern, $content) === 1); ++$i) {
+            $before = $content;
+            $content = self::checked(preg_replace_callback($ifPattern, static function (array $m) use ($tags): string {
                 $match = false;
                 foreach (preg_split('/\s+oder\s+/iu', $m[2]) ?: [] as $name) {
                     if (isset($tags[BlockResolver::key($name)])) {
@@ -160,10 +188,10 @@ class LegalPlaceholderSubscriber implements EventSubscriberInterface
                 $parts = preg_split('/\[\[\s*sonst\s*\]\]/iu', $m[3], 2) ?: [$m[3]];
 
                 return $match ? $parts[0] : ($parts[1] ?? '');
-            }, $content);
+            }, $content), $content, 'Bedingungen');
 
             // [[bis 02.05.2026]] … [[ende]]: bis einschließlich dieses Tages sichtbar; [[ab …]]: ab diesem Tag
-            $content = (string) preg_replace_callback($datePattern, static function (array $m) use ($today): string {
+            $content = self::checked(preg_replace_callback($datePattern, static function (array $m) use ($today): string {
                 $date = self::isoDate($m[2]);
                 $parts = preg_split('/\[\[\s*sonst\s*\]\]/iu', $m[3], 2) ?: [$m[3]];
                 if ($date === null) {
@@ -173,7 +201,15 @@ class LegalPlaceholderSubscriber implements EventSubscriberInterface
                 $match = strtolower($m[1]) === 'bis' ? $today <= $date : $today >= $date;
 
                 return $match ? $parts[0] : ($parts[1] ?? '');
-            }, $content);
+            }, $content), $content, 'Zeitsteuerung');
+
+            if ($content === $before) {
+                break;
+            }
+        }
+        // preg_match in der Schleifenbedingung scheitert ebenfalls lautlos (false) – Bedingungen bleiben dann sichtbar stehen
+        if (preg_last_error() !== \PREG_NO_ERROR) {
+            self::$regexErrors[] = 'Bedingungen: ' . preg_last_error_msg();
         }
 
         return $content;
@@ -201,7 +237,7 @@ class LegalPlaceholderSubscriber implements EventSubscriberInterface
      */
     public static function replace(string $content, array $map): string
     {
-        return (string) preg_replace_callback(
+        return self::checked(preg_replace_callback(
             '/\[\[\s*([^\[\]<>]{1,40}?)\s*\]\]/u',
             static function (array $m) use ($map): string {
                 $key = self::key($m[1]);
@@ -209,7 +245,33 @@ class LegalPlaceholderSubscriber implements EventSubscriberInterface
                 return \array_key_exists($key, $map) ? $map[$key] : $m[0];
             },
             $content
-        );
+        ), $content, 'Platzhalter');
+    }
+
+    /**
+     * preg_* liefert bei PCRE-Fehlern (Backtrack-Limit, ungültiges UTF-8) null – dann den Text vor diesem
+     * Schritt behalten statt einen leeren Rechtstext auszuliefern.
+     */
+    /**
+     * @return list<string>
+     */
+    private static function takeRegexErrors(): array
+    {
+        $errors = self::$regexErrors;
+        self::$regexErrors = [];
+
+        return $errors;
+    }
+
+    private static function checked(?string $result, string $original, string $step): string
+    {
+        if ($result !== null) {
+            return $result;
+        }
+
+        self::$regexErrors[] = $step . ': ' . preg_last_error_msg();
+
+        return $original;
     }
 
     public static function key(string $name): string

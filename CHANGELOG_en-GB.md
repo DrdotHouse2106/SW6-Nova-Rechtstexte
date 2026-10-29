@@ -1,3 +1,7 @@
+# 1.7.2
+- More robust: if a replacement fails with a PCRE error (invalid UTF-8, very long texts), the text of that step is kept instead of being emptied; the error is logged
+- Condition loop stops as soon as nothing changes
+
 # 1.7.1
 - Own plugin icon (previously showed the Nova Upload icon by mistake)
 

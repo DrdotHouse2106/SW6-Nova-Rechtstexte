@@ -1,3 +1,7 @@
+# 1.7.2
+- Robuster: Scheitert eine Textersetzung an einem PCRE-Fehler (z. B. ungültiges UTF-8 aus kopierten Texten oder sehr lange Texte), bleibt der Text dieses Schritts unverändert erhalten statt leer ausgeliefert zu werden (AGB/Widerruf/Datenschutz, auch im Checkout). Der Fehler wird mit Seite und Textelement im Shopware-Log protokolliert
+- Bedingungsauflösung bricht ab, sobald sich nichts mehr ändert
+
 # 1.7.1
 - Eigenes Plugin-Icon (bisher versehentlich das Icon von Nova Upload)
 

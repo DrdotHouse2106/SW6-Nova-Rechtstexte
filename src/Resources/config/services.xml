@@ -17,6 +17,9 @@
             <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
             <argument type="service" id="Nova\Rechtstexte\Service\BlockResolver"/>
             <argument type="service" id="Nova\Rechtstexte\Service\ShippingTableRenderer"/>
+            <call method="setLogger">
+                <argument type="service" id="logger"/>
+            </call>
             <tag name="kernel.event_subscriber"/>
         </service>
     </services>

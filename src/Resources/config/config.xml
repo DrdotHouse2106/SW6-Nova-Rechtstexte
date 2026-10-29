@@ -315,6 +315,18 @@ Deutschland</placeholder>
                     <name>Google Ads</name>
                 </option>
                 <option>
+                    <id>erweitertekonversionen</id>
+                    <name>Erweiterte Conversions (Google Ads)</name>
+                </option>
+                <option>
+                    <id>suchauswertung</id>
+                    <name>Suchauswertung (Nova Suche)</name>
+                </option>
+                <option>
+                    <id>kisuche</id>
+                    <name>KI-Suchkorrektur (Nova Suche mit Claude)</name>
+                </option>
+                <option>
                     <id>adsense</id>
                     <name>Google AdSense</name>
                 </option>
@@ -492,6 +504,18 @@ Deutschland</placeholder>
                 <option>
                     <id>googleads</id>
                     <name>Google Ads</name>
+                </option>
+                <option>
+                    <id>erweitertekonversionen</id>
+                    <name>Erweiterte Conversions (Google Ads)</name>
+                </option>
+                <option>
+                    <id>suchauswertung</id>
+                    <name>Suchauswertung (Nova Suche)</name>
+                </option>
+                <option>
+                    <id>kisuche</id>
+                    <name>KI-Suchkorrektur (Nova Suche mit Claude)</name>
                 </option>
                 <option>
                     <id>adsense</id>

@@ -1,3 +1,9 @@
+# 1.8.0
+- Datenschutz-Vorlage ergänzt:
+  - **Dateien zu Artikeln** (Nova Upload): Zweck, Löschung nach 14 Tagen ohne Bestellung bzw. zwei Jahren nach Bestellung, Mitlöschen bei Bestell-/Kontolöschung
+  - **Erweiterte Conversions** (Google Ads): gehashte Kundendaten nur mit Marketing-Einwilligung – neuer Baustein `erweitertekonversionen`, automatisch erkannt, wenn im Nova Tag Manager „Kundendaten für erweiterte Conversions“ an ist
+  - **Suche auf der Website** (Nova Suche): Speicherung von Suchbegriffen ohne Kontobezug, IP nur kurz gehasht – neuer Baustein `suchauswertung`; **KI-Suchkorrektur** über Anthropic (Claude) – neuer Baustein `kisuche`, beide automatisch erkannt
+
 # 1.7.2
 - Robuster: Scheitert eine Textersetzung an einem PCRE-Fehler (z. B. ungültiges UTF-8 aus kopierten Texten oder sehr lange Texte), bleibt der Text dieses Schritts unverändert erhalten statt leer ausgeliefert zu werden (AGB/Widerruf/Datenschutz, auch im Checkout). Der Fehler wird mit Seite und Textelement im Shopware-Log protokolliert
 - Bedingungsauflösung bricht ab, sobald sich nichts mehr ändert

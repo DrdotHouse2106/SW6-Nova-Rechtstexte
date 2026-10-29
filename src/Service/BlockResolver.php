@@ -11,7 +11,8 @@ use Shopware\Core\System\SystemConfig\SystemConfigService;
 
 /**
  * Ermittelt die aktiven Bausteine eines Verkaufskanals: manuell angeklickte, eigene und – falls
- * eingeschaltet – automatisch erkannte (zugewiesene Zahlungsarten, reCAPTCHA, Tag Manager).
+ * eingeschaltet – automatisch erkannte (zugewiesene Zahlungsarten, reCAPTCHA, Tag Manager mit
+ * erweiterten Conversions, Nova Suche mit Auswertung bzw. Claude).
  */
 class BlockResolver
 {
@@ -64,6 +65,9 @@ class BlockResolver
         'tagmanager' => ['Google Tag Manager', 'gtm'],
         'analytics' => ['Google Analytics'],
         'googleads' => ['Google Ads'],
+        'erweitertekonversionen' => ['Erweiterte Conversions (Google Ads)', 'enhancedconversions'],
+        'suchauswertung' => ['Suchauswertung (Nova Suche)', 'novasuche'],
+        'kisuche' => ['KI-Suchkorrektur (Nova Suche mit Claude)', 'claude'],
         'adsense' => ['Google AdSense'],
         'shopwareanalytics' => ['Shopware Analytics'],
         'recaptcha' => ['Google reCAPTCHA'],
@@ -172,6 +176,19 @@ class BlockResolver
         $gtm = trim((string) ($this->config->get('NovaTagManager.config.containerId', $scId) ?? ''));
         if ($gtm !== '') {
             $found[] = 'tagmanager';
+            if ($this->config->get('NovaTagManager.config.enhancedConversions', $scId)) {
+                $found[] = 'erweitertekonversionen';
+            }
+        }
+
+        if ($this->config->get('NovaSearch.config.active', $scId)) {
+            if ($this->config->get('NovaSearch.config.learningActive', $scId) ?? true) {
+                $found[] = 'suchauswertung';
+            }
+            if ($this->config->get('NovaSearch.config.claudeActive', $scId)) {
+                $found[] = 'suchauswertung';
+                $found[] = 'kisuche';
+            }
         }
 
         return array_values(array_unique($found));

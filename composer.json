@@ -2,7 +2,7 @@
     "name": "nova/nova-rechtstexte",
     "description": "Rechtstexte einmal pflegen, in allen Shops nutzen: Platzhalter wie [[Shopname]] oder [[E-Mail]] in Erlebniswelt-Texten werden je Verkaufskanal ersetzt",
     "type": "shopware-platform-plugin",
-    "version": "1.7.2",
+    "version": "1.8.0",
     "license": "MIT",
     "authors": [
         {

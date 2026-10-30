@@ -72,6 +72,7 @@ class BlockResolver
         'kisuche' => ['KI-Suchkorrektur (Nova Suche mit Claude)', 'claude'],
         'treffenmelden' => ['Formular „Treffen melden“ (Nova Termine)', 'termine', 'novatermine'],
         'versandanfrage' => ['Versandkosten auf Anfrage (Nova Versandkosten)', 'versandkostenaufanfrage', 'anfrageversand'],
+        'tourbenachrichtigung' => ['Tour-Benachrichtigung (Nova Versandkosten)', 'tourmerkliste', 'tourinfo'],
         'adsense' => ['Google AdSense'],
         'shopwareanalytics' => ['Shopware Analytics'],
         'recaptcha' => ['Google reCAPTCHA'],
@@ -203,6 +204,11 @@ class BlockResolver
         // Nova Versandkosten: Plugin aktiv und Versandart „Versandkosten auf Anfrage“ aktiv im Kanal
         if (class_exists('Nova\\Versandkosten\\NovaVersandkosten') && $this->requestShippingActive($scId)) {
             $found[] = 'versandanfrage';
+        }
+
+        // Nova Versandkosten (ab 1.2.0): Tour-Benachrichtigung für diesen Kanal eingeschaltet
+        if (class_exists('Nova\\Versandkosten\\NovaVersandkosten') && $this->config->get('NovaVersandkosten.config.tourNotifyEnabled', $scId)) {
+            $found[] = 'tourbenachrichtigung';
         }
 
         return array_values(array_unique($found));

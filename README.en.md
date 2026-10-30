@@ -10,7 +10,7 @@ Maintain imprint, privacy policy, terms and shipping information **once** for al
 
 ## Building blocks
 
-Mark optional sections with `[[wenn Klarna]] … [[sonst]] … [[ende]]` (also `[[wenn nicht …]]`, `[[wenn A oder B]]`). Time-based sections (1.7.0): `[[bis 02.05.2026]] … [[ende]]` (visible until that day, e.g. event dates) and `[[ab 01.03.2027]] … [[ende]]` – work in any Shopping Experience text. Active blocks per sales channel: auto-detected (assigned payment methods, reCAPTCHA, Nova Tag Manager incl. enhanced conversions, Nova Search incl. Claude, Nova Termine, Nova Versandkosten with active shipping method “on request” → `versandanfrage`: terms clause “contract only with payment of the communicated total”), selected from a list, own names, or forced off.
+Mark optional sections with `[[wenn Klarna]] … [[sonst]] … [[ende]]` (also `[[wenn nicht …]]`, `[[wenn A oder B]]`). Time-based sections (1.7.0): `[[bis 02.05.2026]] … [[ende]]` (visible until that day, e.g. event dates) and `[[ab 01.03.2027]] … [[ende]]` – work in any Shopping Experience text. Active blocks per sales channel: auto-detected (assigned payment methods, reCAPTCHA, Nova Tag Manager incl. enhanced conversions, Nova Search incl. Claude, Nova Termine, Nova Versandkosten with active shipping method “on request” → `versandanfrage`: terms clause “contract only with payment of the communicated total”; Nova Versandkosten 1.2.0+ with “tour notification” switched on → `tourbenachrichtigung`: privacy section on delivery tour notifications – e-mail and postcode or customer account, double opt-in, unsubscribe, deletion after 7 days/24 months, consent under Art. 6(1)(a) GDPR), selected from a list, own names, or forced off.
 
 ## Included templates (German)
 

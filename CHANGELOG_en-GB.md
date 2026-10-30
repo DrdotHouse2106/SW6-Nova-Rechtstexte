@@ -1,3 +1,6 @@
+# 1.8.5
+- Privacy template: new block `tourbenachrichtigung` for the tour notification of Nova Versandkosten (1.2.0+) – purpose, data (e-mail, postcode, customer account and address if applicable, timestamps), double opt-in, unsubscribe via the link in every e-mail or in the account, deletion of unconfirmed sign-ups after 7 days and inactive ones after 24 months, legal basis consent (Art. 6(1)(a) GDPR). Detected automatically when Nova Versandkosten is active and the tour notification is switched on for the sales channel; also in the lists “used blocks” and “never use”
+
 # 1.8.4
 - Terms template: new block `versandanfrage` in “conclusion of contract” – with “shipping costs on request” the order is first a non-binding request; the contract is only concluded when the communicated total is paid; without payment within the stated period it is cancelled. Detected automatically when Nova Versandkosten (1.1.0+) is active and the shipping method “on request” is active and assigned to the sales channel; also in the lists “used blocks” and “never use”
 

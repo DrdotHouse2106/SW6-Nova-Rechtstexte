@@ -1,3 +1,6 @@
+# 1.8.5
+- Datenschutz-Vorlage: neuer Baustein `tourbenachrichtigung` für die Tour-Benachrichtigung von Nova Versandkosten (ab 1.2.0) – Zweck, Daten (E-Mail, PLZ, ggf. Kundenkonto- und Adressbezug, Zeitpunkte), Double-Opt-in, Abmeldung über den Link in jeder Mail oder im Kundenkonto, Löschung unbestätigter Anmeldungen nach 7 Tagen und inaktiver nach 24 Monaten, Rechtsgrundlage Einwilligung (Art. 6 Abs. 1 lit. a DSGVO). Automatisch erkannt, wenn Nova Versandkosten aktiv und die Tour-Benachrichtigung im Verkaufskanal eingeschaltet ist; auch in den Listen „Genutzte Bausteine“ und „Nie verwenden“
+
 # 1.8.4
 - AGB-Vorlage: neuer Baustein `versandanfrage` im Abschnitt „Vertragsschluss“ – bei „Versandkosten auf Anfrage“ ist die Bestellung zunächst eine unverbindliche Anfrage, der Vertrag kommt erst mit Zahlung des mitgeteilten Gesamtbetrags zustande; ohne Zahlung innerhalb der genannten Frist wird storniert. Automatisch erkannt, wenn Nova Versandkosten (ab 1.1.0) aktiv ist und die Versandart „Versandkosten auf Anfrage“ aktiv und dem Verkaufskanal zugeordnet ist; auch in den Listen „Genutzte Bausteine“ und „Nie verwenden“
 

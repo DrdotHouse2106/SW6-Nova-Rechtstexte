@@ -107,7 +107,7 @@ Wie bei den Rechtstext-Generatoren der Händlerverbände: Ein Text enthält **al
 - Steht eine Markierung **allein in einem Absatz**, verschwindet der leere Absatz mit – im Texteditor die Markierungen am besten in eine eigene Zeile schreiben.
 
 **Welche Bausteine aktiv sind** (Plugin-Konfiguration, je Verkaufskanal):
-- **Automatisch erkennen** (Standard an): zugewiesene Zahlungsarten (PayPal, Klarna, Amazon Pay, Google Pay, Apple Pay, Ratepay, Mollie, Stripe, Vorkasse, Barzahlung, Rechnung, Lastschrift), Google reCAPTCHA (Grundinformationen), Nova Tag Manager (Container-ID gesetzt; mit „Kundendaten für erweiterte Conversions“ zusätzlich `erweitertekonversionen`) und Nova Suche (Sofortsuche aktiv: `suchauswertung`, mit Claude zusätzlich `kisuche`)
+- **Automatisch erkennen** (Standard an): zugewiesene Zahlungsarten (PayPal, Klarna, Amazon Pay, Google Pay, Apple Pay, Ratepay, Mollie, Stripe, Vorkasse, Barzahlung, Rechnung, Lastschrift), Google reCAPTCHA (Grundinformationen), Nova Tag Manager (Container-ID gesetzt; mit „Kundendaten für erweiterte Conversions“ zusätzlich `erweitertekonversionen`) Nova Suche (Sofortsuche aktiv: `suchauswertung`, mit Claude zusätzlich `kisuche`) und Nova Termine (Plugin aktiv: `treffenmelden`)
 - **Genutzte Bausteine:** Liste zum Anklicken, z. B. Newsletter, Kundenkonto, YouTube, Gebrauchte Waren, Reparaturleistungen, Altteilpfand, Batterien, Preisgebundene Bücher …
 - **Eigene Bausteine:** freie Namen, kommagetrennt
 - **Nie verwenden:** übersteuert die automatische Erkennung

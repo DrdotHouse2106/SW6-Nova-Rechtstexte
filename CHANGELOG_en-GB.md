@@ -1,3 +1,6 @@
+# 1.8.2
+- Privacy template: new block `treffenmelden` for the event suggestion form (Nova Termine), detected automatically when Nova Termine is active
+
 # 1.8.1
 - Privacy template, block `suchauswertung` (Nova Search): paragraph on the voluntary **search result feedback** added – rating and short text, stored without IP address or account reference, deleted after 12 months
 

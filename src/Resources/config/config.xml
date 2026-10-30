@@ -327,6 +327,10 @@ Deutschland</placeholder>
                     <name>KI-Suchkorrektur (Nova Suche mit Claude)</name>
                 </option>
                 <option>
+                    <id>treffenmelden</id>
+                    <name>Formular „Treffen melden“ (Nova Termine)</name>
+                </option>
+                <option>
                     <id>adsense</id>
                     <name>Google AdSense</name>
                 </option>
@@ -516,6 +520,10 @@ Deutschland</placeholder>
                 <option>
                     <id>kisuche</id>
                     <name>KI-Suchkorrektur (Nova Suche mit Claude)</name>
+                </option>
+                <option>
+                    <id>treffenmelden</id>
+                    <name>Formular „Treffen melden“ (Nova Termine)</name>
                 </option>
                 <option>
                     <id>adsense</id>

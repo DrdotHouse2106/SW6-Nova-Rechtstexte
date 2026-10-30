@@ -1,3 +1,6 @@
+# 1.8.2
+- Datenschutz-Vorlage: neuer Baustein `treffenmelden` für das Formular „Treffen melden“ (Nova Termine) – Angaben zur Veranstaltung, optionale E-Mail, Löschung nach Übernahme bzw. spätestens 180 Tagen; automatisch erkannt, wenn Nova Termine aktiv ist
+
 # 1.8.1
 - Datenschutz-Vorlage, Baustein `suchauswertung` (Nova Suche): Absatz zur freiwilligen **Rückmeldung zum Suchergebnis** ergänzt – Bewertung und kurzer Text, gespeichert ohne IP-Adresse und Kontobezug, Löschung nach 12 Monaten
 

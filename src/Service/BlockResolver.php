@@ -68,6 +68,7 @@ class BlockResolver
         'erweitertekonversionen' => ['Erweiterte Conversions (Google Ads)', 'enhancedconversions'],
         'suchauswertung' => ['Suchauswertung (Nova Suche)', 'novasuche'],
         'kisuche' => ['KI-Suchkorrektur (Nova Suche mit Claude)', 'claude'],
+        'treffenmelden' => ['Formular „Treffen melden“ (Nova Termine)', 'termine', 'novatermine'],
         'adsense' => ['Google AdSense'],
         'shopwareanalytics' => ['Shopware Analytics'],
         'recaptcha' => ['Google reCAPTCHA'],
@@ -189,6 +190,11 @@ class BlockResolver
                 $found[] = 'suchauswertung';
                 $found[] = 'kisuche';
             }
+        }
+
+        // Nova Termine: Shopware lädt die Klassen nur aktiver Plugins
+        if (class_exists('Nova\\Termine\\NovaTermine')) {
+            $found[] = 'treffenmelden';
         }
 
         return array_values(array_unique($found));

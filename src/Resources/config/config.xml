@@ -331,6 +331,10 @@ Deutschland</placeholder>
                     <name>Formular „Treffen melden“ (Nova Termine)</name>
                 </option>
                 <option>
+                    <id>versandanfrage</id>
+                    <name>Versandkosten auf Anfrage (Nova Versandkosten)</name>
+                </option>
+                <option>
                     <id>adsense</id>
                     <name>Google AdSense</name>
                 </option>
@@ -520,6 +524,10 @@ Deutschland</placeholder>
                 <option>
                     <id>treffenmelden</id>
                     <name>Formular „Treffen melden“ (Nova Termine)</name>
+                </option>
+                <option>
+                    <id>versandanfrage</id>
+                    <name>Versandkosten auf Anfrage (Nova Versandkosten)</name>
                 </option>
                 <option>
                     <id>adsense</id>

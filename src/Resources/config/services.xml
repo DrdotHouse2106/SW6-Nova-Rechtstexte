@@ -6,6 +6,7 @@
         <service id="Nova\Rechtstexte\Service\BlockResolver">
             <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
             <argument type="service" id="payment_method.repository"/>
+            <argument type="service" id="Doctrine\DBAL\Connection"/>
         </service>
 
         <service id="Nova\Rechtstexte\Service\ShippingTableRenderer">

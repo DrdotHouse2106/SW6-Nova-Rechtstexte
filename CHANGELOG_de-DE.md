@@ -1,3 +1,6 @@
+# 1.8.4
+- AGB-Vorlage: neuer Baustein `versandanfrage` im Abschnitt „Vertragsschluss“ – bei „Versandkosten auf Anfrage“ ist die Bestellung zunächst eine unverbindliche Anfrage, der Vertrag kommt erst mit Zahlung des mitgeteilten Gesamtbetrags zustande; ohne Zahlung innerhalb der genannten Frist wird storniert. Automatisch erkannt, wenn Nova Versandkosten (ab 1.1.0) aktiv ist und die Versandart „Versandkosten auf Anfrage“ aktiv und dem Verkaufskanal zugeordnet ist; auch in den Listen „Genutzte Bausteine“ und „Nie verwenden“
+
 # 1.8.3
 - Baustein für einen externen Suchdienst aus der Datenschutz-Vorlage entfernt (wird nicht mehr genutzt; die Suche läuft lokal über Nova Suche, Baustein `suchauswertung`). Ein in der Konfiguration noch gesetzter alter Baustein wird ignoriert
 

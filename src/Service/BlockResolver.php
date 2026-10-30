@@ -2,6 +2,7 @@
 
 namespace Nova\Rechtstexte\Service;
 
+use Doctrine\DBAL\Connection;
 use Shopware\Core\Checkout\Payment\PaymentMethodEntity;
 use Shopware\Core\Framework\DataAbstractionLayer\EntityRepository;
 use Shopware\Core\Framework\DataAbstractionLayer\Search\Criteria;
@@ -12,7 +13,8 @@ use Shopware\Core\System\SystemConfig\SystemConfigService;
 /**
  * Ermittelt die aktiven Bausteine eines Verkaufskanals: manuell angeklickte, eigene und – falls
  * eingeschaltet – automatisch erkannte (zugewiesene Zahlungsarten, reCAPTCHA, Tag Manager mit
- * erweiterten Conversions, Nova Suche mit Auswertung bzw. Claude).
+ * erweiterten Conversions, Nova Suche mit Auswertung bzw. Claude, Nova Termine, Nova Versandkosten
+ * mit aktiver Versandart „Versandkosten auf Anfrage“).
  */
 class BlockResolver
 {
@@ -69,6 +71,7 @@ class BlockResolver
         'suchauswertung' => ['Suchauswertung (Nova Suche)', 'novasuche'],
         'kisuche' => ['KI-Suchkorrektur (Nova Suche mit Claude)', 'claude'],
         'treffenmelden' => ['Formular „Treffen melden“ (Nova Termine)', 'termine', 'novatermine'],
+        'versandanfrage' => ['Versandkosten auf Anfrage (Nova Versandkosten)', 'versandkostenaufanfrage', 'anfrageversand'],
         'adsense' => ['Google AdSense'],
         'shopwareanalytics' => ['Shopware Analytics'],
         'recaptcha' => ['Google reCAPTCHA'],
@@ -92,6 +95,7 @@ class BlockResolver
     public function __construct(
         private readonly SystemConfigService $config,
         private readonly EntityRepository $paymentMethodRepository,
+        private readonly ?Connection $connection = null,
     ) {
     }
 
@@ -196,6 +200,28 @@ class BlockResolver
             $found[] = 'treffenmelden';
         }
 
+        // Nova Versandkosten: Plugin aktiv und Versandart „Versandkosten auf Anfrage“ aktiv im Kanal
+        if (class_exists('Nova\\Versandkosten\\NovaVersandkosten') && $this->requestShippingActive($scId)) {
+            $found[] = 'versandanfrage';
+        }
+
         return array_values(array_unique($found));
+    }
+
+    private function requestShippingActive(string $salesChannelId): bool
+    {
+        if ($this->connection === null) {
+            return false;
+        }
+        try {
+            return $this->connection->fetchOne(
+                'SELECT 1 FROM shipping_method sm
+                  INNER JOIN sales_channel_shipping_method scsm ON scsm.shipping_method_id = sm.id
+                  WHERE sm.technical_name = :name AND sm.active = 1 AND scsm.sales_channel_id = UNHEX(:sc) LIMIT 1',
+                ['name' => 'nova_versandkosten_anfrage', 'sc' => $salesChannelId]
+            ) !== false;
+        } catch (\Throwable) {
+            return false;
+        }
     }
 }

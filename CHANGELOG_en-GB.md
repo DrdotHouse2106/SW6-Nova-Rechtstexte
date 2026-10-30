@@ -1,3 +1,6 @@
+# 1.8.4
+- Terms template: new block `versandanfrage` in “conclusion of contract” – with “shipping costs on request” the order is first a non-binding request; the contract is only concluded when the communicated total is paid; without payment within the stated period it is cancelled. Detected automatically when Nova Versandkosten (1.1.0+) is active and the shipping method “on request” is active and assigned to the sales channel; also in the lists “used blocks” and “never use”
+
 # 1.8.3
 - Removed the block for an external search service from the privacy template (no longer used; search runs locally via Nova Search). A leftover selection in the configuration is ignored
 

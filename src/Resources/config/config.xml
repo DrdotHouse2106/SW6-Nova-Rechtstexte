@@ -347,10 +347,6 @@ Deutschland</placeholder>
                     <name>YouTube</name>
                 </option>
                 <option>
-                    <id>doofinder</id>
-                    <name>Doofinder</name>
-                </option>
-                <option>
                     <id>whatsapp</id>
                     <name>WhatsApp</name>
                 </option>
@@ -540,10 +536,6 @@ Deutschland</placeholder>
                 <option>
                     <id>youtube</id>
                     <name>YouTube</name>
-                </option>
-                <option>
-                    <id>doofinder</id>
-                    <name>Doofinder</name>
                 </option>
                 <option>
                     <id>whatsapp</id>

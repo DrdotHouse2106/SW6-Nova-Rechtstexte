@@ -1,3 +1,6 @@
+# 1.8.3
+- Baustein für einen externen Suchdienst aus der Datenschutz-Vorlage entfernt (wird nicht mehr genutzt; die Suche läuft lokal über Nova Suche, Baustein `suchauswertung`). Ein in der Konfiguration noch gesetzter alter Baustein wird ignoriert
+
 # 1.8.2
 - Datenschutz-Vorlage: neuer Baustein `treffenmelden` für das Formular „Treffen melden“ (Nova Termine) – Angaben zur Veranstaltung, optionale E-Mail, Löschung nach Übernahme bzw. spätestens 180 Tagen; automatisch erkannt, wenn Nova Termine aktiv ist
 

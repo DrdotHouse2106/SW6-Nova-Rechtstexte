@@ -1,3 +1,6 @@
+# 1.8.3
+- Removed the block for an external search service from the privacy template (no longer used; search runs locally via Nova Search). A leftover selection in the configuration is ignored
+
 # 1.8.2
 - Privacy template: new block `treffenmelden` for the event suggestion form (Nova Termine), detected automatically when Nova Termine is active
 

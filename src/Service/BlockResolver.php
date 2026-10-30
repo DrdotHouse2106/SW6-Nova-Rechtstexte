@@ -73,7 +73,6 @@ class BlockResolver
         'shopwareanalytics' => ['Shopware Analytics'],
         'recaptcha' => ['Google reCAPTCHA'],
         'youtube' => ['YouTube'],
-        'doofinder' => ['Doofinder'],
         'whatsapp' => ['WhatsApp'],
         'warenwirtschaft' => ['Warenwirtschaft (z. B. weclapp/ERPNext)'],
         'widerrufsformular' => ['Online-Widerrufsformular (Widerrufsbutton)', 'widerrufsbutton'],

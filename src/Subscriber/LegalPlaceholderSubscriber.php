@@ -172,7 +172,7 @@ class LegalPlaceholderSubscriber implements EventSubscriberInterface
         $ifPattern = '/\[\[\s*wenn\s+(nicht\s+)?([^\[\]]+?)\s*\]\]' . $inner . '/isu';
         $datePattern = '/\[\[\s*(bis|ab)\s+(\d{1,2}\.\d{1,2}\.\d{4}|\d{4}-\d{2}-\d{2})\s*\]\]' . $inner . '/isu';
 
-        for ($i = 0; $i < 100 && (preg_match($ifPattern, $content) === 1 || preg_match($datePattern, $content) === 1); ++$i) {
+        for ($i = 0; $i < 100 && (self::matches($ifPattern, $content, 'Bedingungen') || self::matches($datePattern, $content, 'Zeitsteuerung')); ++$i) {
             $before = $content;
             $content = self::checked(preg_replace_callback($ifPattern, static function (array $m) use ($tags): string {
                 $match = false;
@@ -206,10 +206,6 @@ class LegalPlaceholderSubscriber implements EventSubscriberInterface
             if ($content === $before) {
                 break;
             }
-        }
-        // preg_match in der Schleifenbedingung scheitert ebenfalls lautlos (false) – Bedingungen bleiben dann sichtbar stehen
-        if (preg_last_error() !== \PREG_NO_ERROR) {
-            self::$regexErrors[] = 'Bedingungen: ' . preg_last_error_msg();
         }
 
         return $content;
@@ -261,6 +257,21 @@ class LegalPlaceholderSubscriber implements EventSubscriberInterface
         self::$regexErrors = [];
 
         return $errors;
+    }
+
+    /**
+     * preg_match mit Fehlerprüfung: Ein PCRE-Fehler (false) wird gemerkt und geloggt. Sonst bliebe er unbemerkt,
+     * wenn ein späterer preg_match gelingt (preg_last_error() ist dann wieder PREG_NO_ERROR) – und die
+     * Markierungen stünden sichtbar im Rechtstext.
+     */
+    private static function matches(string $pattern, string $content, string $step): bool
+    {
+        $result = preg_match($pattern, $content);
+        if ($result === false) {
+            self::$regexErrors[] = $step . ' (Suche): ' . preg_last_error_msg();
+        }
+
+        return $result === 1;
     }
 
     private static function checked(?string $result, string $original, string $step): string

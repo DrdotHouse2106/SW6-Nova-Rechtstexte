@@ -14,7 +14,8 @@ use Shopware\Core\System\SystemConfig\SystemConfigService;
  * Ermittelt die aktiven Bausteine eines Verkaufskanals: manuell angeklickte, eigene und – falls
  * eingeschaltet – automatisch erkannte (zugewiesene Zahlungsarten, reCAPTCHA, Tag Manager mit
  * erweiterten Conversions, Nova Suche mit Auswertung bzw. Claude, Nova Termine, Nova Versandkosten
- * mit aktiver Versandart „Versandkosten auf Anfrage“).
+ * mit aktiver Versandart „Versandkosten auf Anfrage“). Bausteine fremder Plugins gelten nur, wenn das
+ * Plugin aktiv ist.
  */
 class BlockResolver
 {
@@ -92,6 +93,9 @@ class BlockResolver
 
     /** @var array<string, array<string, true>> */
     private array $cache = [];
+
+    /** @var array<string, true>|null technische Namen aktiver Plugins, null = noch nicht geladen */
+    private ?array $activePlugins = null;
 
     public function __construct(
         private readonly SystemConfigService $config,
@@ -178,15 +182,18 @@ class BlockResolver
             }
         }
 
+        // Fremde Plugin-Einstellungen bleiben nach dem Deaktivieren in system_config stehen – deshalb immer
+        // zusätzlich prüfen, ob das Plugin aktiv ist, sonst beschreibt die Datenschutzerklärung Verarbeitungen,
+        // die gar nicht stattfinden
         $gtm = trim((string) ($this->config->get('NovaTagManager.config.containerId', $scId) ?? ''));
-        if ($gtm !== '') {
+        if ($gtm !== '' && $this->pluginActive('Nova\\TagManager\\NovaTagManager')) {
             $found[] = 'tagmanager';
             if ($this->config->get('NovaTagManager.config.enhancedConversions', $scId)) {
                 $found[] = 'erweitertekonversionen';
             }
         }
 
-        if ($this->config->get('NovaSearch.config.active', $scId)) {
+        if ($this->config->get('NovaSearch.config.active', $scId) && $this->pluginActive('Nova\\Search\\NovaSearch')) {
             if ($this->config->get('NovaSearch.config.learningActive', $scId) ?? true) {
                 $found[] = 'suchauswertung';
             }
@@ -196,22 +203,59 @@ class BlockResolver
             }
         }
 
-        // Nova Termine: Shopware lädt die Klassen nur aktiver Plugins
-        if (class_exists('Nova\\Termine\\NovaTermine')) {
+        // Nova Termine: Plugin aktiv
+        if ($this->pluginActive('Nova\\Termine\\NovaTermine')) {
             $found[] = 'treffenmelden';
         }
 
         // Nova Versandkosten: Plugin aktiv und Versandart „Versandkosten auf Anfrage“ aktiv im Kanal
-        if (class_exists('Nova\\Versandkosten\\NovaVersandkosten') && $this->requestShippingActive($scId)) {
+        if ($this->pluginActive('Nova\\Versandkosten\\NovaVersandkosten') && $this->requestShippingActive($scId)) {
             $found[] = 'versandanfrage';
         }
 
         // Nova Versandkosten (ab 1.2.0): Tour-Benachrichtigung für diesen Kanal eingeschaltet
-        if (class_exists('Nova\\Versandkosten\\NovaVersandkosten') && $this->config->get('NovaVersandkosten.config.tourNotifyEnabled', $scId)) {
+        if ($this->pluginActive('Nova\\Versandkosten\\NovaVersandkosten') && $this->config->get('NovaVersandkosten.config.tourNotifyEnabled', $scId)) {
             $found[] = 'tourbenachrichtigung';
         }
 
         return array_values(array_unique($found));
+    }
+
+    /**
+     * Plugin-Klasse ladbar UND Plugin laut Tabelle `plugin` installiert und aktiv. class_exists() allein reicht
+     * nicht: Per Composer installierte Plugins sind auch deaktiviert ladbar. Ist die Tabelle nicht lesbar,
+     * gilt nur class_exists() (Shopware lädt Klassen aus custom/plugins nur für aktive Plugins).
+     */
+    private function pluginActive(string $class): bool
+    {
+        if (!class_exists($class)) {
+            return false;
+        }
+
+        if ($this->activePlugins === null) {
+            $this->activePlugins = [];
+            try {
+                if ($this->connection !== null) {
+                    foreach ($this->connection->fetchFirstColumn('SELECT name FROM plugin WHERE active = 1 AND installed_at IS NOT NULL') as $name) {
+                        $this->activePlugins[(string) $name] = true;
+                    }
+                }
+            } catch (\Throwable) {
+                $this->activePlugins = [];
+            }
+            if ($this->activePlugins === []) {
+                // Keine Auskunft möglich (kein Zugriff oder leere Antwort): nur die Klassenprüfung zählt
+                $this->activePlugins['*'] = true;
+            }
+        }
+
+        if (isset($this->activePlugins['*'])) {
+            return true;
+        }
+
+        $pos = strrpos($class, '\\');
+
+        return isset($this->activePlugins[$pos === false ? $class : substr($class, $pos + 1)]);
     }
 
     private function requestShippingActive(string $salesChannelId): bool

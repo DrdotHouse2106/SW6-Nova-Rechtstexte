@@ -1,3 +1,8 @@
+# 1.8.6
+- Automatic detection: the blocks `tagmanager`, `erweitertekonversionen`, `suchauswertung` and `kisuche` now only apply when Nova Tag Manager or Nova Search is actually **active**. Previously the settings that Shopware keeps after a plugin is deactivated were enough – the privacy policy could then describe processing that does not take place. Nova Termine and Nova Versandkosten are now checked the same way (plugin active in the plugin manager, not only loadable)
+- Privacy template, block `erweitertekonversionen`: e-mail, phone and name are hashed **on our server** before transmission (since Nova Tag Manager 1.2.0), not in the browser; street, city, postcode and country explicitly named as unhashed. If you keep your own copy of the text in a Shopping Experience, adjust the sentence there as well
+- Conditional sections: a PCRE error while searching for `[[wenn …]]`/`[[bis …]]` is now always detected and logged (previously it could go unnoticed when the second search succeeded – the markers then stayed visible in the text)
+
 # 1.8.5
 - Privacy template: new block `tourbenachrichtigung` for the tour notification of Nova Versandkosten (1.2.0+) – purpose, data (e-mail, postcode, customer account and address if applicable, timestamps), double opt-in, unsubscribe via the link in every e-mail or in the account, deletion of unconfirmed sign-ups after 7 days and inactive ones after 24 months, legal basis consent (Art. 6(1)(a) GDPR). Detected automatically when Nova Versandkosten is active and the tour notification is switched on for the sales channel; also in the lists “used blocks” and “never use”
 

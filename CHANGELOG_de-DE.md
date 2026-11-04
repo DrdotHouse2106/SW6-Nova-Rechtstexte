@@ -1,3 +1,8 @@
+# 1.8.6
+- Automatische Erkennung: Die Bausteine `tagmanager`, `erweitertekonversionen`, `suchauswertung` und `kisuche` gelten nur noch, wenn Nova Tag Manager bzw. Nova Suche auch **aktiv** ist. Bisher reichten die Einstellungen, die Shopware nach dem Deaktivieren eines Plugins behält – die Datenschutzerklärung konnte dann Verarbeitungen beschreiben, die nicht stattfinden. Nova Termine und Nova Versandkosten werden jetzt genauso geprüft (Plugin laut Plugin-Verwaltung aktiv, nicht nur ladbar)
+- Datenschutz-Vorlage, Baustein `erweitertekonversionen`: E-Mail, Telefon und Name werden **auf unserem Server** vor der Übermittlung gehasht (seit Nova Tag Manager 1.2.0), nicht im Browser; Straße, Ort, PLZ und Land ausdrücklich als ungehasht genannt. Wer den Text als eigene Kopie in der Erlebniswelt pflegt, sollte den Satz dort ebenfalls anpassen
+- Bedingte Abschnitte: Ein PCRE-Fehler bei der Suche nach `[[wenn …]]`/`[[bis …]]` wird jetzt in jedem Fall erkannt und geloggt (bisher konnte er unbemerkt bleiben, wenn die zweite Suche gelang – die Markierungen blieben dann sichtbar im Text)
+
 # 1.8.5
 - Datenschutz-Vorlage: neuer Baustein `tourbenachrichtigung` für die Tour-Benachrichtigung von Nova Versandkosten (ab 1.2.0) – Zweck, Daten (E-Mail, PLZ, ggf. Kundenkonto- und Adressbezug, Zeitpunkte), Double-Opt-in, Abmeldung über den Link in jeder Mail oder im Kundenkonto, Löschung unbestätigter Anmeldungen nach 7 Tagen und inaktiver nach 24 Monaten, Rechtsgrundlage Einwilligung (Art. 6 Abs. 1 lit. a DSGVO). Automatisch erkannt, wenn Nova Versandkosten aktiv und die Tour-Benachrichtigung im Verkaufskanal eingeschaltet ist; auch in den Listen „Genutzte Bausteine“ und „Nie verwenden“
 

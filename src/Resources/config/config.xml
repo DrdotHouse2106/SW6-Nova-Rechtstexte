@@ -339,6 +339,10 @@ Deutschland</placeholder>
                     <name>Tour-Benachrichtigung (Nova Versandkosten)</name>
                 </option>
                 <option>
+                    <id>bestandskundenwerbung</id>
+                    <name>Nachfrage nach dem Versand (Nova Nachfrage)</name>
+                </option>
+                <option>
                     <id>adsense</id>
                     <name>Google AdSense</name>
                 </option>
@@ -536,6 +540,10 @@ Deutschland</placeholder>
                 <option>
                     <id>tourbenachrichtigung</id>
                     <name>Tour-Benachrichtigung (Nova Versandkosten)</name>
+                </option>
+                <option>
+                    <id>bestandskundenwerbung</id>
+                    <name>Nachfrage nach dem Versand (Nova Nachfrage)</name>
                 </option>
                 <option>
                     <id>adsense</id>

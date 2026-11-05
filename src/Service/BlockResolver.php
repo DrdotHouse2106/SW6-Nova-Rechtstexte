@@ -74,6 +74,7 @@ class BlockResolver
         'treffenmelden' => ['Formular „Treffen melden“ (Nova Termine)', 'termine', 'novatermine'],
         'versandanfrage' => ['Versandkosten auf Anfrage (Nova Versandkosten)', 'versandkostenaufanfrage', 'anfrageversand'],
         'tourbenachrichtigung' => ['Tour-Benachrichtigung (Nova Versandkosten)', 'tourmerkliste', 'tourinfo'],
+        'bestandskundenwerbung' => ['Nachfrage nach dem Versand (Nova Nachfrage)', 'nachfrage', 'novanachfrage', 'bewertungsanfrage'],
         'adsense' => ['Google AdSense'],
         'shopwareanalytics' => ['Shopware Analytics'],
         'recaptcha' => ['Google reCAPTCHA'],
@@ -216,6 +217,11 @@ class BlockResolver
         // Nova Versandkosten (ab 1.2.0): Tour-Benachrichtigung für diesen Kanal eingeschaltet
         if ($this->pluginActive('Nova\\Versandkosten\\NovaVersandkosten') && $this->config->get('NovaVersandkosten.config.tourNotifyEnabled', $scId)) {
             $found[] = 'tourbenachrichtigung';
+        }
+
+        // Nova Nachfrage: Plugin aktiv und im Kanal eingeschaltet (Bewertungsanfrage/Bestandskundenwerbung nach dem Versand)
+        if ($this->pluginActive('Nova\\Nachfrage\\NovaNachfrage') && $this->config->get('NovaNachfrage.config.active', $scId)) {
+            $found[] = 'bestandskundenwerbung';
         }
 
         return array_values(array_unique($found));

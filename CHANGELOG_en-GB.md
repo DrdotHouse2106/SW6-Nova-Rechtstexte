@@ -1,3 +1,6 @@
+# 1.8.9
+- Terms template: block `gocardless` now also in the “Payment” section – SEPA direct debit via GoCardless SAS, mandate on the GoCardless page, pre-notification by GoCardless by email (no fixed period in the text), “Pay by Bank” as instant transfer, sufficient funds/returned debit. The general `lastschrift` block (own direct debit with 5-day pre-notification) stays separate
+
 # 1.8.8
 - Privacy template: new block `gocardless` in the “payment service providers” section for Nova GoCardless – SEPA Direct Debit via GoCardless SAS (Paris): data transmitted (name, e-mail, billing address, order number, amount), bank details and mandate only on GoCardless' page, feedback only on the mandate and collection status, GoCardless' own processing (account checks, fraud prevention, advance notice), link to the payer privacy notice. Detected automatically when Nova GoCardless is installed and active and the payment method is active and assigned to the sales channel; also in the lists “used blocks” and “never use”
 - Page “payment and shipping”: entry “SEPA Direct Debit via GoCardless” in the payment method list (block `gocardless`)

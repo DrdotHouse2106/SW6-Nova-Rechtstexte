@@ -1,3 +1,6 @@
+# 1.8.9
+- AGB-Vorlage: Baustein `gocardless` jetzt auch im Abschnitt „Zahlung“ – SEPA-Lastschrift über die GoCardless SAS, Mandat auf der Seite von GoCardless, Vorabankündigung von GoCardless per E-Mail (ohne feste Frist im Text), „Pay by Bank“ als Sofortüberweisung, Deckung/Rücklastschrift. Der allgemeine Baustein `lastschrift` (eigene Lastschrift mit 5 Tagen Vorabankündigung) bleibt davon getrennt
+
 # 1.8.8
 - Datenschutz-Vorlage: neuer Baustein `gocardless` im Abschnitt „Zahlungsdienstleister“ für Nova GoCardless – SEPA-Lastschrift über die GoCardless SAS (Paris): übermittelte Daten (Name, E-Mail, Rechnungsanschrift, Bestellnummer, Betrag), Bankverbindung und Mandat nur auf der Seite von GoCardless, Rückmeldung nur zum Status des Mandats und Einzugs, eigene Verarbeitung durch GoCardless (Kontoprüfung, Betrugsprävention, Vorabankündigung), Link zu den Datenschutzhinweisen für Zahler. Automatisch erkannt, wenn Nova GoCardless installiert und aktiv und die Zahlungsart im Verkaufskanal aktiv und zugeordnet ist; auch in den Listen „Genutzte Bausteine“ und „Nie verwenden“
 - Seite „Zahlung und Versand“: Eintrag „SEPA-Lastschrift über GoCardless“ in der Liste der Zahlungsarten (Baustein `gocardless`)

@@ -343,6 +343,10 @@ Deutschland</placeholder>
                     <name>Nachfrage nach dem Versand (Nova Nachfrage)</name>
                 </option>
                 <option>
+                    <id>gocardless</id>
+                    <name>SEPA-Lastschrift über GoCardless (Nova GoCardless)</name>
+                </option>
+                <option>
                     <id>adsense</id>
                     <name>Google AdSense</name>
                 </option>
@@ -544,6 +548,10 @@ Deutschland</placeholder>
                 <option>
                     <id>bestandskundenwerbung</id>
                     <name>Nachfrage nach dem Versand (Nova Nachfrage)</name>
+                </option>
+                <option>
+                    <id>gocardless</id>
+                    <name>SEPA-Lastschrift über GoCardless (Nova GoCardless)</name>
                 </option>
                 <option>
                     <id>adsense</id>

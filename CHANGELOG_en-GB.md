@@ -1,3 +1,7 @@
+# 1.8.8
+- Privacy template: new block `gocardless` in the “payment service providers” section for Nova GoCardless – SEPA Direct Debit via GoCardless SAS (Paris): data transmitted (name, e-mail, billing address, order number, amount), bank details and mandate only on GoCardless' page, feedback only on the mandate and collection status, GoCardless' own processing (account checks, fraud prevention, advance notice), link to the payer privacy notice. Detected automatically when Nova GoCardless is installed and active and the payment method is active and assigned to the sales channel; also in the lists “used blocks” and “never use”
+- Page “payment and shipping”: entry “SEPA Direct Debit via GoCardless” in the payment method list (block `gocardless`)
+
 # 1.8.7
 - Privacy template: new block `bestandskundenwerbung` in the “advertising” section for Nova Nachfrage – one e-mail after shipping asking for a review and pointing out similar products of our own, legal basis § 7(3) UWG in conjunction with Art. 6(1)(f) GDPR, right to object (unsubscribe link in every e-mail, only transmission costs at basic rates), objection stored permanently as a hash only, sending log deleted after 400 days, note on Google for the Google review. Detected automatically when Nova Nachfrage is installed, active and switched on for the sales channel; also in the lists “used blocks” and “never use”
 

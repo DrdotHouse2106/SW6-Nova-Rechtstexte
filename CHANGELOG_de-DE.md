@@ -1,3 +1,7 @@
+# 1.8.8
+- Datenschutz-Vorlage: neuer Baustein `gocardless` im Abschnitt „Zahlungsdienstleister“ für Nova GoCardless – SEPA-Lastschrift über die GoCardless SAS (Paris): übermittelte Daten (Name, E-Mail, Rechnungsanschrift, Bestellnummer, Betrag), Bankverbindung und Mandat nur auf der Seite von GoCardless, Rückmeldung nur zum Status des Mandats und Einzugs, eigene Verarbeitung durch GoCardless (Kontoprüfung, Betrugsprävention, Vorabankündigung), Link zu den Datenschutzhinweisen für Zahler. Automatisch erkannt, wenn Nova GoCardless installiert und aktiv und die Zahlungsart im Verkaufskanal aktiv und zugeordnet ist; auch in den Listen „Genutzte Bausteine“ und „Nie verwenden“
+- Seite „Zahlung und Versand“: Eintrag „SEPA-Lastschrift über GoCardless“ in der Liste der Zahlungsarten (Baustein `gocardless`)
+
 # 1.8.7
 - Datenschutz-Vorlage: neuer Baustein `bestandskundenwerbung` im Abschnitt „Werbung“ für Nova Nachfrage – einmalige E-Mail nach dem Versand mit Bitte um Bewertung und Hinweis auf eigene ähnliche Produkte, Rechtsgrundlage § 7 Abs. 3 UWG i. V. m. Art. 6 Abs. 1 lit. f DSGVO, Widerspruchsrecht (Abmeldelink in jeder Mail, nur Übermittlungskosten nach den Basistarifen), dauerhafte Speicherung des Widerspruchs nur als Hash, Versandprotokoll mit Löschung nach 400 Tagen, Hinweis auf Google bei der Google-Bewertung. Automatisch erkannt, wenn Nova Nachfrage installiert und aktiv und im Verkaufskanal eingeschaltet ist; auch in den Listen „Genutzte Bausteine“ und „Nie verwenden“
 

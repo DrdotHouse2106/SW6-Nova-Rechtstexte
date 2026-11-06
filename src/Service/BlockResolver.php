@@ -14,8 +14,8 @@ use Shopware\Core\System\SystemConfig\SystemConfigService;
  * Ermittelt die aktiven Bausteine eines Verkaufskanals: manuell angeklickte, eigene und – falls
  * eingeschaltet – automatisch erkannte (zugewiesene Zahlungsarten, reCAPTCHA, Tag Manager mit
  * erweiterten Conversions, Nova Suche mit Auswertung bzw. Claude, Nova Termine, Nova Versandkosten
- * mit aktiver Versandart „Versandkosten auf Anfrage“). Bausteine fremder Plugins gelten nur, wenn das
- * Plugin aktiv ist.
+ * mit aktiver Versandart „Versandkosten auf Anfrage“, Nova GoCardless mit aktiver Zahlungsart).
+ * Bausteine fremder Plugins gelten nur, wenn das Plugin aktiv ist.
  */
 class BlockResolver
 {
@@ -56,6 +56,7 @@ class BlockResolver
         'ratepay' => ['Ratepay'],
         'mollie' => ['Mollie'],
         'stripe' => ['Stripe'],
+        'gocardless' => ['SEPA-Lastschrift über GoCardless (Nova GoCardless)', 'novagocardless'],
         'versand' => ['Versand'],
         'abholung' => ['Selbstabholung'],
         'auslandsversand' => ['Versand ins Ausland'],
@@ -162,6 +163,7 @@ class BlockResolver
     {
         $found = [];
         $scId = $context->getSalesChannelId();
+        $goCardlessMethod = false;
 
         $criteria = new Criteria();
         $criteria->addFilter(new EqualsFilter('active', true));
@@ -169,6 +171,9 @@ class BlockResolver
         /** @var PaymentMethodEntity $method */
         foreach ($this->paymentMethodRepository->search($criteria, $context->getContext())->getEntities() as $method) {
             $haystack = mb_strtolower($method->getTechnicalName() . ' ' . $method->getHandlerIdentifier());
+            if ($method->getTechnicalName() === 'nova_gocardless_sepa') {
+                $goCardlessMethod = true;
+            }
             foreach (self::PAYMENT_PATTERNS as $needle => $tag) {
                 if (str_contains($haystack, $needle)) {
                     $found[] = $tag;
@@ -222,6 +227,11 @@ class BlockResolver
         // Nova Nachfrage: Plugin aktiv und im Kanal eingeschaltet (Bewertungsanfrage/Bestandskundenwerbung nach dem Versand)
         if ($this->pluginActive('Nova\\Nachfrage\\NovaNachfrage') && $this->config->get('NovaNachfrage.config.active', $scId)) {
             $found[] = 'bestandskundenwerbung';
+        }
+
+        // Nova GoCardless: Plugin aktiv und Zahlungsart „SEPA-Lastschrift (GoCardless)“ aktiv und dem Kanal zugeordnet
+        if ($goCardlessMethod && $this->pluginActive('Nova\\GoCardless\\NovaGoCardless')) {
+            $found[] = 'gocardless';
         }
 
         return array_values(array_unique($found));

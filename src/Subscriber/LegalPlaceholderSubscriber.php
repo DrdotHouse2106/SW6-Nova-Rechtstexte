@@ -339,6 +339,7 @@ class LegalPlaceholderSubscriber implements EventSubscriberInterface
             'versandkostenautomatisch' => $auto(),
             'anschrift' => nl2br(htmlspecialchars($cfg('address'), \ENT_QUOTES | \ENT_HTML5, 'UTF-8'), false),
             'aufsichtsbehoerde' => nl2br($cfg('supervisoryAuthority'), false),
+            'schlichtungsstelle' => nl2br($cfg('disputeBody'), false),
             'altteil-details' => $cfg('oldPartsDetails'),
             'altteil-anforderungen' => $cfg('oldPartsRequirements'),
             'ruecksendekosten' => $cfg('returnCosts'),

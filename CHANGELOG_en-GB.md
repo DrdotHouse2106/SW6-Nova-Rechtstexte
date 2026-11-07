@@ -1,3 +1,7 @@
+# 1.9.0
+- **Consumer dispute resolution (§ 36 VSBG):** imprint and terms said "willing but not obliged" without naming a body. New setting "[[Schlichtungsstelle]]": filled → willingness with name, address and website of the body; empty → "not willing and not obliged"
+- "Payment and shipping" and privacy policy (block `paypal`): no fixed list of PayPal payment methods any more (SEPA direct debit, Multibanco etc. can be switched off per shop), but "as shown during checkout" with examples
+
 # 1.8.9
 - Terms template: block `gocardless` now also in the “Payment” section – SEPA direct debit via GoCardless SAS, mandate on the GoCardless page, pre-notification by GoCardless by email (no fixed period in the text), “Pay by Bank” as instant transfer, sufficient funds/returned debit. The general `lastschrift` block (own direct debit with 5-day pre-notification) stays separate
 

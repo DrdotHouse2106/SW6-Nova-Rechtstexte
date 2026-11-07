@@ -81,6 +81,15 @@ Deutschland</placeholder>
             <helpText>Data protection supervisory authority responsible for you.</helpText>
         </input-field>
 
+        <input-field type="textarea">
+            <name>disputeBody</name>
+            <label>[[Schlichtungsstelle]] (HTML allowed)</label>
+            <label lang="de-DE">[[Schlichtungsstelle]] (HTML erlaubt)</label>
+            <placeholder>Universalschlichtungsstelle des Bundes, Zentrum für Schlichtung e. V., Straßburger Straße 8, 77694 Kehl am Rhein, www.verbraucher-schlichter.de</placeholder>
+            <helpText lang="de-DE">Nur ausfüllen, wenn Sie an Verbraucherschlichtung teilnehmen wollen: Name, Anschrift und Website der Stelle (§ 36 VSBG). Leer = Impressum und AGB erklären „nicht bereit und nicht verpflichtet“.</helpText>
+            <helpText>Only if you take part in consumer dispute resolution: name, address and website of the body (§ 36 VSBG). Empty = imprint and terms say "not willing and not obliged".</helpText>
+        </input-field>
+
         <input-field type="text">
             <name>erpProvider</name>
             <label>[[Warenwirtschaft]]</label>

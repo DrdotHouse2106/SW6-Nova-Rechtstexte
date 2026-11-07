@@ -34,6 +34,7 @@ Mit Nova Rechtstexte gibt es **ein Layout je Rechtstext**, das allen Shops zugew
 | `[[USt-IdNr]]` | Umsatzsteuer-ID | Plugin-Konfiguration |
 | `[[Anschrift]]` | Anschrift, mehrzeilig | Plugin-Konfiguration |
 | `[[Aufsichtsbehörde]]` | zuständige Datenschutz-Aufsichtsbehörde | Plugin-Konfiguration |
+| `[[Schlichtungsstelle]]` | Verbraucherschlichtungsstelle mit Anschrift und Website. Leer = Impressum/AGB: „nicht bereit und nicht verpflichtet“ | Plugin-Konfiguration |
 | `[[Warenwirtschaft]]` | Anbieter des ERP/Warenwirtschaftssystems | Plugin-Konfiguration |
 | `[[Rücksendekosten]]` | Etikett-Links, Preise je Land, Zuschläge (HTML) | Plugin-Konfiguration |
 | `[[Altteil-Frist]]`, `[[Altteil-Erstattungsfrist]]` | Tage (Standard 14 bzw. 30) | Plugin-Konfiguration |

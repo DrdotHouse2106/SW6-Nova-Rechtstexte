@@ -1,3 +1,7 @@
+# 1.9.0
+- **Verbraucherstreitbeilegung (§ 36 VSBG):** Impressum und AGB sagten „bereit, aber nicht verpflichtet“, ohne eine Stelle zu nennen. Neu: Feld „[[Schlichtungsstelle]]“ in der Konfiguration. Ausgefüllt → Bereitschaft mit Name, Anschrift und Website der Stelle; leer → „nicht bereit und nicht verpflichtet“
+- „Zahlung und Versand“ und Datenschutz (Baustein `paypal`): keine feste Liste der PayPal-Zahlungsarten mehr (SEPA-Lastschrift, Multibanco usw. sind je Shop abschaltbar), sondern „wie im Bestellvorgang angezeigt“ mit Beispielen
+
 # 1.8.9
 - AGB-Vorlage: Baustein `gocardless` jetzt auch im Abschnitt „Zahlung“ – SEPA-Lastschrift über die GoCardless SAS, Mandat auf der Seite von GoCardless, Vorabankündigung von GoCardless per E-Mail (ohne feste Frist im Text), „Pay by Bank“ als Sofortüberweisung, Deckung/Rücklastschrift. Der allgemeine Baustein `lastschrift` (eigene Lastschrift mit 5 Tagen Vorabankündigung) bleibt davon getrennt
 

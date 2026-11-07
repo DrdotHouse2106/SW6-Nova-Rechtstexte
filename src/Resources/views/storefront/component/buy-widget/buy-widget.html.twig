@@ -1,0 +1,7 @@
+{% sw_extends '@Storefront/storefront/component/buy-widget/buy-widget.html.twig' %}
+
+{# Nova Rechtstexte: EU-Gewährleistungshinweis unter der Kaufbox (vor Abgabe der Vertragserklärung) #}
+{% block buy_widget_buy_form %}
+    {{ parent() }}
+    {% sw_include '@NovaRechtstexte/storefront/nova-rechtstexte/gewaehrleistung.html.twig' with { novaGewaehrleistungOrt: 'produkt' } %}
+{% endblock %}

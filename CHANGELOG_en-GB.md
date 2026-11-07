@@ -1,3 +1,6 @@
+# 1.11.0
+- **EU legal guarantee notice** (Implementing Regulation (EU) 2025/1960, mandatory since 27.09.2026): link "Your legal guarantee rights" below the buy box and at checkout, opening the official EU graphic (German, colour, unchanged) with a link to europa.eu/youreurope/garantien; full text as alt text. New setting (default on, can be switched off per sales channel). Order confirmation hint in the README
+
 # 1.10.0
 - **Withdrawal notice (goods and services):** sentence on the electronic withdrawal function now in the official wording of design note 3 (Annex 1 EGBGB, since 19.06.2026), with the address of the function and confirmation on a durable medium incl. content, date and time. New placeholder `[[Widerrufsfunktion]]`; empty = reference to the "Vertrag widerrufen" link
 - **Packaging notice:** new legal basis § 39 VerpackDG (VerpackG repealed since 12.08.2026), take-back only for packaging not subject to system participation, "reusable packaging", primary production packaging, purpose of the return

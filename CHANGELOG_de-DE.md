@@ -1,3 +1,6 @@
+# 1.11.0
+- **EU-Gewährleistungshinweis** (DVO (EU) 2025/1960, Pflicht seit 27.09.2026): Link „Ihre gesetzlichen Gewährleistungsrechte“ unter der Kaufbox und in der Kasse, öffnet die amtliche Grafik der EU-Kommission (deutsch, farbig, unverändert) mit Link zu europa.eu/youreurope/garantien; vollständiger Text als Alternativtext. Neue Einstellung „EU-Gewährleistungshinweis“ (Standard an, je Verkaufskanal abschaltbar). Hinweis zur Bestellbestätigung im README
+
 # 1.10.0
 - **Widerrufsbelehrung (Waren und Dienstleistungen):** Satz zur Widerrufsfunktion jetzt im amtlichen Wortlaut von Gestaltungshinweis 3 (Anlage 1 EGBGB, BGBl. 2026 I Nr. 28, seit 19.06.2026) – mit Adresse der Funktion, Eingangsbestätigung auf dauerhaftem Datenträger mit Inhalt, Datum und Uhrzeit. Neuer Platzhalter `[[Widerrufsfunktion]]` (Adresse der Seite „Vertrag widerrufen“); leer = Verweis auf den Link „Vertrag widerrufen“. Weiterhin nur mit Baustein `widerrufsformular`
 - **Verpackungshinweise:** neue Rechtsgrundlage § 39 VerpackDG (das VerpackG ist seit 12.08.2026 außer Kraft), Rücknahme nur für nicht systembeteiligungspflichtige Verpackungen, „wiederverwendbare Verpackungen“ statt „Mehrweg“, Primärproduktionsverpackungen, Hinweis auf Sinn und Zweck

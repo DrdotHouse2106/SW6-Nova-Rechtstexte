@@ -202,3 +202,13 @@ Dieses Plugin ist mit Unterstützung von KI entstanden (Claude von Anthropic). D
 ## Lizenz
 
 MIT
+
+## EU-Gewährleistungshinweis (ab 1.11.0)
+
+Seit 27.09.2026 müssen Verbraucher vor der Bestellung „in hervorgehobener Weise“ mit der **harmonisierten Mitteilung** nach Anhang I der DVO (EU) 2025/1960 auf die gesetzliche Gewährleistung hingewiesen werden (Art. 246a § 1 Abs. 1 Nr. 11 EGBGB). Das Plugin zeigt dazu unter der Kaufbox und in der Kasse (bei den AGB-/Widerrufshinweisen) den Link **„Ihre gesetzlichen Gewährleistungsrechte“**, der die **amtliche Grafik der EU-Kommission** (deutsch, farbig, unverändert, mit QR-Code) öffnet, daneben den Link `europa.eu/youreurope/garantien`. Die Grafik liegt im Plugin (`public/storefront/gewaehrleistung-de.png`), der vollständige Text steht als Alternativtext darin (Barrierefreiheit).
+
+- Einstellung „EU-Gewährleistungshinweis“: Standard an, je Verkaufskanal abschaltbar (z. B. reine B2B-Shops, Kanäle ohne Verkauf).
+- Gebrauchtware: Die Mitteilung bleibt unverändert (sie nennt selbst „nicht weniger als ein Jahr“); eine verkürzte Gewährleistung vereinbaren Sie wie bisher in AGB/Artikelbeschreibung.
+- **Bestellbestätigung:** Die EU-Kommission empfiehlt, die Mitteilung auch in die Bestätigungsmail aufzunehmen (nicht verbindlich). Dazu in der Mail-Vorlage z. B. ergänzen:
+  `<p><a href="https://europa.eu/youreurope/garantien"><img src="https://IHR-SHOP.de/bundles/novarechtstexte/storefront/gewaehrleistung-de.png" alt="Gesetzliche Gewährleistung" width="420" style="max-width:100%;height:auto"></a></p>`
+- Das GARAN-Label (Anhang II) ist nur nötig, wenn ein Hersteller eine Haltbarkeitsgarantie über mehr als zwei Jahre meldet – nicht enthalten.

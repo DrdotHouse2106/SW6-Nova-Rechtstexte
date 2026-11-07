@@ -1,0 +1,26 @@
+{#
+    Harmonisierte Mitteilung zur gesetzlichen Gewährleistung (DVO (EU) 2025/1960, Anhang I; Art. 246a § 1 Abs. 1 Nr. 11 EGBGB).
+    Die Original-Grafik der EU-Kommission (deutsch, farbig) wird unverändert gezeigt – nicht nachbauen, nicht anpassen.
+#}
+{% block nova_rechtstexte_gewaehrleistung %}
+    {% if config('NovaRechtstexte.config.warrantyNotice') is not same as(false) %}
+        {% set novaGewId = 'nova-gewaehrleistung-' ~ (novaGewaehrleistungOrt|default('x')) %}
+        <p class="nova-gewaehrleistung {{ novaGewaehrleistungKlasse|default('mt-2 mb-0') }}">
+            <button type="button" class="btn btn-link-inline p-0 align-baseline" data-bs-toggle="modal" data-bs-target="#{{ novaGewId }}">{{ 'novaRechtstexte.gewaehrleistung.link'|trans|sw_sanitize }}</button>
+            · <a href="https://europa.eu/youreurope/garantien" target="_blank" rel="noopener">europa.eu/youreurope/garantien</a>
+        </p>
+        <div class="modal fade" id="{{ novaGewId }}" tabindex="-1" aria-label="{{ 'novaRechtstexte.gewaehrleistung.link'|trans|striptags }}" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="{{ 'general.close'|trans|striptags }}"></button>
+                    </div>
+                    <div class="modal-body text-center">
+                        <img src="{{ asset('bundles/novarechtstexte/storefront/gewaehrleistung-de.png', 'asset') }}" alt="{{ 'novaRechtstexte.gewaehrleistung.alt'|trans|striptags }}" class="img-fluid" loading="lazy" width="1654" height="2339">
+                        <p class="mt-2 mb-0"><a href="https://europa.eu/youreurope/garantien" target="_blank" rel="noopener">europa.eu/youreurope/garantien</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

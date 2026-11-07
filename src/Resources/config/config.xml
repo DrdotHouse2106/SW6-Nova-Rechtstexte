@@ -634,4 +634,16 @@ Deutschland</placeholder>
             </options>
         </input-field>
     </card>
+    <card>
+        <title>EU legal guarantee notice</title>
+        <title lang="de-DE">EU-Gewährleistungshinweis</title>
+        <input-field type="bool">
+            <name>warrantyNotice</name>
+            <label>Show harmonised notice on product page and checkout</label>
+            <label lang="de-DE">Harmonisierte Mitteilung auf Produktseite und in der Kasse zeigen</label>
+            <helpText>Link "Your legal guarantee rights" opening the official EU graphic (Implementing Regulation (EU) 2025/1960, Annex I, German, colour), mandatory for consumer sales since 27.09.2026. Switch off per sales channel for B2B-only shops or shops without sales.</helpText>
+            <helpText lang="de-DE">Link „Ihre gesetzlichen Gewährleistungsrechte“, der die amtliche EU-Grafik öffnet (DVO (EU) 2025/1960, Anhang I, deutsch, farbig) – Pflicht beim Verkauf an Verbraucher seit 27.09.2026. Für reine B2B-Shops oder Kanäle ohne Verkauf je Verkaufskanal ausschalten.</helpText>
+            <defaultValue>true</defaultValue>
+        </input-field>
+    </card>
 </config>

@@ -81,6 +81,15 @@ Deutschland</placeholder>
             <helpText>Data protection supervisory authority responsible for you.</helpText>
         </input-field>
 
+        <input-field type="text">
+            <name>withdrawalUrl</name>
+            <label>[[Widerrufsfunktion]]</label>
+            <label lang="de-DE">[[Widerrufsfunktion]]</label>
+            <placeholder>https://www.example.de/vertrag-widerrufen/</placeholder>
+            <helpText lang="de-DE">Adresse der Seite „Vertrag widerrufen“ (§ 356a BGB) für den Satz in der Widerrufsbelehrung (Gestaltungshinweis 3). Leer = „unter dem Link ‚Vertrag widerrufen‘ auf unserer Website“.</helpText>
+            <helpText>URL of the "Withdraw from contract" page (§ 356a BGB) for the withdrawal notice. Empty = generic reference to the link.</helpText>
+        </input-field>
+
         <input-field type="textarea">
             <name>disputeBody</name>
             <label>[[Schlichtungsstelle]] (HTML allowed)</label>

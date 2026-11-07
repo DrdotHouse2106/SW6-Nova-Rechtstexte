@@ -325,6 +325,7 @@ class LegalPlaceholderSubscriber implements EventSubscriberInterface
             'firma' => $cfg('company') ?: $get('core.basicInformation.shopName'),
             'inhaber' => $cfg('owner'),
             'ust-idnr' => $cfg('vatId'),
+            'widerrufsfunktion' => $cfg('withdrawalUrl'),
             'lieferzeit' => $cfg('deliveryTime'),
             'warenwirtschaft' => $cfg('erpProvider'),
             'altteil-frist' => $cfg('oldPartsDays') ?: '14',

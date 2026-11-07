@@ -1,3 +1,7 @@
+# 1.10.0
+- **Withdrawal notice (goods and services):** sentence on the electronic withdrawal function now in the official wording of design note 3 (Annex 1 EGBGB, since 19.06.2026), with the address of the function and confirmation on a durable medium incl. content, date and time. New placeholder `[[Widerrufsfunktion]]`; empty = reference to the "Vertrag widerrufen" link
+- **Packaging notice:** new legal basis § 39 VerpackDG (VerpackG repealed since 12.08.2026), take-back only for packaging not subject to system participation, "reusable packaging", primary production packaging, purpose of the return
+
 # 1.9.0
 - **Consumer dispute resolution (§ 36 VSBG):** imprint and terms said "willing but not obliged" without naming a body. New setting "[[Schlichtungsstelle]]": filled → willingness with name, address and website of the body; empty → "not willing and not obliged"
 - "Payment and shipping" and privacy policy (block `paypal`): no fixed list of PayPal payment methods any more (SEPA direct debit, Multibanco etc. can be switched off per shop), but "as shown during checkout" with examples

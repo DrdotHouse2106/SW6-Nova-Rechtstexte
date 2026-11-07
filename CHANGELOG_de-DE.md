@@ -1,3 +1,7 @@
+# 1.10.0
+- **Widerrufsbelehrung (Waren und Dienstleistungen):** Satz zur Widerrufsfunktion jetzt im amtlichen Wortlaut von Gestaltungshinweis 3 (Anlage 1 EGBGB, BGBl. 2026 I Nr. 28, seit 19.06.2026) – mit Adresse der Funktion, Eingangsbestätigung auf dauerhaftem Datenträger mit Inhalt, Datum und Uhrzeit. Neuer Platzhalter `[[Widerrufsfunktion]]` (Adresse der Seite „Vertrag widerrufen“); leer = Verweis auf den Link „Vertrag widerrufen“. Weiterhin nur mit Baustein `widerrufsformular`
+- **Verpackungshinweise:** neue Rechtsgrundlage § 39 VerpackDG (das VerpackG ist seit 12.08.2026 außer Kraft), Rücknahme nur für nicht systembeteiligungspflichtige Verpackungen, „wiederverwendbare Verpackungen“ statt „Mehrweg“, Primärproduktionsverpackungen, Hinweis auf Sinn und Zweck
+
 # 1.9.0
 - **Verbraucherstreitbeilegung (§ 36 VSBG):** Impressum und AGB sagten „bereit, aber nicht verpflichtet“, ohne eine Stelle zu nennen. Neu: Feld „[[Schlichtungsstelle]]“ in der Konfiguration. Ausgefüllt → Bereitschaft mit Name, Anschrift und Website der Stelle; leer → „nicht bereit und nicht verpflichtet“
 - „Zahlung und Versand“ und Datenschutz (Baustein `paypal`): keine feste Liste der PayPal-Zahlungsarten mehr (SEPA-Lastschrift, Multibanco usw. sind je Shop abschaltbar), sondern „wie im Bestellvorgang angezeigt“ mit Beispielen

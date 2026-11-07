@@ -1,3 +1,6 @@
+# 1.11.1
+- EU-Gewährleistungshinweis: Das Fenster steht jetzt am Ende der Seite statt in der Kaufbox. Auf dem Desktop lag sonst der abgedunkelte Hintergrund über dem Fenster (Kaufbox „sticky“), Schließen und Esc wirkten nicht
+
 # 1.11.0
 - **EU-Gewährleistungshinweis** (DVO (EU) 2025/1960, Pflicht seit 27.09.2026): Link „Ihre gesetzlichen Gewährleistungsrechte“ unter der Kaufbox und in der Kasse, öffnet die amtliche Grafik der EU-Kommission (deutsch, farbig, unverändert) mit Link zu europa.eu/youreurope/garantien; vollständiger Text als Alternativtext. Neue Einstellung „EU-Gewährleistungshinweis“ (Standard an, je Verkaufskanal abschaltbar). Hinweis zur Bestellbestätigung im README
 

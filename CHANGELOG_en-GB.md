@@ -1,3 +1,6 @@
+# 1.11.1
+- EU legal guarantee notice: the modal is now rendered at the end of the page instead of inside the buy box. On desktop the backdrop covered it (sticky buy box), close and Esc did not work
+
 # 1.11.0
 - **EU legal guarantee notice** (Implementing Regulation (EU) 2025/1960, mandatory since 27.09.2026): link "Your legal guarantee rights" below the buy box and at checkout, opening the official EU graphic (German, colour, unchanged) with a link to europa.eu/youreurope/garantien; full text as alt text. New setting (default on, can be switched off per sales channel). Order confirmation hint in the README
 

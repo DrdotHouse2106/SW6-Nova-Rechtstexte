@@ -1,0 +1,7 @@
+{% sw_extends '@Storefront/storefront/base.html.twig' %}
+
+{# Nova Rechtstexte: Fenster zum EU-Gewährleistungshinweis außerhalb aller Spalten, damit der Hintergrund es nicht überdeckt #}
+{% block base_body_script %}
+    {% sw_include '@NovaRechtstexte/storefront/nova-rechtstexte/gewaehrleistung-modal.html.twig' %}
+    {{ parent() }}
+{% endblock %}

@@ -1,0 +1,18 @@
+{# Fenster zum EU-Gewährleistungshinweis – einmal je Seite am Ende von <body> (base_body_script) #}
+{% block nova_rechtstexte_gewaehrleistung_modal %}
+    {% if config('NovaRechtstexte.config.warrantyNotice') is not same as(false) %}
+        <div class="modal fade" id="nova-gewaehrleistung" tabindex="-1" aria-label="{{ 'novaRechtstexte.gewaehrleistung.link'|trans|striptags }}" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="{{ 'general.close'|trans|striptags }}"></button>
+                    </div>
+                    <div class="modal-body text-center">
+                        <img src="{{ asset('bundles/novarechtstexte/storefront/gewaehrleistung-de.png', 'asset') }}" alt="{{ 'novaRechtstexte.gewaehrleistung.alt'|trans|striptags }}" class="img-fluid" loading="lazy" width="1654" height="2339">
+                        <p class="mt-2 mb-0"><a href="https://europa.eu/youreurope/garantien" target="_blank" rel="noopener">europa.eu/youreurope/garantien</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

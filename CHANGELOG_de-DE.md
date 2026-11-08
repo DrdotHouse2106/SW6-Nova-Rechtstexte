@@ -1,3 +1,8 @@
+# 1.12.0
+- **Versandkosten mit Nova Versandkosten:** Die automatische Übersicht schrieb bei dessen Versandarten „versandkostenfrei“ (0-€-Matrix in Shopware, Preis entsteht erst im Warenkorb) – für Kunden und Google Merchant Center eine falsche Angabe. Ist Nova Versandkosten aktiv, kommen die Preise jetzt aus dessen Rechner: Gewichtsstufen im Heimatland inkl. aktueller Zuschläge, Warenpost/Kleinpaket mit Warenwertgrenze, Laufzeit, Hinweise zu Sperrgut, mehreren Paketen und Ausland, Texte für Spedition, „auf Anfrage“ und Abholung. Ohne das Plugin bleibt alles wie bisher
+- Neuer Platzhalter `[[Lieferländer]]` (Länder des Verkaufskanals, mit Nova Versandkosten nur dessen freigeschaltete Länder). „Zahlung und Versand“ nennt die Länder jetzt („Wir liefern in die unten genannten Länder“ stand ohne Liste da)
+- „Zahlung und Versand“: Satz, dass ein eigener Versandtermin bzw. Bestellschluss auf Produktseite oder im Warenkorb vorgeht (z. B. Monats-Liefertermine)
+
 # 1.11.1
 - EU-Gewährleistungshinweis: Das Fenster steht jetzt am Ende der Seite statt in der Kaufbox. Auf dem Desktop lag sonst der abgedunkelte Hintergrund über dem Fenster (Kaufbox „sticky“), Schließen und Esc wirkten nicht
 

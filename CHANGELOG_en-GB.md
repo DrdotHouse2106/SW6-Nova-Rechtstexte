@@ -1,3 +1,8 @@
+# 1.12.0
+- **Shipping costs with Nova Versandkosten:** the automatic overview showed "free shipping" for its shipping methods (0 € matrix in Shopware, price is calculated in the cart). If Nova Versandkosten is active, prices now come from its calculator: weight steps in the home country incl. current surcharges, letter parcel/small parcel with goods value limit, transit time, notes on bulky goods, multiple parcels and abroad, texts for freight, "on request" and pickup. Without the plugin nothing changes
+- New placeholder `[[Lieferländer]]` (countries of the sales channel, limited to Nova Versandkosten's allowed countries); "Zahlung und Versand" now lists them
+- "Zahlung und Versand": a product-specific shipping date or order deadline shown on the product page or in the cart takes precedence
+
 # 1.11.1
 - EU legal guarantee notice: the modal is now rendered at the end of the page instead of inside the buy box. On desktop the backdrop covered it (sticky buy box), close and Esc did not work
 

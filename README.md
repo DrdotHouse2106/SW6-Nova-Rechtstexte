@@ -43,6 +43,7 @@ Mit Nova Rechtstexte gibt es **ein Layout je Rechtstext**, das allen Shops zugew
 | `[[Lieferzeit]]` | z. B. „3 - 5 Tagen“ | Plugin-Konfiguration |
 | `[[Versandkosten]]` | Versandkosten-Übersicht: **automatisch aus den Versandarten** des Verkaufskanals, oder eigener Text (HTML) | Versandarten bzw. Plugin-Konfiguration |
 | `[[Versandkosten automatisch]]` | immer die automatische Übersicht | Versandarten |
+| `[[Lieferländer]]` | Länder des Verkaufskanals, mit Komma getrennt (mit Nova Versandkosten nur dessen freigeschaltete Länder) | Verkaufskanal → Länder |
 | `[[Domain]]` | z. B. mein-shop.de | aufgerufene Domain (ohne www) |
 | `[[Shop-URL]]` | z. B. https://mein-shop.de | Domain des Verkaufskanals |
 | `[[Jahr]]` | aktuelles Jahr | – |
@@ -80,6 +81,7 @@ Ist das Feld „[[Versandkosten]] von Hand“ leer, erzeugt das Plugin die Versa
 - **„Gilt für“ kommt aus der Regel-Beschreibung** (Rule Builder → Regel → Beschreibung, erste Zeile), z. B. „EU-Zone 1: Österreich, Belgien, Frankreich …“. Ohne Beschreibung erscheint der Regelname. Interne Regelnamen müssen also nicht geändert werden.
 - **Beschreibung „-“** (nur ein Bindestrich) = Preise dieser Regel nicht aufführen, z. B. Sonderregeln für einzelne Artikel. Bei einer Verfügbarkeitsregel blendet „-“ nur die Zeile „Gilt für“ aus.
 - Versandarten, die nicht im Text stehen sollen (z. B. interne), unter „diese Versandarten nicht aufführen“ wählen.
+- **Mit Nova Versandkosten** (ab 1.12.0, nur wenn das Plugin aktiv ist): Dessen Versandarten (technischer Name `nova_versandkosten_…`) haben in Shopware eine 0-€-Matrix, weil der Preis erst im Warenkorb entsteht. Statt „versandkostenfrei“ fragt das Plugin deshalb den Rechner von Nova Versandkosten: Paketpreise im Heimatland je Gewichtsstufe (inkl. aktueller Zuschläge), Warenpost/Kleinpaket mit Warenwertgrenze, Laufzeit aus der Laufzeiten-Tabelle, Hinweise zu Sperrgut, mehreren Paketen und Ausland, Texte für Spedition, „auf Anfrage“ und Abholung. Ändern sich Preise oder Tarife, ändert sich der Text von selbst.
 
 **Leere Werte je Shop:** Soll ein Platzhalter in einem Shop leer sein (z. B. keine USt-IdNr.), dort nur „-“ eintragen – ein leeres Feld erbt den Wert von „Alle Verkaufskanäle“.
 

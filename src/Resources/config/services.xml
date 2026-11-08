@@ -12,6 +12,10 @@
         <service id="Nova\Rechtstexte\Service\ShippingTableRenderer">
             <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
             <argument type="service" id="shipping_method.repository"/>
+            <argument type="service" id="country.repository"/>
+            <!-- Optional: Nova Versandkosten (nur wenn installiert und aktiv) -->
+            <argument type="service" id="Nova\Versandkosten\Service\QuoteService" on-invalid="null"/>
+            <argument type="service" id="Nova\Versandkosten\Service\Settings" on-invalid="null"/>
         </service>
 
         <service id="Nova\Rechtstexte\Subscriber\LegalPlaceholderSubscriber">

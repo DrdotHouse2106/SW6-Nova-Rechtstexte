@@ -338,6 +338,7 @@ class LegalPlaceholderSubscriber implements EventSubscriberInterface
         $html = [
             'versandkosten' => $manual !== '' ? $manual : $auto(),
             'versandkostenautomatisch' => $auto(),
+            'lieferländer' => $this->shipping->countries($event->getSalesChannelContext()),
             'anschrift' => nl2br(htmlspecialchars($cfg('address'), \ENT_QUOTES | \ENT_HTML5, 'UTF-8'), false),
             'aufsichtsbehoerde' => nl2br($cfg('supervisoryAuthority'), false),
             'schlichtungsstelle' => nl2br($cfg('disputeBody'), false),

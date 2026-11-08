@@ -2,7 +2,7 @@
 
 🇩🇪 [Deutsche Version](README.md)
 
-Maintain imprint, privacy policy, terms and shipping information **once** for all sales channels. Use placeholders such as `[[Shopname]]`, `[[E-Mail]]`, `[[Telefon]]`, `[[Telefax]]`, `[[WhatsApp]]`, `[[Firma]]`, `[[Inhaber]]`, `[[USt-IdNr]]`, `[[Lieferzeit]]`, `[[Versandkosten]]`, `[[Domain]]`, `[[Shop-URL]]`, `[[Jahr]]`, `[[Zusatz1]]`–`[[Zusatz3]]` in shopping experience text elements; they are replaced per sales channel on the server – independent of the theme and also in modals (terms in checkout).
+Maintain imprint, privacy policy, terms and shipping information **once** for all sales channels. Use placeholders such as `[[Shopname]]`, `[[E-Mail]]`, `[[Telefon]]`, `[[Telefax]]`, `[[WhatsApp]]`, `[[Firma]]`, `[[Inhaber]]`, `[[USt-IdNr]]`, `[[Lieferzeit]]`, `[[Versandkosten]]`, `[[Lieferländer]]`, `[[Domain]]`, `[[Shop-URL]]`, `[[Jahr]]`, `[[Zusatz1]]`–`[[Zusatz3]]` in shopping experience text elements; they are replaced per sales channel on the server – independent of the theme and also in modals (terms in checkout).
 
 > **⚠️ Disclaimer**
 >

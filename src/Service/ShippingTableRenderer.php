@@ -4,6 +4,7 @@ namespace Nova\Rechtstexte\Service;
 
 use Shopware\Core\Checkout\Shipping\Aggregate\ShippingMethodPrice\ShippingMethodPriceEntity;
 use Shopware\Core\Checkout\Shipping\ShippingMethodEntity;
+use Shopware\Core\System\Country\CountryEntity;
 use Shopware\Core\Framework\DataAbstractionLayer\EntityRepository;
 use Shopware\Core\Framework\DataAbstractionLayer\Search\Criteria;
 use Shopware\Core\Framework\DataAbstractionLayer\Search\Filter\EqualsFilter;
@@ -14,6 +15,10 @@ use Shopware\Core\System\SystemConfig\SystemConfigService;
 /**
  * Baut aus den Versandarten des Verkaufskanals eine Versandkosten-Übersicht für den Rechtstext
  * „Zahlung und Versand“ – so stimmen Text und Checkout immer überein.
+ *
+ * Versandarten, deren Preis ein anderes Plugin im Checkout rechnet, haben in Shopware oft eine 0-€-Matrix.
+ * Für Nova Versandkosten (technischer Name „nova_versandkosten_…“) fragt der Renderer deshalb – nur wenn
+ * das Plugin aktiv ist – dessen Rechner nach den echten Preisen. Ohne das Plugin bleibt alles wie bisher.
  */
 class ShippingTableRenderer
 {
@@ -29,10 +34,53 @@ class ShippingTableRenderer
     /** @var array<string, string> */
     private array $cache = [];
 
+    private const NOVA_PREFIX = 'nova_versandkosten_';
+
+    /** Gewichte (kg), an denen die Paketpreise abgefragt werden; gleiche Preise werden zusammengefasst */
+    private const NOVA_WEIGHTS = [1, 2, 3, 5, 10, 15, 20, 25, 31.5];
+
+    /** @var array<string, string> */
+    private array $countryCache = [];
+
+    /**
+     * @param object|null $novaQuote    Nova\Versandkosten\Service\QuoteService, falls installiert und aktiv
+     * @param object|null $novaSettings Nova\Versandkosten\Service\Settings, falls installiert und aktiv
+     */
     public function __construct(
         private readonly SystemConfigService $config,
         private readonly EntityRepository $shippingMethodRepository,
+        private readonly EntityRepository $countryRepository,
+        private readonly ?object $novaQuote = null,
+        private readonly ?object $novaSettings = null,
     ) {
+    }
+
+    /**
+     * Lieferländer des Verkaufskanals (bei Nova Versandkosten eingeschränkt auf dessen freigeschaltete Länder),
+     * mit Komma getrennt in der Sprache des Shops.
+     */
+    public function countries(SalesChannelContext $context): string
+    {
+        $scId = $context->getSalesChannelId();
+        if (isset($this->countryCache[$scId])) {
+            return $this->countryCache[$scId];
+        }
+
+        $criteria = new Criteria();
+        $criteria->addFilter(new EqualsFilter('active', true));
+        $criteria->addFilter(new EqualsFilter('salesChannels.id', $scId));
+        $allowed = $this->novaSettings !== null ? $this->novaSettings->rules($scId)->allowedCountries : [];
+
+        $names = [];
+        /** @var CountryEntity $country */
+        foreach ($this->countryRepository->search($criteria, $context->getContext())->getEntities() as $country) {
+            if ($allowed === [] || \in_array(strtoupper((string) $country->getIso()), $allowed, true)) {
+                $names[] = (string) ($country->getTranslation('name') ?? $country->getName());
+            }
+        }
+        sort($names, \SORT_LOCALE_STRING);
+
+        return $this->countryCache[$scId] = self::e(implode(', ', $names));
     }
 
     public function render(SalesChannelContext $context): string
@@ -72,6 +120,10 @@ class ShippingTableRenderer
     private function renderMethod(ShippingMethodEntity $method, SalesChannelContext $context, bool $showRules, bool $showDeliveryTime): string
     {
         $name = self::e($method->getTranslation('name') ?? $method->getName() ?? '');
+        $technical = (string) $method->getTechnicalName();
+        if ($this->novaQuote !== null && $this->novaSettings !== null && str_starts_with($technical, self::NOVA_PREFIX)) {
+            return '<h4>' . $name . '</h4>' . $this->renderNova(substr($technical, \strlen(self::NOVA_PREFIX)), $context, $showDeliveryTime);
+        }
         $meta = [];
         if ($showDeliveryTime && $method->getDeliveryTime() !== null) {
             $meta[] = 'Lieferzeit: ' . self::e($method->getDeliveryTime()->getTranslation('name') ?? $method->getDeliveryTime()->getName() ?? '');
@@ -129,6 +181,106 @@ class ShippingTableRenderer
         }
 
         return $out . '</tbody></table>';
+    }
+
+    /**
+     * Nova Versandkosten: Preise im Heimatland über den Rechner des Plugins (inkl. aktueller Zuschläge),
+     * Ausland, Sperrgut und Laufzeit als Text.
+     */
+    private function renderNova(string $option, SalesChannelContext $context, bool $showDeliveryTime): string
+    {
+        $scId = $context->getSalesChannelId();
+        $rules = $this->novaSettings->rules($scId);
+        $home = $rules->homeCountry;
+        $homeName = $this->countryName($home, $context);
+
+        switch ($option) {
+            case 'abholung':
+                return '<p>kostenlos</p>';
+            case 'anfrage':
+                return '<p>Für Artikel, deren Versandkosten sich vorab nicht berechnen lassen: Wir teilen Ihnen die Versandkosten nach der Bestellung mit (siehe AGB).</p>';
+            case 'spedition':
+                return '<p>Für Speditionsware: Preis nach Gewicht, Maßen und Lieferort, wird im Warenkorb vor der Bestellung angezeigt. Ist das nicht möglich, nennen wir Ihnen die Versandkosten nach der Bestellung.</p>';
+            case 'warenpost':
+            case 'kleinpaket':
+            case 'dpd':
+            case 'dhl':
+                break;
+            default:
+                return '<p>Die Kosten werden im Warenkorb angezeigt.</p>';
+        }
+
+        $small = \in_array($option, ['warenpost', 'kleinpaket'], true);
+        $rows = [];
+        $last = null;
+        $weights = $small ? [max(0.01, min(0.25, $rules->smallNoDimsMaxKg))] : array_filter(
+            array_unique([...self::NOVA_WEIGHTS, $rules->maxPackageKg, $rules->fixedPriceMaxKg($option) ?? 1.0]),
+            static fn ($kg) => $kg <= $rules->maxPackageKg
+        );
+        sort($weights);
+        foreach ($weights as $kg) {
+            $price = $this->novaPrice($option, (float) $kg, $small, $home, $scId) ?? ($small ? $rules->fixedPrice($option) : null);
+            if ($price === null) {
+                break;
+            }
+            if ($last !== null && abs($rows[$last][1] - $price) < 0.005) {
+                $rows[$last][0] = (float) $kg;
+            } else {
+                $rows[] = [(float) $kg, $price];
+                $last = array_key_last($rows);
+            }
+        }
+
+        $out = '';
+        if ($rows === []) {
+            $out .= '<p>Die Kosten werden im Warenkorb angezeigt.</p>';
+        } elseif ($small) {
+            $out .= '<p>' . self::e($homeName) . ': ' . $this->money($rows[0][1]) . '</p>';
+        } else {
+            $out .= '<table class="table table-sm"><thead><tr><th>Gewicht je Paket (' . self::e($homeName) . ')</th><th>Preis</th></tr></thead><tbody>';
+            foreach ($rows as [$kg, $price]) {
+                $out .= '<tr><td>bis ' . self::num($kg) . ' kg</td><td>' . $this->money($price) . '</td></tr>';
+            }
+            $out .= '</tbody></table>';
+        }
+
+        $notes = [];
+        if ($small) {
+            $limit = $rules->goodsValueLimit($option);
+            $notes[] = 'Nur für kleine, leichte Artikel' . ($limit !== null ? ' und einen Warenwert bis ' . number_format($limit, 2, ',', '.') . ' €' : '') . '; ob eine Bestellung passt, zeigt der Warenkorb.';
+        } else {
+            $notes[] = 'Schwerere Sendungen gehen in mehreren Paketen, der Preis gilt je Paket.';
+            if ($rules->passOversize) {
+                $notes[] = 'Für Sperrgut (übergroße Pakete) kommt der Zuschlag des Versanddienstleisters hinzu.';
+            }
+        }
+        $notes[] = 'Ins Ausland richtet sich der Preis nach Land, Gewicht und Größe; er wird im Warenkorb vor der Bestellung angezeigt.';
+        if ($showDeliveryTime && ($days = $rules->transitDays($option, $home)) !== null) {
+            $notes[] = 'Laufzeit ' . self::e($homeName) . ': ' . ($days[0] === $days[1] ? $days[0] : $days[0] . '–' . $days[1]) . ' Werktage ab Versand.';
+        }
+
+        return $out . '<p><small>' . implode(' ', $notes) . '</small></p>';
+    }
+
+    /** Preis brutto in € für ein Paket mit Standardmaßen, null = nicht möglich. */
+    private function novaPrice(string $option, float $kg, bool $small, string $country, string $scId): ?float
+    {
+        try {
+            $item = new \Nova\Versandkosten\Calculator\Item('nova-rechtstexte', '', $kg, null, null, null, 'paket', 'einzelpaket', 1, $small ? 10.0 : 100.0, false, null, $small);
+            $result = $this->novaQuote->calculateItems([$item], $country, '', '', $scId)?->option($option);
+        } catch (\Throwable) {
+            return null;
+        }
+
+        return $result !== null && $result->available ? $result->saleCents / 100 : null;
+    }
+
+    private function countryName(string $iso, SalesChannelContext $context): string
+    {
+        $criteria = (new Criteria())->addFilter(new EqualsFilter('iso', $iso))->setLimit(1);
+        $country = $this->countryRepository->search($criteria, $context->getContext())->first();
+
+        return $country instanceof CountryEntity ? (string) ($country->getTranslation('name') ?? $country->getName()) : $iso;
     }
 
     private function range(ShippingMethodPriceEntity $price): string

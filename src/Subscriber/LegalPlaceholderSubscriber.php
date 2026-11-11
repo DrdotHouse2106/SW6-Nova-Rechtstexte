@@ -345,6 +345,7 @@ class LegalPlaceholderSubscriber implements EventSubscriberInterface
             'altteil-details' => $cfg('oldPartsDetails'),
             'altteil-anforderungen' => $cfg('oldPartsRequirements'),
             'ruecksendekosten' => $cfg('returnCosts'),
+            'ruecksendekostenspedition' => $cfg('returnCostsFreight'),
             'zusatz1' => $cfg('extra1'),
             'zusatz2' => $cfg('extra2'),
             'zusatz3' => $cfg('extra3'),
@@ -360,6 +361,7 @@ class LegalPlaceholderSubscriber implements EventSubscriberInterface
         $map['ustidnr'] = $map['ust-id'] = $map['ust-idnr'];
         $map['aufsichtsbehörde'] = $map['aufsichtsbehoerde'];
         $map['rücksendekosten'] = $map['ruecksendekosten'];
+        $map['rücksendekostenspedition'] = $map['ruecksendekostenspedition'];
         $map['altteildetails'] = $map['altteil-details'];
         $map['altteilanforderungen'] = $map['altteil-anforderungen'];
         $map['altteilfrist'] = $map['altteil-frist'];

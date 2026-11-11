@@ -38,6 +38,7 @@ Mit Nova Rechtstexte gibt es **ein Layout je Rechtstext**, das allen Shops zugew
 | `[[Schlichtungsstelle]]` | Verbraucherschlichtungsstelle mit Anschrift und Website. Leer = Impressum/AGB: „nicht bereit und nicht verpflichtet“ | Plugin-Konfiguration |
 | `[[Warenwirtschaft]]` | Anbieter des ERP/Warenwirtschaftssystems | Plugin-Konfiguration |
 | `[[Rücksendekosten]]` | Etikett-Links, Preise je Land, Zuschläge (HTML) | Plugin-Konfiguration |
+| `[[Rücksendekosten Spedition]]` | Geschätzte Höchstkosten (EUR) für die Rücksendung nicht paketfähiger Waren, für die Widerrufsbelehrung mit Baustein „Speditionsversand“ | Plugin-Konfiguration |
 | `[[Altteil-Frist]]`, `[[Altteil-Erstattungsfrist]]` | Tage (Standard 14 bzw. 30) | Plugin-Konfiguration |
 | `[[Altteil-Anforderungen]]`, `[[Altteil-Details]]` | eigene Annahmebedingungen, Beträge je Bauteil (HTML) | Plugin-Konfiguration |
 | `[[Lieferzeit]]` | z. B. „3 - 5 Tagen“ | Plugin-Konfiguration |

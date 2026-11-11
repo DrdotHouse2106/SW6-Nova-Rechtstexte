@@ -154,6 +154,15 @@ Deutschland</placeholder>
             <defaultValue>true</defaultValue>
         </input-field>
 
+        <input-field type="text">
+            <name>returnCostsFreight</name>
+            <label>[[Rücksendekosten Spedition]]</label>
+            <label lang="de-DE">[[Rücksendekosten Spedition]]</label>
+            <placeholder>300</placeholder>
+            <helpText lang="de-DE">Nur mit Baustein „Speditionsversand“: geschätzte Höchstkosten (Zahl in EUR) für die Rücksendung nicht paketfähiger Waren. Die Widerrufsbelehrung schreibt dann amtlich „Die Kosten werden auf höchstens etwa … EUR geschätzt.“ Leer = Satz entfällt (für Speditionsware verlangt das Gesetz aber eine Angabe).</helpText>
+            <helpText>Only with the freight block: estimated maximum return cost (EUR) for goods that cannot be returned by post.</helpText>
+        </input-field>
+
         <input-field type="textarea">
             <name>returnCosts</name>
             <label>[[Rücksendekosten]] (HTML allowed)</label>

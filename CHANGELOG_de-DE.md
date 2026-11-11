@@ -1,3 +1,8 @@
+# 1.13.0
+- **Widerrufsbelehrung im amtlichen Wortlaut:** Fristbeginn nach Gestaltungshinweis 1 c („die letzte Ware in Besitz genommen“, passt auch bei nur einer Lieferung) statt eines selbst zusammengefassten Satzes. Baustein „Speditionsversand“ ohne „paketversandfähige“, ohne Abholzusage und ohne feste Pauschale: Es gilt der normale Mustertext, ergänzt um die amtliche Kostenschätzung „Die Kosten werden auf höchstens etwa … EUR geschätzt.“ (Gestaltungshinweis 5 b)
+- Neuer Platzhalter `[[Rücksendekosten Spedition]]` (geschätzte Höchstkosten in EUR). Leer = Satz entfällt
+- Widerrufsbelehrung Dienstleistungen: „beginnen soll“ wie im Muster (statt „sollen“)
+
 # 1.12.1
 - Vorlage „Rücksendung“: Rückgabefrist (14 Tage ab Erhalt) und Erstattungsfrist stehen jetzt ausdrücklich auf der Seite. Google Merchant Center lehnte Rückgaberichtlinien ab mit „Auf Ihrer Website fehlt die Rückgabefrist“, weil die Frist nur in der Widerrufsbelehrung stand
 

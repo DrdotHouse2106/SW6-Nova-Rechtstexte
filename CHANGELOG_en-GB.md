@@ -1,3 +1,8 @@
+# 1.13.0
+- **Withdrawal notice in the statutory wording:** start of period per design note 1 c ("the last goods"), freight block without "parcel-capable", without pickup promise and without fixed flat fee; instead the statutory estimate "Die Kosten werden auf höchstens etwa … EUR geschätzt." (design note 5 b)
+- New placeholder `[[Rücksendekosten Spedition]]` (estimated maximum return cost in EUR); empty = sentence omitted
+- Withdrawal notice for services: "beginnen soll" as in the statutory model
+
 # 1.12.1
 - Template "Rücksendung" (returns): the 14-day return period and refund period are now stated on the page. Google Merchant Center rejected return policies because the period was only in the withdrawal notice
 

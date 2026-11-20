@@ -1,0 +1,7 @@
+{# Nova Rechtstexte: gut sichtbarer Zugang zur Widerrufsfunktion (§ 356a BGB), nicht nur als grauer Fußzeilen-Link #}
+{% set novaWiderrufUrl = config('NovaRechtstexte.config.withdrawalUrl') %}
+{% if novaWiderrufUrl and config('NovaRechtstexte.config.withdrawalButton') is not same as(false) %}
+    {% block nova_rechtstexte_widerruf_knopf %}
+        <a href="{{ novaWiderrufUrl }}" class="{{ novaWiderrufClass|default('btn btn-outline-primary btn-sm') }}">{{ 'novaRechtstexte.widerruf.knopf'|trans|sw_sanitize }}</a>
+    {% endblock %}
+{% endif %}

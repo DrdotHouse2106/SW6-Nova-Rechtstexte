@@ -1,0 +1,9 @@
+{% sw_extends '@Storefront/storefront/layout/footer/footer.html.twig' %}
+
+{# Nova Rechtstexte: Knopf „Vertrag widerrufen“ auf jeder Seite über der unteren Fußzeile #}
+{% block layout_footer_bottom %}
+    <div class="container text-center py-3 nova-widerruf-footer">
+        {% sw_include '@NovaRechtstexte/storefront/nova-rechtstexte/widerruf-knopf.html.twig' %}
+    </div>
+    {{ parent() }}
+{% endblock %}

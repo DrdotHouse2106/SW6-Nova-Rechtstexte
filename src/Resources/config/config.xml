@@ -90,6 +90,15 @@ Deutschland</placeholder>
             <helpText>URL of the "Withdraw from contract" page (§ 356a BGB) for the withdrawal notice. Empty = generic reference to the link.</helpText>
         </input-field>
 
+        <input-field type="bool">
+            <name>withdrawalButton</name>
+            <label>Show "Withdraw from contract" button in footer and customer account</label>
+            <label lang="de-DE">Knopf „Vertrag widerrufen“ in Fußzeile und Kundenkonto zeigen</label>
+            <helpText lang="de-DE">Hervorgehobener Knopf auf jeder Seite (über der unteren Fußzeile) und im Kundenkonto unter „Bestellungen“, Ziel ist die Adresse aus [[Widerrufsfunktion]]. Ohne Adresse erscheint nichts. Abmahnungen 2026 beanstandeten Widerrufsfunktionen, die nur als grauer Link zwischen anderen Rechtstexten stehen.</helpText>
+            <helpText>Highlighted button on every page and in the customer account, linking to the [[Widerrufsfunktion]] URL. Nothing is shown without a URL.</helpText>
+            <defaultValue>true</defaultValue>
+        </input-field>
+
         <input-field type="textarea">
             <name>disputeBody</name>
             <label>[[Schlichtungsstelle]] (HTML allowed)</label>

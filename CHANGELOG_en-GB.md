@@ -1,3 +1,7 @@
+# 1.16.0
+- New: highlighted "Withdraw from contract" button on every page above the bottom footer and in the customer account below "Orders", linking to [[Widerrufsfunktion]] (setting, default on)
+- Template "Rücksendung": no longer refuses unpaid returns (asks for sufficient postage instead), refund mentions outbound shipping costs, free return label for complaints
+
 # 1.15.1
 - [[Lieferländer]]: the allowed countries of Nova Shipping Costs only restrict the list if the sales channel has no other shipping methods
 

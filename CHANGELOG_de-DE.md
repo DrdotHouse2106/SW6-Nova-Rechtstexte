@@ -1,3 +1,7 @@
+# 1.16.0
+- Neu: Knopf „Vertrag widerrufen“ (hervorgehoben) auf jeder Seite über der unteren Fußzeile und im Kundenkonto unter „Bestellungen“, Ziel = [[Widerrufsfunktion]]; Einstellung „Knopf „Vertrag widerrufen“ … zeigen“ (Standard an)
+- Vorlage „Rücksendung“: Satz „Unfreie Sendungen können wir nicht annehmen“ ersetzt durch die Bitte, ausreichend zu frankieren (keine Beschränkung des Widerrufsrechts); Erstattung nennt die Hinsendekosten; bei Reklamationen kostenloses Etikett statt Pflicht zur Voranmeldung
+
 # 1.15.1
 - [[Lieferländer]]: Die freigeschalteten Länder von Nova Versandkosten schränken die Liste nur noch ein, wenn der Kanal keine anderen Versandarten hat (z. B. Verlag: Inland über eigene Versandart, Ausland über Nova – Deutschland stand fälschlich bei „außer“)
 

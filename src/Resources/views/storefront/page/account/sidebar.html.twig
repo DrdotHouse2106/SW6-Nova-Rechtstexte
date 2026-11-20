@@ -1,0 +1,7 @@
+{% sw_extends '@Storefront/storefront/page/account/sidebar.html.twig' %}
+
+{# Nova Rechtstexte: „Vertrag widerrufen“ im Kundenkonto direkt unter den Bestellungen #}
+{% block page_account_sidebar_link_orders %}
+    {{ parent() }}
+    {% sw_include '@NovaRechtstexte/storefront/nova-rechtstexte/widerruf-knopf.html.twig' with { novaWiderrufClass: 'list-group-item list-group-item-action account-aside-item' } %}
+{% endblock %}

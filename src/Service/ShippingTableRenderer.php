@@ -56,7 +56,8 @@ class ShippingTableRenderer
     }
 
     /**
-     * Lieferländer des Verkaufskanals (bei Nova Versandkosten eingeschränkt auf dessen freigeschaltete Länder),
+     * Lieferländer des Verkaufskanals (bei Nova Versandkosten eingeschränkt auf dessen freigeschaltete Länder,
+     * sofern der Kanal keine anderen Versandarten hat),
      * mit Komma getrennt in der Sprache des Shops; bei mehr als 40 Ländern „alle Länder außer …“.
      */
     public function countries(SalesChannelContext $context): string
@@ -69,7 +70,8 @@ class ShippingTableRenderer
         $inChannel = new Criteria();
         $inChannel->addFilter(new EqualsFilter('active', true), new EqualsFilter('salesChannels.id', $scId));
         $channelIds = array_flip($this->countryRepository->searchIds($inChannel, $context->getContext())->getIds());
-        $allowed = $this->novaSettings !== null ? $this->novaSettings->rules($scId)->allowedCountries : [];
+        $allowed = $this->novaSettings !== null && !$this->hasOtherShippingMethods($context)
+            ? $this->novaSettings->rules($scId)->allowedCountries : [];
 
         $criteria = new Criteria();
         $criteria->addFilter(new EqualsFilter('active', true));
@@ -86,6 +88,21 @@ class ShippingTableRenderer
         }
 
         return $this->countryCache[$scId] = self::e(self::countryList($names, $excluded));
+    }
+
+    /** Hat der Kanal aktive Versandarten außerhalb von Nova Versandkosten? Dann gelten Novas Länder nicht für alle. */
+    private function hasOtherShippingMethods(SalesChannelContext $context): bool
+    {
+        $criteria = new Criteria();
+        $criteria->addFilter(new EqualsFilter('active', true), new EqualsFilter('salesChannels.id', $context->getSalesChannelId()));
+        /** @var ShippingMethodEntity $method */
+        foreach ($this->shippingMethodRepository->search($criteria, $context->getContext())->getEntities() as $method) {
+            if (!str_starts_with((string) $method->getTechnicalName(), self::NOVA_PREFIX)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**

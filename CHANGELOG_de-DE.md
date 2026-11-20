@@ -1,3 +1,6 @@
+# 1.15.1
+- [[Lieferländer]]: Die freigeschalteten Länder von Nova Versandkosten schränken die Liste nur noch ein, wenn der Kanal keine anderen Versandarten hat (z. B. Verlag: Inland über eigene Versandart, Ausland über Nova – Deutschland stand fälschlich bei „außer“)
+
 # 1.15.0
 - Widerrufsbelehrung: Die Kostenschätzung [[Rücksendekosten Spedition]] gilt ausdrücklich nur für Waren, die nicht normal mit der Post zurückgesandt werden können (Speditionsware), nicht für Paketware
 - [[Lieferländer]]: Bei mehr als 40 Ländern „alle Länder außer …“ (die aktiven, nicht belieferten Länder) statt einer langen Aufzählung

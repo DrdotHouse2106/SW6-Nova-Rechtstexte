@@ -1,3 +1,6 @@
+# 1.15.1
+- [[Lieferländer]]: the allowed countries of Nova Shipping Costs only restrict the list if the sales channel has no other shipping methods
+
 # 1.15.0
 - Cancellation policy: the [[Rücksendekosten Spedition]] estimate now explicitly applies only to goods that cannot be returned by post (freight), not to parcel goods
 - [[Lieferländer]]: with more than 40 countries, "alle Länder außer …" (active countries not delivered to) instead of a long list

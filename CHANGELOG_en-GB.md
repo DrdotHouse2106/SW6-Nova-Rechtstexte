@@ -1,3 +1,6 @@
+# 1.14.0
+- New: block **`osspreise`**, detected automatically when Nova OSS Prices is active in the sales channel; “Zahlung und Versand” then explains that consumers in other EU countries pay the VAT of their country and the final price is shown in the cart once the country is known
+
 # 1.13.0
 - **Withdrawal notice in the statutory wording:** start of period per design note 1 c ("the last goods"), freight block without "parcel-capable", without pickup promise and without fixed flat fee; instead the statutory estimate "Die Kosten werden auf höchstens etwa … EUR geschätzt." (design note 5 b)
 - New placeholder `[[Rücksendekosten Spedition]]` (estimated maximum return cost in EUR); empty = sentence omitted

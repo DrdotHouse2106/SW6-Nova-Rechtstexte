@@ -1,3 +1,6 @@
+# 1.14.0
+- Neu: Baustein **`osspreise`** – wird automatisch erkannt, wenn Nova OSS-Preise aktiv und im Verkaufskanal eingeschaltet ist. „Zahlung und Versand“ erklärt dann, dass für Verbraucher in anderen EU-Ländern die Umsatzsteuer des Lieferlandes gilt und der Endpreis im Warenkorb erscheint, sobald das Lieferland bekannt ist
+
 # 1.13.0
 - **Widerrufsbelehrung im amtlichen Wortlaut:** Fristbeginn nach Gestaltungshinweis 1 c („die letzte Ware in Besitz genommen“, passt auch bei nur einer Lieferung) statt eines selbst zusammengefassten Satzes. Baustein „Speditionsversand“ ohne „paketversandfähige“, ohne Abholzusage und ohne feste Pauschale: Es gilt der normale Mustertext, ergänzt um die amtliche Kostenschätzung „Die Kosten werden auf höchstens etwa … EUR geschätzt.“ (Gestaltungshinweis 5 b)
 - Neuer Platzhalter `[[Rücksendekosten Spedition]]` (geschätzte Höchstkosten in EUR). Leer = Satz entfällt

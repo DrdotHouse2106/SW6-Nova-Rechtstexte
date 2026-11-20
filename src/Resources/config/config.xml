@@ -374,6 +374,10 @@ Deutschland</placeholder>
                     <name>SEPA-Lastschrift über GoCardless (Nova GoCardless)</name>
                 </option>
                 <option>
+                    <id>osspreise</id>
+                    <name>Preise mit der Mehrwertsteuer des Lieferlandes (Nova OSS-Preise)</name>
+                </option>
+                <option>
                     <id>adsense</id>
                     <name>Google AdSense</name>
                 </option>
@@ -579,6 +583,10 @@ Deutschland</placeholder>
                 <option>
                     <id>gocardless</id>
                     <name>SEPA-Lastschrift über GoCardless (Nova GoCardless)</name>
+                </option>
+                <option>
+                    <id>osspreise</id>
+                    <name>Preise mit der Mehrwertsteuer des Lieferlandes (Nova OSS-Preise)</name>
                 </option>
                 <option>
                     <id>adsense</id>

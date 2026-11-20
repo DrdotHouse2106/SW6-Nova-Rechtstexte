@@ -57,6 +57,7 @@ class BlockResolver
         'mollie' => ['Mollie'],
         'stripe' => ['Stripe'],
         'gocardless' => ['SEPA-Lastschrift über GoCardless (Nova GoCardless)', 'novagocardless'],
+        'osspreise' => ['Preise mit der Mehrwertsteuer des Lieferlandes (Nova OSS-Preise)', 'oss'],
         'versand' => ['Versand'],
         'abholung' => ['Selbstabholung'],
         'auslandsversand' => ['Versand ins Ausland'],
@@ -232,6 +233,11 @@ class BlockResolver
         // Nova GoCardless: Plugin aktiv und Zahlungsart „SEPA-Lastschrift (GoCardless)“ aktiv und dem Kanal zugeordnet
         if ($goCardlessMethod && $this->pluginActive('Nova\\GoCardless\\NovaGoCardless')) {
             $found[] = 'gocardless';
+        }
+
+        // Nova OSS-Preise: Plugin aktiv und im Kanal eingeschaltet (Preise mit der Mehrwertsteuer des Lieferlandes)
+        if ($this->pluginActive('Nova\\Oss\\NovaOss') && $this->config->get('NovaOss.config.active', $scId)) {
+            $found[] = 'osspreise';
         }
 
         return array_values(array_unique($found));

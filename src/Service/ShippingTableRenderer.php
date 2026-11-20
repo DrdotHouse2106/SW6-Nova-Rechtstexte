@@ -57,7 +57,7 @@ class ShippingTableRenderer
 
     /**
      * Lieferländer des Verkaufskanals (bei Nova Versandkosten eingeschränkt auf dessen freigeschaltete Länder),
-     * mit Komma getrennt in der Sprache des Shops.
+     * mit Komma getrennt in der Sprache des Shops; bei mehr als 40 Ländern „alle Länder außer …“.
      */
     public function countries(SalesChannelContext $context): string
     {
@@ -66,21 +66,43 @@ class ShippingTableRenderer
             return $this->countryCache[$scId];
         }
 
-        $criteria = new Criteria();
-        $criteria->addFilter(new EqualsFilter('active', true));
-        $criteria->addFilter(new EqualsFilter('salesChannels.id', $scId));
+        $inChannel = new Criteria();
+        $inChannel->addFilter(new EqualsFilter('active', true), new EqualsFilter('salesChannels.id', $scId));
+        $channelIds = array_flip($this->countryRepository->searchIds($inChannel, $context->getContext())->getIds());
         $allowed = $this->novaSettings !== null ? $this->novaSettings->rules($scId)->allowedCountries : [];
 
-        $names = [];
+        $criteria = new Criteria();
+        $criteria->addFilter(new EqualsFilter('active', true));
+        $names = $excluded = [];
         /** @var CountryEntity $country */
         foreach ($this->countryRepository->search($criteria, $context->getContext())->getEntities() as $country) {
-            if ($allowed === [] || \in_array(strtoupper((string) $country->getIso()), $allowed, true)) {
-                $names[] = (string) ($country->getTranslation('name') ?? $country->getName());
+            $name = (string) ($country->getTranslation('name') ?? $country->getName());
+            if (isset($channelIds[$country->getId()])
+                && ($allowed === [] || \in_array(strtoupper((string) $country->getIso()), $allowed, true))) {
+                $names[] = $name;
+            } else {
+                $excluded[] = $name;
             }
         }
-        sort($names, \SORT_LOCALE_STRING);
 
-        return $this->countryCache[$scId] = self::e(implode(', ', $names));
+        return $this->countryCache[$scId] = self::e(self::countryList($names, $excluded));
+    }
+
+    /**
+     * Bis 40 Länder: Aufzählung. Darüber kürzer „alle Länder außer …“ (die nicht belieferten aktiven Länder).
+     *
+     * @param list<string> $names
+     * @param list<string> $excluded
+     */
+    public static function countryList(array $names, array $excluded): string
+    {
+        sort($names, \SORT_LOCALE_STRING);
+        sort($excluded, \SORT_LOCALE_STRING);
+        if (\count($names) <= 40) {
+            return implode(', ', $names);
+        }
+
+        return $excluded === [] ? 'alle Länder' : 'alle Länder außer ' . implode(', ', $excluded);
     }
 
     public function render(SalesChannelContext $context): string

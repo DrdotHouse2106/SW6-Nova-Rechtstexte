@@ -1,3 +1,7 @@
+# 1.15.0
+- Widerrufsbelehrung: Die Kostenschätzung [[Rücksendekosten Spedition]] gilt ausdrücklich nur für Waren, die nicht normal mit der Post zurückgesandt werden können (Speditionsware), nicht für Paketware
+- [[Lieferländer]]: Bei mehr als 40 Ländern „alle Länder außer …“ (die aktiven, nicht belieferten Länder) statt einer langen Aufzählung
+
 # 1.14.0
 - Neu: Baustein **`osspreise`** – wird automatisch erkannt, wenn Nova OSS-Preise aktiv und im Verkaufskanal eingeschaltet ist. „Zahlung und Versand“ erklärt dann, dass für Verbraucher in anderen EU-Ländern die Umsatzsteuer des Lieferlandes gilt und der Endpreis im Warenkorb erscheint, sobald das Lieferland bekannt ist
 

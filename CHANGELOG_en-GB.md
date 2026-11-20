@@ -1,3 +1,7 @@
+# 1.15.0
+- Cancellation policy: the [[Rücksendekosten Spedition]] estimate now explicitly applies only to goods that cannot be returned by post (freight), not to parcel goods
+- [[Lieferländer]]: with more than 40 countries, "alle Länder außer …" (active countries not delivered to) instead of a long list
+
 # 1.14.0
 - New: block **`osspreise`**, detected automatically when Nova OSS Prices is active in the sales channel; “Zahlung und Versand” then explains that consumers in other EU countries pay the VAT of their country and the final price is shown in the cart once the country is known
 

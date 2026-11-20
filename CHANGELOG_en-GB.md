@@ -1,3 +1,6 @@
+# 1.16.1
+- Footer "Withdraw from contract" button with fixed colours (white, black text/border) instead of the theme primary colour
+
 # 1.16.0
 - New: highlighted "Withdraw from contract" button on every page above the bottom footer and in the customer account below "Orders", linking to [[Widerrufsfunktion]] (setting, default on)
 - Template "Rücksendung": no longer refuses unpaid returns (asks for sufficient postage instead), refund mentions outbound shipping costs, free return label for complaints

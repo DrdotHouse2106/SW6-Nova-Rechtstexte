@@ -1,3 +1,6 @@
+# 1.16.1
+- Knopf „Vertrag widerrufen“ in der Fußzeile mit festen Farben (weiß, schwarze Schrift und Rahmen) statt Theme-Primärfarbe – war auf kfz-isolierung.de unsichtbar (Kontrast 1:1)
+
 # 1.16.0
 - Neu: Knopf „Vertrag widerrufen“ (hervorgehoben) auf jeder Seite über der unteren Fußzeile und im Kundenkonto unter „Bestellungen“, Ziel = [[Widerrufsfunktion]]; Einstellung „Knopf „Vertrag widerrufen“ … zeigen“ (Standard an)
 - Vorlage „Rücksendung“: Satz „Unfreie Sendungen können wir nicht annehmen“ ersetzt durch die Bitte, ausreichend zu frankieren (keine Beschränkung des Widerrufsrechts); Erstattung nennt die Hinsendekosten; bei Reklamationen kostenloses Etikett statt Pflicht zur Voranmeldung

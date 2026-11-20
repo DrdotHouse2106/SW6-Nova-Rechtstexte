@@ -1,7 +1,8 @@
-{# Nova Rechtstexte: gut sichtbarer Zugang zur Widerrufsfunktion (§ 356a BGB), nicht nur als grauer Fußzeilen-Link #}
+{# Nova Rechtstexte: gut sichtbarer Zugang zur Widerrufsfunktion (§ 356a BGB), nicht nur als grauer Fußzeilen-Link.
+   In der Fußzeile feste Farben (weiß/schwarz), damit der Knopf auf jedem Footer-Hintergrund lesbar ist. #}
 {% set novaWiderrufUrl = config('NovaRechtstexte.config.withdrawalUrl') %}
 {% if novaWiderrufUrl and config('NovaRechtstexte.config.withdrawalButton') is not same as(false) %}
     {% block nova_rechtstexte_widerruf_knopf %}
-        <a href="{{ novaWiderrufUrl }}" class="{{ novaWiderrufClass|default('btn btn-outline-primary btn-sm') }}">{{ 'novaRechtstexte.widerruf.knopf'|trans|sw_sanitize }}</a>
+        <a href="{{ novaWiderrufUrl }}" class="{{ novaWiderrufClass|default('btn btn-sm') }}"{% if not novaWiderrufClass is defined %} style="background:#fff;color:#1a1a1a;border:2px solid #1a1a1a;font-weight:600"{% endif %}>{{ 'novaRechtstexte.widerruf.knopf'|trans|sw_sanitize }}</a>
     {% endblock %}
 {% endif %}
